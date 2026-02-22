@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Process | DenZal Construction Co.</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #1a3a6b;
+    --blue:       #2558a8;
+    --blue-dark:  #1c4790;
+    --blue-light: #3a6bbf;
+    --blue-pale:  #dce8f7;
+    --gold:       #d4960a;
+    --gold-light: #f0c030;
+    --gold-pale:  #fdf3d0;
+    --red:        #8b1a1a;
+    --cream:      #f4f6fa;
+    --white:      #ffffff;
+    --gray-light: #e8edf5;
+    --gray-mid:   #7a90b0;
+    --text-dark:  #1a1a1a;
+    --text-mid:   #3a4a5a;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Barlow',sans-serif; background:var(--cream); color:var(--text-dark); overflow-x:hidden; }
+
+  /* ─── MOCKUP BANNER ─── */
+  .mockup-banner {
+    background:#ff4757; color:#fff; text-align:center;
+    padding:10px; font-family:monospace; font-size:.8rem; letter-spacing:.08em;
+    position:relative; z-index:999;
+  }
+
+  /* ─── TOP BAR ─── */
+  .top-bar {
+    background:var(--navy); color:rgba(255,255,255,.6);
+    font-size:.78rem; letter-spacing:.08em;
+    padding:8px 40px;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .top-bar a { color:var(--gold-light); text-decoration:none; }
+  .top-bar .right { display:flex; gap:24px; align-items:center; }
+
+  /* ─── NAV ─── */
+  nav {
+    background:var(--white);
+    display:flex; justify-content:space-between; align-items:center;
+    padding:0 40px; height:88px;
+    position:sticky; top:0; z-index:200;
+    box-shadow:0 2px 20px rgba(0,0,0,.08);
+  }
+  .nav-links { display:flex; gap:32px; list-style:none; }
+  .nav-links a {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.88rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--text-mid); text-decoration:none; font-weight:600; transition:color .2s;
+  }
+  .nav-links a:hover { color:var(--blue); }
+  .nav-links a.active { color:var(--blue); border-bottom:2px solid var(--gold); padding-bottom:2px; }
+  .nav-cta {
+    background:var(--blue); color:#fff;
+    padding:12px 28px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.85rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+    text-decoration:none; transition:background .2s;
+  }
+  .nav-cta:hover { background:var(--navy); }
+
+  /* ─── PAGE HERO ─── */
+  .page-hero {
+    background:var(--blue); position:relative; overflow:hidden;
+    padding:80px 80px 72px;
+  }
+  .page-hero::before {
+    content:'';
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at 75% 60%, rgba(240,192,48,.13) 0%, transparent 55%),
+      repeating-linear-gradient(
+        -45deg,
+        transparent, transparent 38px,
+        rgba(255,255,255,.03) 38px, rgba(255,255,255,.03) 39px
+      );
+  }
+  .page-hero-inner { position:relative; z-index:2; }
+  .eyebrow {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.78rem; letter-spacing:.3em; text-transform:uppercase;
+    color:var(--gold-light);
+    display:flex; align-items:center; gap:12px; margin-bottom:16px;
+  }
+  .eyebrow::before { content:''; display:block; width:32px; height:2px; background:var(--gold-light); }
+  .page-hero h1 {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2.6rem,5vw,4.2rem); font-weight:900;
+    color:#fff; line-height:1.05; letter-spacing:-.02em; margin-bottom:20px;
+  }
+  .page-hero h1 em { font-style:italic; color:var(--gold-light); }
+  .page-hero p {
+    font-size:1.05rem; color:rgba(255,255,255,.75); font-weight:300;
+    line-height:1.75; max-width:580px; margin-bottom:36px;
+  }
+  .guarantee-pill {
+    display:inline-flex; align-items:center; gap:10px;
+    background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2);
+    padding:10px 20px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.82rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+    color:#fff;
+  }
+  .guarantee-pill .check { color:var(--gold-light); font-size:1rem; }
+  .breadcrumb {
+    position:absolute; bottom:20px; right:40px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.75rem; letter-spacing:.12em; text-transform:uppercase;
+    color:rgba(255,255,255,.35);
+  }
+  .breadcrumb a { color:rgba(255,255,255,.55); text-decoration:none; }
+  .breadcrumb a:hover { color:var(--gold-light); }
+  .breadcrumb span { margin:0 8px; }
+
+  /* ─── QUICK NAV STEPS ─── */
+  .step-nav {
+    background:var(--white); border-bottom:1px solid var(--gray-light);
+    padding:0 80px;
+    display:flex; gap:0; align-items:stretch;
+    position:sticky; top:88px; z-index:100;
+    overflow-x:auto;
+    box-shadow:0 2px 10px rgba(0,0,0,.04);
+  }
+  .step-nav-item {
+    display:flex; align-items:center; gap:10px;
+    padding:18px 24px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.8rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--gray-mid);
+    text-decoration:none;
+    border-bottom:3px solid transparent;
+    white-space:nowrap;
+    transition:color .2s, border-color .2s;
+  }
+  .step-nav-item:hover { color:var(--blue); border-bottom-color:var(--gray-light); }
+  .step-nav-item.active { color:var(--blue); border-bottom-color:var(--gold); }
+  .step-num-badge {
+    width:22px; height:22px; border-radius:50%;
+    background:var(--gray-light); color:var(--gray-mid);
+    font-size:.68rem; font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+    transition:background .2s, color .2s;
+    flex-shrink:0;
+  }
+  .step-nav-item.active .step-num-badge,
+  .step-nav-item:hover .step-num-badge { background:var(--blue); color:#fff; }
+  .step-nav-divider { width:1px; background:var(--gray-light); margin:12px 0; }
+
+  /* ─── INTRO PROMISE STRIP ─── */
+  .promise-strip {
+    background:var(--gold-pale);
+    border-top:3px solid var(--gold);
+    border-bottom:3px solid var(--gold);
+    padding:28px 80px;
+    display:flex; gap:0; align-items:stretch;
+  }
+  .promise-item {
+    flex:1; display:flex; align-items:center; gap:14px;
+    padding:0 32px;
+    border-right:1px solid rgba(212,150,10,.3);
+  }
+  .promise-item:first-child { padding-left:0; }
+  .promise-item:last-child { border-right:none; }
+  .promise-icon { font-size:1.6rem; flex-shrink:0; }
+  .promise-text {}
+  .promise-label {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.72rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:2px;
+  }
+  .promise-desc { font-size:.88rem; color:var(--text-mid); line-height:1.4; }
+
+  /* ─── MAIN CONTENT ─── */
+  .main { padding:0 0 0; }
+
+  /* ─── PROCESS STEPS ─── */
+  .process-step {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    min-height:520px;
+  }
+  .process-step:nth-child(even) .step-visual { order:-1; }
+
+  /* Left/right visual panel */
+  .step-visual {
+    position:relative; overflow:hidden;
+  }
+  .step-visual-inner {
+    position:absolute; inset:0;
+    display:flex; flex-direction:column; justify-content:flex-end;
+    padding:48px;
+  }
+  /* Step 1 – Consultation */
+  .step-1 .step-visual { background:linear-gradient(135deg, #1c4790 0%, #2558a8 60%, #3a6bbf 100%); }
+  /* Step 2 – Site & Lot */
+  .step-2 .step-visual { background:linear-gradient(135deg, #14532d 0%, #166534 60%, #16a34a 100%); }
+  /* Step 3 – Design */
+  .step-3 .step-visual { background:linear-gradient(135deg, #7c2d12 0%, #9a3412 60%, #c2410c 100%); }
+  /* Step 4 – Permitting */
+  .step-4 .step-visual { background:linear-gradient(135deg, #4a1d96 0%, #6d28d9 60%, #7c3aed 100%); }
+  /* Step 5 – Construction */
+  .step-5 .step-visual { background:linear-gradient(135deg, var(--navy) 0%, var(--blue-dark) 60%, var(--blue) 100%); }
+  /* Step 6 – Walkthrough */
+  .step-6 .step-visual { background:linear-gradient(135deg, #713f12 0%, #92400e 60%, #b45309 100%); }
+  /* Step 7 – Keys */
+  .step-7 .step-visual { background:linear-gradient(135deg, var(--navy) 0%, #0f2d5e 60%, var(--blue-dark) 100%); }
+
+  .step-visual-bg {
+    position:absolute; inset:0; opacity:.12;
+    background-size:cover; background-position:center;
+  }
+  .step-1 .step-visual-bg { background-image:url('https://denzalconstruction.com/wp-content/uploads/2019/03/denzal-1024x732.jpg'); }
+  .step-5 .step-visual-bg { background-image:url('https://denzalconstruction.com/wp-content/uploads/2019/03/221-skyline3-1024x684.jpg'); }
+  .step-7 .step-visual-bg { background-image:url('https://denzalconstruction.com/wp-content/uploads/2019/03/305-vincent-ave3-1024x684.jpg'); }
+
+  /* large background step number */
+  .step-visual-num {
+    position:absolute; right:-20px; top:50%; transform:translateY(-50%);
+    font-family:'Playfair Display',serif;
+    font-size:22vw; font-weight:900; line-height:1;
+    color:rgba(255,255,255,.06);
+    letter-spacing:-.05em;
+    pointer-events:none; user-select:none;
+  }
+
+  /* icon + phase label at bottom of visual */
+  .step-phase {
+    position:relative; z-index:2;
+  }
+  .step-phase-icon { font-size:2.8rem; margin-bottom:12px; display:block; }
+  .step-phase-label {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.72rem; font-weight:700; letter-spacing:.25em; text-transform:uppercase;
+    color:rgba(255,255,255,.55); margin-bottom:6px;
+  }
+  .step-phase-name {
+    font-family:'Playfair Display',serif;
+    font-size:2rem; font-weight:700; color:#fff; line-height:1.1;
+  }
+
+  /* Right/left content panel */
+  .step-content {
+    padding:64px 64px;
+    display:flex; flex-direction:column; justify-content:center;
+    background:var(--white);
+  }
+  .process-step:nth-child(even) .step-content { background:var(--cream); }
+
+  .step-header { margin-bottom:28px; }
+  .step-eyebrow {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.72rem; font-weight:700; letter-spacing:.25em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:8px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .step-eyebrow::before { content:''; display:block; width:24px; height:2px; background:var(--gold); }
+  .step-content h2 {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(1.7rem,2.5vw,2.3rem); font-weight:700;
+    color:var(--blue-dark); line-height:1.15; letter-spacing:-.01em;
+  }
+  .step-content h2 em { font-style:italic; color:var(--blue); }
+  .step-intro {
+    font-size:1rem; color:var(--text-mid); line-height:1.8;
+    margin-bottom:28px;
+  }
+
+  /* What happens list */
+  .what-happens {
+    margin-bottom:28px;
+  }
+  .what-happens-label {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.72rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--gray-mid); margin-bottom:14px;
+  }
+  .what-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
+  .what-list li {
+    display:flex; align-items:flex-start; gap:12px;
+    font-size:.92rem; color:var(--text-mid); line-height:1.5;
+  }
+  .what-list li::before {
+    content:'✓';
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.85rem; font-weight:700;
+    color:#fff; background:var(--blue);
+    min-width:20px; height:20px;
+    display:flex; align-items:center; justify-content:center;
+    margin-top:1px; flex-shrink:0;
+  }
+
+  /* timeline tag */
+  .timeline-tag {
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--blue-pale);
+    border-left:3px solid var(--blue);
+    padding:10px 16px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.78rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--blue);
+    margin-bottom:16px;
+  }
+  .timeline-tag .clock { font-size:1rem; }
+
+  /* callout quote box */
+  .step-callout {
+    background:var(--gold-pale);
+    border-left:4px solid var(--gold);
+    padding:16px 20px;
+    font-size:.88rem; color:var(--text-mid);
+    line-height:1.6; font-style:italic;
+    margin-top:20px;
+  }
+  .step-callout strong {
+    font-style:normal; color:var(--navy);
+    font-family:'Barlow Condensed',sans-serif;
+    letter-spacing:.05em; text-transform:uppercase;
+    font-size:.75rem; display:block; margin-bottom:4px;
+  }
+
+  /* ─── CONNECTOR LINES between steps ─── */
+  .step-connector {
+    display:flex; align-items:center; justify-content:center;
+    height:80px; background:var(--cream);
+    position:relative;
+  }
+  .step-connector::before {
+    content:'';
+    position:absolute; left:50%; top:0; bottom:0;
+    width:2px; background:var(--gray-light);
+    transform:translateX(-50%);
+  }
+  .connector-circle {
+    position:relative; z-index:2;
+    width:44px; height:44px; border-radius:50%;
+    background:var(--white); border:2px solid var(--blue);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.65rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--blue); white-space:nowrap;
+  }
+
+  /* ─── OVERVIEW TIMELINE ─── */
+  .overview-section {
+    background:var(--navy);
+    padding:90px 80px;
+    position:relative; overflow:hidden;
+  }
+  .overview-section::before {
+    content:'TIMELINE';
+    position:absolute; font-family:'Playfair Display',serif;
+    font-size:16vw; font-weight:900;
+    color:rgba(255,255,255,.03); letter-spacing:-.05em;
+    top:50%; left:50%; transform:translate(-50%,-50%);
+    white-space:nowrap; pointer-events:none;
+  }
+  .overview-header { text-align:center; margin-bottom:64px; position:relative; z-index:2; }
+  .overview-eyebrow {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.75rem; font-weight:700; letter-spacing:.3em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:12px;
+    display:flex; align-items:center; justify-content:center; gap:12px;
+  }
+  .overview-eyebrow::before,
+  .overview-eyebrow::after { content:''; display:block; width:40px; height:1px; background:var(--gold); }
+  .overview-header h2 {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2rem,4vw,3rem); font-weight:700;
+    color:#fff; letter-spacing:-.01em; line-height:1.2;
+  }
+  .overview-header h2 em { font-style:italic; color:var(--gold-light); }
+  .overview-header p { color:rgba(255,255,255,.6); font-size:.98rem; margin-top:12px; max-width:520px; margin-left:auto; margin-right:auto; line-height:1.7; }
+
+  /* horizontal timeline */
+  .timeline-track {
+    position:relative; z-index:2;
+    display:flex; align-items:flex-start;
+    gap:0;
+  }
+  .timeline-track::before {
+    content:'';
+    position:absolute; top:28px; left:0; right:0; height:2px;
+    background:rgba(255,255,255,.15);
+    z-index:0;
+  }
+  .tl-item {
+    flex:1; position:relative; z-index:1; text-align:center; padding:0 8px;
+    cursor:pointer;
+  }
+  .tl-dot {
+    width:56px; height:56px; border-radius:50%;
+    background:var(--blue-dark); border:2px solid rgba(255,255,255,.2);
+    display:flex; align-items:center; justify-content:center;
+    margin:0 auto 16px;
+    font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:900;
+    color:var(--gold-light);
+    transition:background .3s, border-color .3s, transform .3s;
+  }
+  .tl-item:hover .tl-dot,
+  .tl-item.active .tl-dot {
+    background:var(--gold); border-color:var(--gold);
+    color:var(--navy); transform:scale(1.15);
+  }
+  .tl-label {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.75rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+    color:rgba(255,255,255,.5); margin-bottom:4px;
+    transition:color .3s;
+  }
+  .tl-item:hover .tl-label,
+  .tl-item.active .tl-label { color:#fff; }
+  .tl-time {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.68rem; letter-spacing:.08em;
+    color:var(--gold);
+    opacity:0; transform:translateY(4px);
+    transition:opacity .3s, transform .3s;
+  }
+  .tl-item:hover .tl-time,
+  .tl-item.active .tl-time { opacity:1; transform:translateY(0); }
+
+  /* ─── FAQ ─── */
+  .faq-section {
+    padding:90px 80px;
+    background:var(--white);
+    display:grid; grid-template-columns:1fr 2fr; gap:80px; align-items:start;
+  }
+  .faq-aside {}
+  .faq-aside .section-eyebrow {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.72rem; font-weight:700; letter-spacing:.25em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:12px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .faq-aside .section-eyebrow::before { content:''; display:block; width:24px; height:2px; background:var(--gold); }
+  .faq-aside h2 {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(1.8rem,3vw,2.5rem); font-weight:700;
+    color:var(--blue-dark); line-height:1.2; margin-bottom:20px;
+  }
+  .faq-aside h2 em { font-style:italic; color:var(--blue); }
+  .faq-aside p { font-size:.9rem; color:var(--text-mid); line-height:1.8; margin-bottom:28px; }
+  .faq-contact {
+    background:var(--blue);
+    padding:24px 28px;
+    color:#fff;
+  }
+  .faq-contact-label {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.7rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--gold-light); margin-bottom:6px;
+  }
+  .faq-contact p { font-size:.88rem; color:rgba(255,255,255,.8); margin-bottom:12px; line-height:1.5; }
+  .faq-contact a {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.82rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--gold-light); text-decoration:none;
+    display:flex; align-items:center; gap:6px;
+    transition:gap .2s;
+  }
+  .faq-contact a:hover { gap:10px; }
+
+  .faq-list { display:flex; flex-direction:column; gap:2px; }
+  .faq-item { border-bottom:1px solid var(--gray-light); }
+  .faq-q {
+    width:100%; background:none; border:none; cursor:pointer; text-align:left;
+    padding:22px 0; display:flex; align-items:center; justify-content:space-between;
+    gap:20px;
+  }
+  .faq-q-text {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:1rem; font-weight:700; letter-spacing:.03em;
+    color:var(--blue-dark); text-align:left; line-height:1.3;
+  }
+  .faq-toggle {
+    width:28px; height:28px; border-radius:50%;
+    background:var(--gray-light); color:var(--blue);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.1rem; font-weight:300; flex-shrink:0;
+    transition:background .2s, color .2s, transform .3s;
+  }
+  .faq-item.open .faq-toggle { background:var(--blue); color:#fff; transform:rotate(45deg); }
+  .faq-a {
+    font-size:.9rem; color:var(--text-mid); line-height:1.75;
+    max-height:0; overflow:hidden;
+    transition:max-height .4s ease, padding .3s;
+    padding:0;
+  }
+  .faq-item.open .faq-a { max-height:400px; padding:0 0 22px; }
+
+  /* ─── CTA SECTION ─── */
+  .final-cta {
+    background:var(--gold);
+    padding:90px 80px;
+    display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;
+    border-top:5px solid var(--blue);
+  }
+  .final-cta h2 {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2rem,4vw,3rem); font-weight:900;
+    color:var(--navy); line-height:1.1; letter-spacing:-.02em;
+  }
+  .final-cta h2 em { font-style:italic; }
+  .final-cta p { font-size:1rem; color:rgba(26,58,107,.75); margin-top:12px; line-height:1.7; }
+  .cta-form { display:flex; flex-direction:column; gap:14px; }
+  .cta-form input, .cta-form select, .cta-form textarea {
+    width:100%; padding:14px 18px;
+    font-family:'Barlow',sans-serif; font-size:.95rem;
+    border:none; background:rgba(255,255,255,.9); color:var(--text-dark);
+    outline:none;
+    transition:background .2s;
+  }
+  .cta-form input:focus, .cta-form select:focus, .cta-form textarea:focus {
+    background:#fff; box-shadow:0 0 0 2px var(--blue);
+  }
+  .cta-form .row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .cta-form textarea { height:100px; resize:vertical; }
+  .btn-submit {
+    background:var(--blue); color:#fff;
+    padding:16px; font-family:'Barlow Condensed',sans-serif;
+    font-size:.95rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
+    border:none; cursor:pointer; transition:background .2s;
+  }
+  .btn-submit:hover { background:var(--navy); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background:var(--navy); padding:52px 80px 28px;
+    border-top:4px solid var(--blue);
+  }
+  .footer-top {
+    display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:50px;
+    padding-bottom:40px;
+    border-bottom:1px solid rgba(255,255,255,.1); margin-bottom:28px;
+  }
+  .footer-brand p { font-size:.85rem; color:rgba(255,255,255,.4); line-height:1.7; max-width:260px; margin-top:12px; }
+  .footer-col h5 {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.72rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:14px;
+  }
+  .footer-col ul { list-style:none; }
+  .footer-col li { margin-bottom:9px; }
+  .footer-col a { font-size:.85rem; color:rgba(255,255,255,.4); text-decoration:none; transition:color .2s; }
+  .footer-col a:hover { color:#fff; }
+  .footer-bottom { display:flex; justify-content:space-between; align-items:center; }
+  .footer-copy { font-size:.75rem; color:rgba(255,255,255,.25); letter-spacing:.04em; }
+  .social-row { display:flex; gap:12px; }
+  .social-btn {
+    width:34px; height:34px; border:1px solid rgba(255,255,255,.2);
+    display:flex; align-items:center; justify-content:center;
+    color:rgba(255,255,255,.4); text-decoration:none; font-size:.8rem;
+    transition:border-color .2s, color .2s;
+  }
+  .social-btn:hover { border-color:var(--gold); color:var(--gold); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(30px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  .process-step { animation:fadeUp .6s ease both; }
+  .process-step:nth-child(1) { animation-delay:.1s; }
+  .process-step:nth-child(2) { animation-delay:.15s; }
+</style>
+</head>
+<body>
+
+<div class="mockup-banner">🎨 MOCKUP — DenZal Construction · Our Process Page — For Review Only</div>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <span>📍 Serving Scranton, Wilkes-Barre & All of NEPA</span>
+  <div class="right">
+    <span>✉ <a href="/cdn-cgi/l/email-protection#93f7f6fde9f2fff0fcfde0e7e1e6f0e7fafcfdd3f4fef2faffbdf0fcfe"><span class="__cf_email__" data-cfemail="472322293d262b2428293433353224332e282907202a262e2b6924282a">[email&#160;protected]</span></a></span>
+    <span>📞 <a href="tel:5708764663">(570) 876-4663</a></span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" style="display:flex;align-items:center;text-decoration:none;">
+    <img src="https://denzalconstruction.com/wp-content/uploads/2019/03/DenZal_Logo-2-MED-1024x593.png"
+         alt="DenZal Construction Co. LLC" style="height:62px;width:auto;display:block;">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="our-homes.html">Our Homes</a></li>
+    <li><a href="process.html" class="active">Our Process</a></li>
+    <li><a href="testimonials.html">Testimonials</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Get a Free Consultation</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="eyebrow">How We Build</div>
+    <h1>Your Dream Home,<br><em>Step by Step.</em></h1>
+    <p>Building a custom home is one of the biggest decisions you'll ever make. We take that seriously. Here's exactly what happens from your first call to the day we hand you the keys — no surprises, no runaround.</p>
+    <div style="display:flex; gap:12px; flex-wrap:wrap;">
+      <div class="guarantee-pill"><span class="check">✓</span> On-Time Guarantee</div>
+      <div class="guarantee-pill"><span class="check">✓</span> On-Budget Guarantee</div>
+      <div class="guarantee-pill"><span class="check">✓</span> No Hidden Costs</div>
+    </div>
+  </div>
+  <div class="breadcrumb"><a href="index.html">Home</a><span>›</span>Our Process</div>
+</div>
+
+<!-- STEP QUICK NAV -->
+<div class="step-nav">
+  <a href="#step1" class="step-nav-item active"><span class="step-num-badge">1</span>Consultation</a>
+  <div class="step-nav-divider"></div>
+  <a href="#step2" class="step-nav-item"><span class="step-num-badge">2</span>Site & Lot</a>
+  <div class="step-nav-divider"></div>
+  <a href="#step3" class="step-nav-item"><span class="step-num-badge">3</span>Design</a>
+  <div class="step-nav-divider"></div>
+  <a href="#step4" class="step-nav-item"><span class="step-num-badge">4</span>Permitting</a>
+  <div class="step-nav-divider"></div>
+  <a href="#step5" class="step-nav-item"><span class="step-num-badge">5</span>Construction</a>
+  <div class="step-nav-divider"></div>
+  <a href="#step6" class="step-nav-item"><span class="step-num-badge">6</span>Walkthrough</a>
+  <div class="step-nav-divider"></div>
+  <a href="#step7" class="step-nav-item"><span class="step-num-badge">7</span>Keys in Hand</a>
+</div>
+
+<!-- PROMISE STRIP -->
+<div class="promise-strip">
+  <div class="promise-item">
+    <span class="promise-icon">🤝</span>
+    <div class="promise-text">
+      <div class="promise-label">Direct Access</div>
+      <div class="promise-desc">Chris & Ryan's numbers — always. No call centers.</div>
+    </div>
+  </div>
+  <div class="promise-item">
+    <span class="promise-icon">📋</span>
+    <div class="promise-text">
+      <div class="promise-label">Fixed-Price Contract</div>
+      <div class="promise-desc">What we quote is what you pay. Period.</div>
+    </div>
+  </div>
+  <div class="promise-item">
+    <span class="promise-icon">📅</span>
+    <div class="promise-text">
+      <div class="promise-label">On-Time Delivery</div>
+      <div class="promise-desc">We set a schedule and we stick to it.</div>
+    </div>
+  </div>
+  <div class="promise-item">
+    <span class="promise-icon">🏆</span>
+    <div class="promise-text">
+      <div class="promise-label">Quality Guaranteed</div>
+      <div class="promise-desc">Every home is inspected inside and out before keys.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     STEP 1 — FREE CONSULTATION
+══════════════════════════════════════════ -->
+<div class="process-step step-1" id="step1">
+  <div class="step-visual">
+    <div class="step-visual-bg"></div>
+    <div class="step-visual-num">1</div>
+    <div class="step-visual-inner">
+      <div class="step-phase">
+        <span class="step-phase-icon">☕</span>
+        <div class="step-phase-label">Phase One</div>
+        <div class="step-phase-name">Free<br>Consultation</div>
+      </div>
+    </div>
+  </div>
+  <div class="step-content">
+    <div class="step-header">
+      <div class="step-eyebrow">Step 1</div>
+      <h2>Let's Talk About<br><em>Your Vision</em></h2>
+    </div>
+    <div class="timeline-tag"><span class="clock">🕐</span> Week 1 · No Cost, No Obligation</div>
+    <p class="step-intro">Every great home starts with a conversation. We'll sit down with you — in person or by phone — to understand what you're looking for, what your budget is, and what timeline works for your family.</p>
+    <div class="what-happens">
+      <div class="what-happens-label">What Happens at This Stage</div>
+      <ul class="what-list">
+        <li>Discuss your home style preferences, must-haves, and wish list</li>
+        <li>Review your budget range and what it realistically builds in NEPA today</li>
+        <li>Walk through model home options vs. a fully custom design</li>
+        <li>Talk about your ideal lot location or current land ownership</li>
+        <li>Answer every question you have — no pressure, no sales pitch</li>
+      </ul>
+    </div>
+    <div class="step-callout">
+      <strong>Chris & Ryan's Promise</strong>
+      "We've never once rushed a consultation. This is where trust starts — and trust is everything in this business."
+    </div>
+  </div>
+</div>
+
+<div class="step-connector">
+  <div class="connector-circle">Then</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     STEP 2 — SITE & LOT SELECTION
+══════════════════════════════════════════ -->
+<div class="process-step step-2" id="step2">
+  <div class="step-visual">
+    <div class="step-visual-num">2</div>
+    <div class="step-visual-inner">
+      <div class="step-phase">
+        <span class="step-phase-icon">📍</span>
+        <div class="step-phase-label">Phase Two</div>
+        <div class="step-phase-name">Site &<br>Lot Selection</div>
+      </div>
+    </div>
+  </div>
+  <div class="step-content">
+    <div class="step-header">
+      <div class="step-eyebrow">Step 2</div>
+      <h2>Finding the<br><em>Right Lot</em></h2>
+    </div>
+    <div class="timeline-tag"><span class="clock">🕐</span> Weeks 1–4 · If Lot Not Yet Secured</div>
+    <p class="step-intro">Already own land? We'll evaluate it together. Need help finding a lot? We have deep relationships across Lackawanna and Luzerne counties and can help connect you with available parcels that fit your goals.</p>
+    <div class="what-happens">
+      <div class="what-happens-label">What Happens at This Stage</div>
+      <ul class="what-list">
+        <li>Site evaluation — soil, drainage, slope, utilities, setbacks</li>
+        <li>Review of local zoning and deed restrictions</li>
+        <li>Guidance on lot-to-house-size ratios and orientation</li>
+        <li>Referrals to trusted surveyors and engineers if needed</li>
+        <li>Realistic cost impact of the lot on your total build budget</li>
+      </ul>
+    </div>
+    <div class="step-callout">
+      <strong>Good to Know</strong>
+      Already have a lot? Great — this step takes about a week for us to review and clear. We'll identify any site challenges upfront so there are zero surprises during construction.
+    </div>
+  </div>
+</div>
+
+<div class="step-connector">
+  <div class="connector-circle">Then</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     STEP 3 — DESIGN & SELECTIONS
+══════════════════════════════════════════ -->
+<div class="process-step step-3" id="step3">
+  <div class="step-visual">
+    <div class="step-visual-num">3</div>
+    <div class="step-visual-inner">
+      <div class="step-phase">
+        <span class="step-phase-icon">📐</span>
+        <div class="step-phase-label">Phase Three</div>
+        <div class="step-phase-name">Design &<br>Selections</div>
+      </div>
+    </div>
+  </div>
+  <div class="step-content">
+    <div class="step-header">
+      <div class="step-eyebrow">Step 3</div>
+      <h2>Designing<br><em>Your Home</em></h2>
+    </div>
+    <div class="timeline-tag"><span class="clock">🕐</span> Weeks 3–8 · Most Important Phase</div>
+    <p class="step-intro">This is where your home really comes to life. Whether you're customizing one of our proven model designs or starting from scratch, our design team walks you through every decision — floor plans, finishes, fixtures, and more.</p>
+    <div class="what-happens">
+      <div class="what-happens-label">What Happens at This Stage</div>
+      <ul class="what-list">
+        <li>Finalize floor plan — layout, room sizes, garage, and special features</li>
+        <li>Choose exterior: siding, roofing, windows, doors, and colors</li>
+        <li>Select interior finishes: flooring, cabinetry, countertops, tile</li>
+        <li>Choose plumbing fixtures, lighting, and electrical package</li>
+        <li>Review and sign the final fixed-price construction contract</li>
+      </ul>
+    </div>
+    <div class="step-callout">
+      <strong>No Overwhelm, Guaranteed</strong>
+      We guide every selection in a logical order so nothing is rushed and nothing is missed. Our experience means we'll flag choices that affect each other before you commit.
+    </div>
+  </div>
+</div>
+
+<div class="step-connector">
+  <div class="connector-circle">Then</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     STEP 4 — PERMITTING & APPROVALS
+══════════════════════════════════════════ -->
+<div class="process-step step-4" id="step4">
+  <div class="step-visual">
+    <div class="step-visual-num">4</div>
+    <div class="step-visual-inner">
+      <div class="step-phase">
+        <span class="step-phase-icon">📄</span>
+        <div class="step-phase-label">Phase Four</div>
+        <div class="step-phase-name">Permitting &<br>Approvals</div>
+      </div>
+    </div>
+  </div>
+  <div class="step-content">
+    <div class="step-header">
+      <div class="step-eyebrow">Step 4</div>
+      <h2>We Handle<br><em>the Paperwork</em></h2>
+    </div>
+    <div class="timeline-tag"><span class="clock">🕐</span> Weeks 6–12 · We Manage This for You</div>
+    <p class="step-intro">Permits, approvals, and municipal filings can feel like a maze — but that's our lane. We've built hundreds of homes across NEPA and know exactly what each municipality requires. You don't have to touch a single form.</p>
+    <div class="what-happens">
+      <div class="what-happens-label">What Happens at This Stage</div>
+      <ul class="what-list">
+        <li>Submit building permit application to the appropriate township or borough</li>
+        <li>Coordinate with local code officials and inspectors</li>
+        <li>File any necessary zoning variance or sewage permits</li>
+        <li>Secure utility connections (electric, gas, water, sewer)</li>
+        <li>Schedule the pre-construction meeting and ground-break date</li>
+      </ul>
+    </div>
+    <div class="step-callout">
+      <strong>Timeline Note</strong>
+      Municipal permit timelines vary across NEPA. Some townships turn permits in 2 weeks; others take 6–8. We'll give you a realistic estimate for your specific municipality before you sign.
+    </div>
+  </div>
+</div>
+
+<div class="step-connector">
+  <div class="connector-circle">Then</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     STEP 5 — CONSTRUCTION
+══════════════════════════════════════════ -->
+<div class="process-step step-5" id="step5">
+  <div class="step-visual">
+    <div class="step-visual-bg"></div>
+    <div class="step-visual-num">5</div>
+    <div class="step-visual-inner">
+      <div class="step-phase">
+        <span class="step-phase-icon">🏗️</span>
+        <div class="step-phase-label">Phase Five</div>
+        <div class="step-phase-name">Construction</div>
+      </div>
+    </div>
+  </div>
+  <div class="step-content">
+    <div class="step-header">
+      <div class="step-eyebrow">Step 5</div>
+      <h2>Breaking Ground —<br><em>Building Your Home</em></h2>
+    </div>
+    <div class="timeline-tag"><span class="clock">🕐</span> Months 3–9 · The Heart of the Process</div>
+    <p class="step-intro">Shovels in the ground. This is what we do best. Our crews are experienced, our subcontractors are vetted and trusted, and our job site standards are high. You'll get regular updates at every milestone — no radio silence.</p>
+    <div class="what-happens">
+      <div class="what-happens-label">Key Construction Milestones</div>
+      <ul class="what-list">
+        <li><strong>Foundation:</strong> Excavation, footings poured, basement or slab laid</li>
+        <li><strong>Framing:</strong> Walls, roof structure, windows and doors set</li>
+        <li><strong>Rough-ins:</strong> Plumbing, electrical, HVAC installed inside walls</li>
+        <li><strong>Insulation & Drywall:</strong> Home becomes weathertight</li>
+        <li><strong>Interior Finishes:</strong> Flooring, cabinets, trim, paint, fixtures</li>
+        <li><strong>Exterior:</strong> Siding, roofing, driveway, grading, landscaping rough</li>
+      </ul>
+    </div>
+    <div class="step-callout">
+      <strong>Stay in the Loop</strong>
+      Chris or Ryan will personally contact you at every major milestone. You're welcome on site any time — we want you excited, not anxious.
+    </div>
+  </div>
+</div>
+
+<div class="step-connector">
+  <div class="connector-circle">Then</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     STEP 6 — FINAL WALKTHROUGH
+══════════════════════════════════════════ -->
+<div class="process-step step-6" id="step6">
+  <div class="step-visual">
+    <div class="step-visual-num">6</div>
+    <div class="step-visual-inner">
+      <div class="step-phase">
+        <span class="step-phase-icon">🔍</span>
+        <div class="step-phase-label">Phase Six</div>
+        <div class="step-phase-name">Final<br>Walkthrough</div>
+      </div>
+    </div>
+  </div>
+  <div class="step-content">
+    <div class="step-header">
+      <div class="step-eyebrow">Step 6</div>
+      <h2>We Don't Leave<br><em>Until It's Right</em></h2>
+    </div>
+    <div class="timeline-tag"><span class="clock">🕐</span> 1–2 Weeks Before Closing</div>
+    <p class="step-intro">Before you take possession, we walk through every inch of the home together. Every door, every switch, every finish. If anything isn't exactly right, it gets fixed — before you move in, not after.</p>
+    <div class="what-happens">
+      <div class="what-happens-label">What Happens at This Stage</div>
+      <ul class="what-list">
+        <li>Full room-by-room walkthrough with Chris or Ryan in person</li>
+        <li>Review all finishes against your selections sheet</li>
+        <li>Test all appliances, HVAC, plumbing, and electrical systems</li>
+        <li>Document any punch list items and schedule completion</li>
+        <li>Final municipal inspection and certificate of occupancy</li>
+        <li>Home orientation — how everything in your new home works</li>
+      </ul>
+    </div>
+    <div class="step-callout">
+      <strong>Our Standard</strong>
+      The punch list is closed before keys are handed over — not after. We don't consider a home finished until you agree it is.
+    </div>
+  </div>
+</div>
+
+<div class="step-connector">
+  <div class="connector-circle">Finally</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     STEP 7 — KEYS IN HAND
+══════════════════════════════════════════ -->
+<div class="process-step step-7" id="step7">
+  <div class="step-visual">
+    <div class="step-visual-bg"></div>
+    <div class="step-visual-num">7</div>
+    <div class="step-visual-inner">
+      <div class="step-phase">
+        <span class="step-phase-icon">🔑</span>
+        <div class="step-phase-label">Phase Seven</div>
+        <div class="step-phase-name">Keys<br>in Hand</div>
+      </div>
+    </div>
+  </div>
+  <div class="step-content">
+    <div class="step-header">
+      <div class="step-eyebrow">Step 7</div>
+      <h2>Welcome Home —<br><em>You're Done.</em></h2>
+    </div>
+    <div class="timeline-tag"><span class="clock">🕐</span> Move-In Day</div>
+    <p class="step-intro">This is the moment we build toward. You get the keys to a home that was built exactly to your specifications, on time, and on budget — just like we promised at the start. And our relationship doesn't end here.</p>
+    <div class="what-happens">
+      <div class="what-happens-label">What You Get at Closing</div>
+      <ul class="what-list">
+        <li>Keys and full access to your completed, inspected home</li>
+        <li>Warranty documentation for all systems and materials</li>
+        <li>Contact info for every major subcontractor for future reference</li>
+        <li>Maintenance schedule and tips for your new home's systems</li>
+        <li>Chris & Ryan's direct number — always — for anything that comes up</li>
+      </ul>
+    </div>
+    <div class="step-callout">
+      <strong>We're Still Here</strong>
+      Many of our clients come back to us for basement finishing, decks, additions, and renovations years later. That's the relationship we're building — not just the house.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     OVERVIEW TIMELINE
+══════════════════════════════════════════ -->
+<div class="overview-section">
+  <div class="overview-header">
+    <div class="overview-eyebrow">At a Glance</div>
+    <h2>From First Call to <em>Move-In Day</em></h2>
+    <p>Typical custom home timeline is 9–12 months start to finish. Model homes can move faster — some as quick as 6 months depending on selections and permit timelines.</p>
+  </div>
+  <div class="timeline-track">
+    <div class="tl-item active">
+      <div class="tl-dot">1</div>
+      <div class="tl-label">Consultation</div>
+      <div class="tl-time">Week 1</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">2</div>
+      <div class="tl-label">Site & Lot</div>
+      <div class="tl-time">Wks 1–4</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">3</div>
+      <div class="tl-label">Design</div>
+      <div class="tl-time">Wks 3–8</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">4</div>
+      <div class="tl-label">Permitting</div>
+      <div class="tl-time">Wks 6–12</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">5</div>
+      <div class="tl-label">Construction</div>
+      <div class="tl-time">Mo. 3–9</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">6</div>
+      <div class="tl-label">Walkthrough</div>
+      <div class="tl-time">Mo. 9–10</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">7</div>
+      <div class="tl-label">Keys!</div>
+      <div class="tl-time">Mo. 10–12</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     FAQ
+══════════════════════════════════════════ -->
+<div class="faq-section">
+  <div class="faq-aside">
+    <div class="section-eyebrow">Common Questions</div>
+    <h2>What People Ask <em>Before They Build</em></h2>
+    <p>These are the questions we hear most often from first-time custom home buyers in NEPA. If yours isn't here, just call us — we love talking through the details.</p>
+    <div class="faq-contact">
+      <div class="faq-contact-label">Still Have Questions?</div>
+      <p>Chris and Ryan answer the phone directly. No hold music, no voicemail maze.</p>
+      <a href="tel:5708764663">(570) 876-4663 →</a>
+    </div>
+  </div>
+  <div class="faq-list">
+
+    <div class="faq-item open">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">How long does it take to build a custom home with DenZal?</span>
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">Most custom homes take 9 to 12 months from signed contract to keys, depending on your selections, permit timelines, and site conditions. Our model homes on ready lots can move significantly faster — sometimes 6 to 8 months. We'll give you a realistic schedule before you sign anything.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">What does a DenZal custom home actually cost?</span>
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">Custom home costs vary based on size, finishes, and lot conditions. In today's NEPA market, a quality custom build typically starts in the mid-$200s and goes up from there depending on selections. We'll give you honest pricing at the first consultation — no inflated estimates, no bait-and-switch. Our fixed-price contract means what we quote is what you pay.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Do I need to own land before I talk to you?</span>
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">Not at all. Many clients come to us before they've found a lot — and we help them find one. We have relationships with landowners, real estate agents, and developers across Lackawanna and Luzerne counties. If you already own land, we'll evaluate it at our first meeting at no cost.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Can I make changes during construction?</span>
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">Minor changes are sometimes possible depending on the stage of construction. However, the best way to avoid costly change orders is to finalize all selections before we break ground — which is exactly what our design process is designed to do. We invest heavily in the design phase so you feel confident and complete before construction starts.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">How do I finance a custom home build?</span>
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">Most custom homes are financed through a construction-to-permanent loan, which converts to a standard mortgage once the home is complete. We can refer you to local lenders we've worked with who understand the construction loan process. We'll also help you understand what documents lenders typically need from us during the process.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">What warranty do you provide?</span>
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">We stand behind our work. All DenZal homes come with a one-year builder's warranty covering workmanship, plus manufacturer warranties on all installed systems and materials. We also provide documentation on every major subcontractor so you always know who to call for a specific system. And honestly — Chris and Ryan's number doesn't change. Just call us.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">What's the difference between a model home and a custom build?</span>
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">Our model homes are proven floor plans that can be built faster and with slightly more predictable pricing — but they're not cookie-cutter. You still choose your finishes, colors, and many layout options. A fully custom home starts from a blank page: you pick the floor plan, room sizes, features, and every detail. Both are built with the same quality and backed by the same guarantee.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     FINAL CTA
+══════════════════════════════════════════ -->
+<div class="final-cta" id="cta">
+  <div>
+    <h2>Ready to Start<br><em>Your Process?</em></h2>
+    <p>The first step costs nothing. Fill out the form and Chris or Ryan will reach out within one business day to set up your free, no-pressure consultation.</p>
+    <div style="margin-top:32px; display:flex; flex-direction:column; gap:16px;">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <div style="width:40px; height:40px; background:var(--blue); display:flex; align-items:center; justify-content:center; color:var(--gold-light); font-size:1rem; flex-shrink:0;">📞</div>
+        <div>
+          <div style="font-family:'Barlow Condensed',sans-serif; font-size:.7rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--navy); margin-bottom:2px;">Call or Text</div>
+          <div style="font-size:1rem; color:var(--navy); font-weight:600;">(570) 876-4663</div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:14px;">
+        <div style="width:40px; height:40px; background:var(--blue); display:flex; align-items:center; justify-content:center; color:var(--gold-light); font-size:1rem; flex-shrink:0;">📍</div>
+        <div>
+          <div style="font-family:'Barlow Condensed',sans-serif; font-size:.7rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--navy); margin-bottom:2px;">Office</div>
+          <div style="font-size:.95rem; color:var(--navy);">466 N Main St, Eynon PA 18403</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta-form">
+    <div class="row">
+      <input type="text" placeholder="First Name">
+      <input type="text" placeholder="Last Name">
+    </div>
+    <input type="tel" placeholder="Phone Number">
+    <input type="email" placeholder="Email Address">
+    <select>
+      <option value="" disabled selected>I'm interested in...</option>
+      <option>Custom Home Build</option>
+      <option>Model Home</option>
+      <option>I have land, need a builder</option>
+      <option>Need help finding a lot too</option>
+      <option>Just exploring / pricing</option>
+    </select>
+    <textarea placeholder="Tell us about your project — dream size, style, timeline, anything..."></textarea>
+    <button class="btn-submit">Request My Free Consultation →</button>
+    <p style="font-size:.78rem; color:rgba(26,58,107,.6); text-align:center; line-height:1.5;">No obligation. No spam. Chris or Ryan will personally follow up within one business day.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="index.html"><img src="https://denzalconstruction.com/wp-content/uploads/2019/03/DenZal_Logo-2-MED-1024x593.png" alt="DenZal Construction" style="height:72px;width:auto;display:block;"></a>
+      <p>NEPA's premier custom home builder. Fine building, quality craftsmanship, exceptional value — home by home.</p>
+      <div class="social-row" style="margin-top:16px;">
+        <a href="https://www.facebook.com/denzalconstruction/" class="social-btn">f</a>
+        <a href="https://www.instagram.com/denzalconstruction/" class="social-btn">📷</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+            <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="our-homes.html">Our Homes</a></li>
+        <li><a href="process.html">Our Process</a></li>
+        <li><a href="testimonials.html">Testimonials</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>The Process</h5>
+      <ul>
+        <li><a href="#step1">1. Free Consultation</a></li>
+        <li><a href="#step2">2. Site & Lot</a></li>
+        <li><a href="#step3">3. Design</a></li>
+        <li><a href="#step4">4. Permitting</a></li>
+        <li><a href="#step5">5. Construction</a></li>
+        <li><a href="#step6">6. Walkthrough</a></li>
+        <li><a href="#step7">7. Keys in Hand</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="tel:5708764663">(570) 876-4663</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#a4c0c1cadec5c8c7cbcad7d0d6d1c7d0cdcbcae4c3c9c5cdc88ac7cbc9"><span class="__cf_email__" data-cfemail="f195949f8b909d929e9f828583849285989e9fb1969c90989ddf929e9c">[email&#160;protected]</span></a></li>
+        <li><a href="https://www.google.com/maps/place/Denzal+Construction" target="_blank">466 N Main St, Eynon PA</a></li>
+        <li style="margin-top:12px;"><a href="#cta" style="color:var(--gold-light);">Start Your Home →</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 DenZal Construction Co. LLC · Licensed & Insured · Eynon, PA 18403</span>
+    <span class="footer-copy">Built with ❤️ in NEPA</span>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // ── FAQ ACCORDION ──
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    // Open this one if it was closed
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // ── STEP NAV ACTIVE STATE on scroll ──
+  const stepIds = ['step1','step2','step3','step4','step5','step6','step7'];
+  const navItems = document.querySelectorAll('.step-nav-item');
+  const tlItems  = document.querySelectorAll('.tl-item');
+
+  function updateActive() {
+    let curren

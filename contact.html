@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | DenZal Construction Co.</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #1a3a6b;
+    --blue:       #2558a8;
+    --blue-dark:  #1c4790;
+    --blue-light: #3a6bbf;
+    --blue-pale:  #dce8f7;
+    --gold:       #d4960a;
+    --gold-light: #f0c030;
+    --gold-pale:  #fdf6e0;
+    --cream:      #f4f6fa;
+    --white:      #ffffff;
+    --gray-light: #e8edf5;
+    --gray-mid:   #7a90b0;
+    --text-dark:  #1a1a1a;
+    --text-mid:   #3a4a5a;
+    --success:    #16a34a;
+    --success-pale:#dcfce7;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Barlow',sans-serif; background:var(--cream); color:var(--text-dark); overflow-x:hidden; }
+
+  /* ─── MOCKUP BANNER ─── */
+  .mockup-banner {
+    background:#ff4757; color:#fff; text-align:center;
+    padding:10px; font-family:monospace; font-size:.8rem; letter-spacing:.08em;
+  }
+
+  /* ─── TOP BAR ─── */
+  .top-bar {
+    background:var(--navy); color:rgba(255,255,255,.6);
+    font-size:.78rem; letter-spacing:.08em;
+    padding:8px 40px;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .top-bar a { color:var(--gold-light); text-decoration:none; }
+  .top-bar .right { display:flex; gap:24px; align-items:center; }
+
+  /* ─── NAV ─── */
+  nav {
+    background:var(--white);
+    display:flex; justify-content:space-between; align-items:center;
+    padding:0 40px; height:88px;
+    position:sticky; top:0; z-index:200;
+    box-shadow:0 2px 20px rgba(0,0,0,.08);
+  }
+  .nav-links { display:flex; gap:32px; list-style:none; }
+  .nav-links a {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.88rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--text-mid); text-decoration:none; font-weight:600; transition:color .2s;
+  }
+  .nav-links a:hover { color:var(--blue); }
+  .nav-links a.active { color:var(--blue); border-bottom:2px solid var(--gold); padding-bottom:2px; }
+  .nav-cta {
+    background:var(--gold); color:var(--navy); padding:12px 28px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.85rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+    text-decoration:none; transition:background .2s;
+  }
+  .nav-cta:hover { background:var(--gold-light); }
+
+  /* ─── HERO BAND ─── */
+  .hero-band {
+    background:var(--blue);
+    padding:64px 80px 60px;
+    position:relative; overflow:hidden;
+  }
+  .hero-band::before {
+    content:'';
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at 85% 50%, rgba(240,192,48,.13) 0%, transparent 55%),
+      repeating-linear-gradient(-45deg, transparent, transparent 36px,
+        rgba(255,255,255,.025) 36px, rgba(255,255,255,.025) 37px);
+  }
+  .hero-band-inner {
+    position:relative; z-index:2;
+    display:grid; grid-template-columns:1fr auto; gap:60px; align-items:center;
+  }
+  .eyebrow {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.75rem; font-weight:700; letter-spacing:.3em; text-transform:uppercase;
+    color:var(--gold-light);
+    display:flex; align-items:center; gap:12px; margin-bottom:16px;
+  }
+  .eyebrow::before { content:''; display:block; width:28px; height:2px; background:var(--gold-light); }
+  .hero-band h1 {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2.2rem,4vw,3.4rem); font-weight:900;
+    color:#fff; line-height:1.08; letter-spacing:-.02em; margin-bottom:16px;
+  }
+  .hero-band h1 em { font-style:italic; color:var(--gold-light); }
+  .hero-band p {
+    font-size:1rem; color:rgba(255,255,255,.72); font-weight:300;
+    line-height:1.8; max-width:520px;
+  }
+  .breadcrumb {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.72rem; letter-spacing:.12em; text-transform:uppercase;
+    color:rgba(255,255,255,.35); margin-top:28px;
+  }
+  .breadcrumb a { color:rgba(255,255,255,.55); text-decoration:none; }
+  .breadcrumb span { margin:0 8px; }
+
+  /* quick-dial cards */
+  .quick-dials {
+    display:flex; flex-direction:column; gap:12px;
+    flex-shrink:0;
+  }
+  .quick-dial {
+    background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18);
+    padding:16px 22px;
+    display:flex; align-items:center; gap:14px;
+    text-decoration:none; transition:background .2s;
+    min-width:260px;
+  }
+  .quick-dial:hover { background:rgba(255,255,255,.18); }
+  .quick-dial-icon {
+    width:40px; height:40px; border-radius:50%;
+    background:var(--gold); color:var(--navy);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.1rem; flex-shrink:0;
+  }
+  .quick-dial-text {}
+  .quick-dial-label {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.65rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase;
+    color:rgba(255,255,255,.5); display:block; margin-bottom:2px;
+  }
+  .quick-dial-value {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:1rem; font-weight:700; color:#fff;
+  }
+
+  /* ─── MAIN LAYOUT ─── */
+  .main-grid {
+    display:grid; grid-template-columns:1fr 420px;
+    gap:0; min-height:700px;
+    background:var(--white);
+  }
+
+  /* ─── FORM SIDE ─── */
+  .form-side {
+    padding:64px 64px 64px 80px;
+    border-right:1px solid var(--gray-light);
+  }
+  .form-intro { margin-bottom:40px; }
+  .section-eyebrow {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.72rem; font-weight:700; letter-spacing:.25em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:10px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .section-eyebrow::before { content:''; display:block; width:22px; height:2px; background:var(--gold); }
+  .form-intro h2 {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(1.7rem,2.5vw,2.2rem); font-weight:700;
+    color:var(--blue-dark); line-height:1.2; letter-spacing:-.01em; margin-bottom:12px;
+  }
+  .form-intro h2 em { font-style:italic; color:var(--blue); }
+  .form-intro p { font-size:.93rem; color:var(--text-mid); line-height:1.75; }
+
+  /* step indicators */
+  .form-steps {
+    display:flex; gap:0; margin-bottom:40px;
+    border-bottom:2px solid var(--gray-light);
+  }
+  .form-step-tab {
+    flex:1; padding:14px 16px; text-align:center; cursor:pointer;
+    border-bottom:3px solid transparent; margin-bottom:-2px;
+    transition:border-color .2s;
+  }
+  .form-step-tab.active { border-bottom-color:var(--blue); }
+  .form-step-num {
+    width:26px; height:26px; border-radius:50%;
+    background:var(--gray-light); color:var(--gray-mid);
+    font-family:'Barlow Condensed',sans-serif; font-size:.75rem; font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+    margin:0 auto 6px; transition:background .2s, color .2s;
+  }
+  .form-step-tab.active .form-step-num,
+  .form-step-tab.completed .form-step-num {
+    background:var(--blue); color:#fff;
+  }
+  .form-step-tab.completed .form-step-num::after { content:'✓'; }
+  .form-step-label {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.68rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
+    color:var(--gray-mid); transition:color .2s;
+  }
+  .form-step-tab.active .form-step-label { color:var(--blue); }
+
+  /* form panels */
+  .form-panel { display:none; }
+  .form-panel.active { display:block; }
+
+  /* form fields */
+  .field-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+  .field-row.solo { grid-template-columns:1fr; }
+  .field-row.trio { grid-template-columns:1fr 1fr 1fr; }
+  .field-group { display:flex; flex-direction:column; gap:6px; }
+  .field-label {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.72rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
+    color:var(--text-mid);
+  }
+  .field-label .req { color:var(--gold); }
+  .field-input, .field-select, .field-textarea {
+    padding:13px 16px;
+    font-family:'Barlow',sans-serif; font-size:.93rem; color:var(--text-dark);
+    background:var(--cream); border:2px solid var(--gray-light);
+    outline:none; width:100%;
+    transition:border-color .2s, background .2s;
+    appearance:none;
+  }
+  .field-input:focus, .field-select:focus, .field-textarea:focus {
+    border-color:var(--blue); background:var(--white);
+  }
+  .field-input.error, .field-select.error, .field-textarea.error {
+    border-color:#dc2626;
+  }
+  .field-textarea { height:120px; resize:vertical; }
+  .field-hint {
+    font-size:.78rem; color:var(--gray-mid); line-height:1.4;
+    font-style:italic;
+  }
+
+  /* option tiles for project type */
+  .option-tiles {
+    display:grid; grid-template-columns:1fr 1fr; gap:10px;
+    margin-bottom:16px;
+  }
+  .option-tile {
+    border:2px solid var(--gray-light); background:var(--cream);
+    padding:14px 16px; cursor:pointer;
+    display:flex; align-items:center; gap:10px;
+    transition:border-color .2s, background .2s;
+  }
+  .option-tile:hover { border-color:var(--blue-light); background:var(--blue-pale); }
+  .option-tile.selected { border-color:var(--blue); background:var(--blue-pale); }
+  .option-tile input[type="radio"] { display:none; }
+  .option-tile-icon { font-size:1.3rem; flex-shrink:0; }
+  .option-tile-text {}
+  .option-tile-name {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.82rem; font-weight:700; letter-spacing:.06em;
+    color:var(--blue-dark); display:block;
+  }
+  .option-tile-desc {
+    font-size:.72rem; color:var(--gray-mid); line-height:1.3;
+  }
+
+  /* budget slider */
+  .budget-options {
+    display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:16px;
+  }
+  .budget-btn {
+    border:2px solid var(--gray-light); background:var(--cream);
+    padding:10px 8px; text-align:center; cursor:pointer;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.75rem; font-weight:700; letter-spacing:.06em;
+    color:var(--text-mid);
+    transition:border-color .2s, background .2s, color .2s;
+  }
+  .budget-btn:hover { border-color:var(--blue); color:var(--blue); }
+  .budget-btn.selected { border-color:var(--blue); background:var(--blue); color:#fff; }
+
+  /* timeline options */
+  .timeline-options {
+    display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;
+  }
+  .timeline-chip {
+    border:2px solid var(--gray-light); background:var(--cream);
+    padding:8px 16px; cursor:pointer;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.75rem; font-weight:700; letter-spacing:.08em;
+    color:var(--text-mid);
+    transition:border-color .2s, background .2s, color .2s;
+  }
+  .timeline-chip:hover { border-color:var(--blue); color:var(--blue); }
+  .timeline-chip.selected { border-color:var(--blue); background:var(--blue); color:#fff; }
+
+  /* nav buttons */
+  .form-nav {
+    display:flex; justify-content:space-between; align-items:center;
+    margin-top:32px; padding-top:24px; border-top:1px solid var(--gray-light);
+  }
+  .btn-prev {
+    background:none; border:2px solid var(--gray-light); color:var(--gray-mid);
+    padding:13px 28px; cursor:pointer;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.85rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+    transition:border-color .2s, color .2s;
+  }
+  .btn-prev:hover { border-color:var(--blue); color:var(--blue); }
+  .btn-next {
+    background:var(--blue); color:#fff; border:none;
+    padding:14px 36px; cursor:pointer;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.88rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+    transition:background .2s; display:flex; align-items:center; gap:8px;
+  }
+  .btn-next:hover { background:var(--blue-dark); }
+  .btn-submit-final {
+    background:var(--gold); color:var(--navy); border:none;
+    padding:16px 40px; cursor:pointer;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.92rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+    transition:background .2s; display:flex; align-items:center; gap:8px;
+  }
+  .btn-submit-final:hover { background:var(--gold-light); }
+  .step-progress {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.72rem; letter-spacing:.1em; color:var(--gray-mid);
+  }
+
+  /* ── SUCCESS STATE ── */
+  .form-success {
+    display:none; text-align:center; padding:60px 40px;
+    animation:fadeUp .5s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(20px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  .success-icon { font-size:4rem; margin-bottom:20px; display:block; }
+  .form-success h3 {
+    font-family:'Playfair Display',serif;
+    font-size:2rem; font-weight:700; color:var(--blue-dark); margin-bottom:12px;
+  }
+  .form-success h3 em { font-style:italic; color:var(--blue); }
+  .form-success p { font-size:.95rem; color:var(--text-mid); line-height:1.75; max-width:440px; margin:0 auto 28px; }
+  .success-detail {
+    background:var(--success-pale); border-left:4px solid var(--success);
+    padding:16px 20px; text-align:left; margin-bottom:28px;
+    font-size:.88rem; color:#14532d; line-height:1.6;
+  }
+
+  /* ─── INFO SIDE ─── */
+  .info-side {
+    background:var(--navy);
+    padding:64px 48px 64px 44px;
+    display:flex; flex-direction:column; gap:0;
+  }
+  .info-block { margin-bottom:40px; }
+  .info-block:last-child { margin-bottom:0; }
+  .info-eyebrow {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.68rem; font-weight:700; letter-spacing:.25em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:16px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .info-eyebrow::before { content:''; display:block; width:18px; height:2px; background:var(--gold); }
+
+  /* contact methods */
+  .contact-method {
+    display:flex; align-items:flex-start; gap:14px;
+    padding:18px 0; border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .contact-method:last-child { border-bottom:none; }
+  .contact-method-icon {
+    width:40px; height:40px; flex-shrink:0;
+    background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1rem;
+  }
+  .contact-method-text {}
+  .contact-method-label {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.65rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase;
+    color:rgba(255,255,255,.4); display:block; margin-bottom:3px;
+  }
+  .contact-method-value {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.95rem; font-weight:700; color:#fff;
+    text-decoration:none; display:block;
+    transition:color .2s;
+  }
+  .contact-method-value:hover { color:var(--gold-light); }
+  .contact-method-sub {
+    font-size:.78rem; color:rgba(255,255,255,.45); margin-top:2px; line-height:1.4;
+  }
+
+  /* hours */
+  .hours-grid {
+    display:flex; flex-direction:column; gap:8px;
+  }
+  .hours-row {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:8px 0; border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  .hours-row:last-child { border-bottom:none; }
+  .hours-day {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.78rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+    color:rgba(255,255,255,.6);
+  }
+  .hours-time {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.78rem; font-weight:700; letter-spacing:.06em;
+    color:#fff;
+  }
+  .hours-time.closed { color:rgba(255,255,255,.3); }
+  .hours-note {
+    font-size:.78rem; color:rgba(255,255,255,.4); line-height:1.5;
+    margin-top:10px; font-style:italic;
+  }
+
+  /* social */
+  .social-row { display:flex; gap:10px; }
+  .social-btn {
+    width:38px; height:38px; border:1px solid rgba(255,255,255,.2);
+    display:flex; align-items:center; justify-content:center;
+    color:rgba(255,255,255,.5); text-decoration:none;
+    font-family:'Barlow Condensed',sans-serif; font-size:.75rem; font-weight:700;
+    transition:border-color .2s, color .2s, background .2s;
+  }
+  .social-btn:hover { border-color:var(--gold); color:var(--gold); }
+
+  /* promise pills on info side */
+  .promise-pills {
+    display:flex; flex-direction:column; gap:8px;
+  }
+  .promise-pill {
+    display:flex; align-items:center; gap:10px;
+    padding:10px 14px;
+    background:rgba(255,255,255,.06); border-left:3px solid var(--gold);
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.78rem; font-weight:700; letter-spacing:.06em;
+    color:rgba(255,255,255,.8);
+  }
+  .promise-pill .check { color:var(--gold-light); }
+
+  /* ─── MAP SECTION ─── */
+  .map-section {
+    position:relative; height:420px;
+    background:var(--gray-light);
+    overflow:hidden;
+  }
+  .map-section iframe {
+    width:100%; height:100%; border:none; display:block;
+    filter:saturate(.85);
+  }
+  .map-pin-card {
+    position:absolute; bottom:28px; left:80px;
+    background:var(--white);
+    padding:20px 24px;
+    display:flex; align-items:center; gap:16px;
+    box-shadow:0 8px 32px rgba(0,0,0,.15);
+    min-width:280px;
+  }
+  .map-pin-icon {
+    width:44px; height:44px; flex-shrink:0;
+    background:var(--blue); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.2rem;
+  }
+  .map-pin-text {}
+  .map-pin-name {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.88rem; font-weight:700; letter-spacing:.06em;
+    color:var(--navy); display:block; margin-bottom:2px;
+  }
+  .map-pin-addr { font-size:.82rem; color:var(--text-mid); }
+  .map-pin-link {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.7rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--blue); text-decoration:none; margin-top:5px; display:block;
+    transition:opacity .2s;
+  }
+  .map-pin-link:hover { opacity:.7; }
+
+  /* ─── REASSURANCE STRIP ─── */
+  .reassurance {
+    background:var(--gold);
+    padding:32px 80px;
+    display:flex; gap:40px; align-items:center; flex-wrap:wrap;
+    border-top:4px solid var(--blue);
+    border-bottom:4px solid var(--blue);
+  }
+  .reassurance-item {
+    display:flex; align-items:center; gap:12px; flex:1; min-width:180px;
+  }
+  .reassurance-icon { font-size:1.5rem; flex-shrink:0; }
+  .reassurance-text {}
+  .reassurance-label {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.72rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--navy); margin-bottom:1px;
+  }
+  .reassurance-desc { font-size:.82rem; color:rgba(26,58,107,.72); line-height:1.3; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background:var(--navy); padding:52px 80px 28px;
+    border-top:4px solid var(--blue);
+  }
+  .footer-top {
+    display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:50px;
+    padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,.1); margin-bottom:28px;
+  }
+  .footer-brand p { font-size:.85rem; color:rgba(255,255,255,.4); line-height:1.7; max-width:260px; margin-top:12px; }
+  .footer-col h5 {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.72rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:14px;
+  }
+  .footer-col ul { list-style:none; }
+  .footer-col li { margin-bottom:9px; }
+  .footer-col a { font-size:.85rem; color:rgba(255,255,255,.4); text-decoration:none; transition:color .2s; }
+  .footer-col a:hover { color:#fff; }
+  .footer-bottom { display:flex; justify-content:space-between; align-items:center; }
+  .footer-copy { font-size:.75rem; color:rgba(255,255,255,.25); letter-spacing:.04em; }
+  .footer-social-row { display:flex; gap:12px; }
+  .footer-social-btn {
+    width:34px; height:34px; border:1px solid rgba(255,255,255,.2);
+    display:flex; align-items:center; justify-content:center;
+    color:rgba(255,255,255,.4); text-decoration:none; font-size:.8rem;
+    transition:border-color .2s, color .2s;
+  }
+  .footer-social-btn:hover { border-color:var(--gold); color:var(--gold); }
+</style>
+</head>
+<body>
+
+<div class="mockup-banner">🎨 MOCKUP — DenZal Construction · Contact Page — For Review Only</div>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <span>📍 466 N Main St, Eynon, PA 18403</span>
+  <div class="right">
+    <span>✉ <a href="/cdn-cgi/l/email-protection#2e4a4b40544f424d41405d5a5c5b4d5a4741406e49434f4742004d4143"><span class="__cf_email__" data-cfemail="7014151e0a111c131f1e030402051304191f1e30171d11191c5e131f1d">[email&#160;protected]</span></a></span>
+    <span>📞 <a href="tel:5708764663">(570) 876-4663</a></span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" style="display:flex;align-items:center;text-decoration:none;">
+    <img src="https://denzalconstruction.com/wp-content/uploads/2019/03/DenZal_Logo-2-MED-1024x593.png"
+         alt="DenZal Construction Co. LLC" style="height:62px;width:auto;display:block;">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="our-homes.html">Our Homes</a></li>
+    <li><a href="process.html">Our Process</a></li>
+    <li><a href="testimonials.html">Testimonials</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <a href="#form" class="nav-cta">Start Here</a>
+</nav>
+
+<!-- ══════════════════════════════
+     HERO BAND
+══════════════════════════════ -->
+<div class="hero-band">
+  <div class="hero-band-inner">
+    <div>
+      <div class="eyebrow">Let's Talk</div>
+      <h1>Your Dream Home<br>Starts with <em>One Call.</em></h1>
+      <p>Fill out the form below — or just call us. Chris or Ryan picks up directly. No call centers, no forms to fill before we'll talk to you. We're NEPA locals and we'd love to hear what you're planning.</p>
+      <div class="breadcrumb"><a href="index.html">Home</a><span>›</span>Contact Us</div>
+    </div>
+    <div class="quick-dials">
+      <a href="tel:5708764663" class="quick-dial">
+        <div class="quick-dial-icon">📞</div>
+        <div class="quick-dial-text">
+          <span class="quick-dial-label">Call or Text</span>
+          <span class="quick-dial-value">(570) 876-4663</span>
+        </div>
+      </a>
+      <a href="/cdn-cgi/l/email-protection#7216171c08131e111d1c0106000711061b1d1c32151f131b1e5c111d1f" class="quick-dial">
+        <div class="quick-dial-icon">✉️</div>
+        <div class="quick-dial-text">
+          <span class="quick-dial-label">Email Us</span>
+          <span class="quick-dial-value"><span class="__cf_email__" data-cfemail="670302091d060b0408091413151204130e080927000a060e0b4904080a">[email&#160;protected]</span></span>
+        </div>
+      </a>
+      <a href="https://www.google.com/maps/place/Denzal+Construction" target="_blank" class="quick-dial">
+        <div class="quick-dial-icon">📍</div>
+        <div class="quick-dial-text">
+          <span class="quick-dial-label">Office</span>
+          <span class="quick-dial-value">466 N Main St, Eynon PA</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     MAIN GRID — FORM + INFO
+══════════════════════════════ -->
+<div class="main-grid" id="form">
+
+  <!-- ── FORM SIDE ── -->
+  <div class="form-side">
+
+    <div class="form-intro">
+      <div class="section-eyebrow">Free Consultation Request</div>
+      <h2>Tell Us About<br><em>Your Project</em></h2>
+      <p>The more detail you share, the better Chris and Ryan can prepare for your first conversation. Takes about 3 minutes — and it's completely free, no obligation.</p>
+    </div>
+
+    <!-- Step tabs -->
+    <div class="form-steps">
+      <div class="form-step-tab active" id="tab1">
+        <div class="form-step-num">1</div>
+        <div class="form-step-label">Your Project</div>
+      </div>
+      <div class="form-step-tab" id="tab2">
+        <div class="form-step-num">2</div>
+        <div class="form-step-label">Your Details</div>
+      </div>
+      <div class="form-step-tab" id="tab3">
+        <div class="form-step-num">3</div>
+        <div class="form-step-label">Confirm &amp; Send</div>
+      </div>
+    </div>
+
+    <!-- ── STEP 1: Project ── -->
+    <div class="form-panel active" id="panel1">
+
+      <p style="font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gray-mid);margin-bottom:14px;">What are you looking to build? <span style="color:#dc2626">*</span></p>
+      <div class="option-tiles" id="projectTiles">
+        <label class="option-tile" onclick="selectTile(this,'project')">
+          <input type="radio" name="project" value="custom-home">
+          <span class="option-tile-icon">🏠</span>
+          <span class="option-tile-text">
+            <span class="option-tile-name">Custom Home</span>
+            <span class="option-tile-desc">Fully custom floor plan, your lot</span>
+          </span>
+        </label>
+        <label class="option-tile" onclick="selectTile(this,'project')">
+          <input type="radio" name="project" value="model-home">
+          <span class="option-tile-icon">📐</span>
+          <span class="option-tile-text">
+            <span class="option-tile-name">Model Home</span>
+            <span class="option-tile-desc">Choose from our signature designs</span>
+          </span>
+        </label>
+        <label class="option-tile" onclick="selectTile(this,'project')">
+          <input type="radio" name="project" value="renovation">
+          <span class="option-tile-icon">🔨</span>
+          <span class="option-tile-text">
+            <span class="option-tile-name">Renovation</span>
+            <span class="option-tile-desc">Kitchen, basement, addition, etc.</span>
+          </span>
+        </label>
+        <label class="option-tile" onclick="selectTile(this,'project')">
+          <input type="radio" name="project" value="deck">
+          <span class="option-tile-icon">🪵</span>
+          <span class="option-tile-text">
+            <span class="option-tile-name">Deck / Exterior</span>
+            <span class="option-tile-desc">Deck, porch, garage, or exterior work</span>
+          </span>
+        </label>
+        <label class="option-tile" onclick="selectTile(this,'project')">
+          <input type="radio" name="project" value="not-sure">
+          <span class="option-tile-icon">🤔</span>
+          <span class="option-tile-text">
+            <span class="option-tile-name">Not Sure Yet</span>
+            <span class="option-tile-desc">Just exploring — we're happy to help</span>
+          </span>
+        </label>
+        <label class="option-tile" onclick="selectTile(this,'project')">
+          <input type="radio" name="project" value="other">
+          <span class="option-tile-icon">💬</span>
+          <span class="option-tile-text">
+            <span class="option-tile-name">Something Else</span>
+            <span class="option-tile-desc">Tell us in the message</span>
+          </span>
+        </label>
+      </div>
+
+      <div class="field-row solo" style="margin-top:24px;">
+        <div class="field-group">
+          <label class="field-label">Do you already have a lot / land? <span class="req">*</span></label>
+          <select class="field-select" id="lotStatus">
+            <option value="" disabled selected>Select an option</option>
+            <option>Yes — I own land already</option>
+            <option>Yes — I'm under contract on a lot</option>
+            <option>No — I need help finding one</option>
+            <option>Not applicable (renovation/deck)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-group" style="margin-bottom:16px;">
+        <label class="field-label">Approximate budget range <span class="req">*</span></label>
+        <div class="budget-options">
+          <button type="button" class="budget-btn" onclick="selectBudget(this)">Under $200k</button>
+          <button type="button" class="budget-btn" onclick="selectBudget(this)">$200k–$350k</button>
+          <button type="button" class="budget-btn" onclick="selectBudget(this)">$350k–$500k</button>
+          <button type="button" class="budget-btn" onclick="selectBudget(this)">$500k+</button>
+        </div>
+        <span class="field-hint">This helps Chris and Ryan suggest the right options — no commitment.</span>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Ideal start timeline</label>
+        <div class="timeline-options">
+          <button type="button" class="timeline-chip" onclick="selectChip(this)">ASAP</button>
+          <button type="button" class="timeline-chip" onclick="selectChip(this)">Within 3 months</button>
+          <button type="button" class="timeline-chip" onclick="selectChip(this)">3–6 months</button>
+          <button type="button" class="timeline-chip" onclick="selectChip(this)">6–12 months</button>
+          <button type="button" class="timeline-chip" onclick="selectChip(this)">Just exploring</button>
+        </div>
+      </div>
+
+      <div class="form-nav">
+        <span class="step-progress">Step 1 of 3</span>
+        <button class="btn-next" onclick="goToStep(2)">Next: Your Details →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 2: Contact Info ── -->
+    <div class="form-panel" id="panel2">
+
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label">First Name <span class="req">*</span></label>
+          <input class="field-input" type="text" id="firstName" placeholder="Chris" autocomplete="given-name">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Last Name <span class="req">*</span></label>
+          <input class="field-input" type="text" id="lastName" placeholder="Smith" autocomplete="family-name">
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label">Phone Number <span class="req">*</span></label>
+          <input class="field-input" type="tel" id="phone" placeholder="(570) 555-0100" autocomplete="tel">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Email Address <span class="req">*</span></label>
+          <input class="field-input" type="email" id="email" placeholder="you@email.com" autocomplete="email">
+        </div>
+      </div>
+
+      <div class="field-row solo">
+        <div class="field-group">
+          <label class="field-label">General Location / Town <span class="req">*</span></label>
+          <input class="field-input" type="text" id="location" placeholder="e.g. Dunmore, Clarks Summit, Kingston...">
+          <span class="field-hint">Helps us understand the area you're building in. No full address needed yet.</span>
+        </div>
+      </div>
+
+      <div class="field-row solo">
+        <div class="field-group">
+          <label class="field-label">Best Way to Reach You</label>
+          <select class="field-select" id="contactPref">
+            <option value="" disabled selected>Select preference</option>
+            <option>Phone call</option>
+            <option>Text message</option>
+            <option>Email</option>
+            <option>Any — whatever's fastest</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-row solo">
+        <div class="field-group">
+          <label class="field-label">Best Time to Call</label>
+          <select class="field-select" id="callTime">
+            <option value="" disabled selected>Select preference</option>
+            <option>Morning (8am – 12pm)</option>
+            <option>Afternoon (12pm – 4pm)</option>
+            <option>Evening (4pm – 7pm)</option>
+            <option>Weekends preferred</option>
+            <option>Anytime</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-prev" onclick="goToStep(1)">← Back</button>
+        <span class="step-progress">Step 2 of 3</span>
+        <button class="btn-next" onclick="goToStep(3)">Next: Review & Send →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 3: Review & Message ── -->
+    <div class="form-panel" id="panel3">
+
+      <!-- Summary -->
+      <div style="background:var(--blue-pale); border-left:4px solid var(--blue); padding:18px 20px; margin-bottom:24px;">
+        <p style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;">Your Submission Summary</p>
+        <div id="summaryText" style="font-size:.88rem;color:var(--text-mid);line-height:1.6;"></div>
+      </div>
+
+      <div class="field-row solo">
+        <div class="field-group">
+          <label class="field-label">Anything else you'd like Chris &amp; Ryan to know?</label>
+          <textarea class="field-textarea" id="message" placeholder="Tell us more about your project — lot size, style inspiration, must-have features, concerns about the process, anything at all. The more detail, the better we can prepare for your first call."></textarea>
+        </div>
+      </div>
+
+      <div style="background:var(--gold-pale); border-left:3px solid var(--gold); padding:14px 18px; margin-bottom:8px; font-size:.85rem; color:var(--text-mid); line-height:1.6;">
+        <strong style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:4px;">What Happens Next</strong>
+        Chris or Ryan will personally follow up within one business day — usually the same day. This is not a sales pitch. It's a conversation about your project, completely free.
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-prev" onclick="goToStep(2)">← Back</button>
+        <span class="step-progress">Step 3 of 3</span>
+        <button class="btn-submit-final" onclick="submitForm()">Send My Request ✓</button>
+      </div>
+    </div>
+
+    <!-- ── SUCCESS ── -->
+    <div class="form-success" id="formSuccess">
+      <span class="success-icon">🏠</span>
+      <h3>You're on Chris &amp; Ryan's<br><em>Radar Now.</em></h3>
+      <p>Your consultation request is in. Expect a personal call or message within one business day — usually same day for inquiries received before 3pm.</p>
+      <div class="success-detail">
+        <strong style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;display:block;margin-bottom:4px;">While You Wait</strong>
+        Browse our model homes, read through client testimonials, or check out our process overview — all designed to answer the questions you probably already have.
+      </div>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+        <a href="our-homes.html" style="background:var(--blue);color:#fff;padding:13px 28px;font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;">View Our Homes</a>
+        <a href="testimonials.html" style="background:var(--gold);color:var(--navy);padding:13px 28px;font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;">Read Testimonials</a>
+      </div>
+    </div>
+
+  </div><!-- /form-side -->
+
+  <!-- ── INFO SIDE ── -->
+  <div class="info-side">
+
+    <!-- Contact Methods -->
+    <div class="info-block">
+      <div class="info-eyebrow">Reach Us Directly</div>
+
+      <div class="contact-method">
+        <div class="contact-method-icon">📞</div>
+        <div class="contact-method-text">
+          <span class="contact-method-label">Call or Text</span>
+          <a href="tel:5708764663" class="contact-method-value">(570) 876-4663</a>
+          <span class="contact-method-sub">Chris or Ryan answer directly.<br>No voicemail maze.</span>
+        </div>
+      </div>
+
+      <div class="contact-method">
+        <div class="contact-method-icon">✉️</div>
+        <div class="contact-method-text">
+          <span class="contact-method-label">Email</span>
+          <a href="/cdn-cgi/l/email-protection#9cf8f9f2e6fdf0fff3f2efe8eee9ffe8f5f3f2dcfbf1fdf5f0b2fff3f1" class="contact-method-value"><span class="__cf_email__" data-cfemail="f69293988c979a9599988582848395829f9998b6919b979f9ad895999b">[email&#160;protected]</span></a>
+          <span class="contact-method-sub">Replies within one business day.</span>
+        </div>
+      </div>
+
+      <div class="contact-method">
+        <div class="contact-method-icon">📍</div>
+        <div class="contact-method-text">
+          <span class="contact-method-label">Office Address</span>
+          <span class="contact-method-value" style="cursor:default;">466 N Main St</span>
+          <span class="contact-method-sub">Eynon, PA 18403<br>Serving all of NEPA</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Hours -->
+    <div class="info-block">
+      <div class="info-eyebrow">Office Hours</div>
+      <div class="hours-grid">
+        <div class="hours-row">
+          <span class="hours-day">Monday – Friday</span>
+          <span class="hours-time">9:00 AM – 5:00 PM</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Saturday</span>
+          <span class="hours-time">By Appointment</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Sunday</span>
+          <span class="hours-time closed">Closed</span>
+        </div>
+      </div>
+      <p class="hours-note">Emergency? Text Chris or Ryan directly — they're usually reachable for current clients outside of business hours.</p>
+    </div>
+
+    <!-- Promises -->
+    <div class="info-block">
+      <div class="info-eyebrow">Our Guarantees</div>
+      <div class="promise-pills">
+        <div class="promise-pill"><span class="check">✓</span> Free, no-obligation consultation</div>
+        <div class="promise-pill"><span class="check">✓</span> On-time delivery — guaranteed</div>
+        <div class="promise-pill"><span class="check">✓</span> On-budget, fixed-price contract</div>
+        <div class="promise-pill"><span class="check">✓</span> Chris or Ryan on every job</div>
+        <div class="promise-pill"><span class="check">✓</span> Licensed &amp; insured in Pennsylvania</div>
+      </div>
+    </div>
+
+    <!-- Social -->
+    <div class="info-block">
+      <div class="info-eyebrow">Follow Along</div>
+      <p style="font-size:.82rem;color:rgba(255,255,255,.5);margin-bottom:14px;line-height:1.6;">See completed homes, works in progress, and NEPA builds on our socials.</p>
+      <div class="social-row">
+        <a href="https://www.facebook.com/denzalconstruction/" target="_blank" class="social-btn">f</a>
+        <a href="https://www.instagram.com/denzalconstruction/" target="_blank" class="social-btn">📷</a>
+        <a href="https://www.youtube.com/@denzalconstruction" target="_blank" class="social-btn">▶</a>
+      </div>
+    </div>
+
+  </div><!-- /info-side -->
+
+</div><!-- /main-grid -->
+
+<!-- ══════════════════════════════
+     MAP
+══════════════════════════════ -->
+<div class="map-section">
+  <iframe
+    title="DenZal Construction location"
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001.8!2d-75.5726!3d41.4969!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c4d061b1c85c33%3A0x3bf3a412929adc5b!2sDenzal%20Construction!5e0!3m2!1sen!2sus!4v1700000000000"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+  <div class="map-pin-card">
+    <div class="map-pin-icon">📍</div>
+    <div class="map-pin-text">
+      <span class="map-pin-name">DenZal Construction Co. LLC</span>
+      <span class="map-pin-addr">466 N Main St, Eynon, PA 18403</span>
+      <a href="https://www.google.com/maps/place/Denzal+Construction" target="_blank" class="map-pin-link">Get Directions →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     REASSURANCE STRIP
+══════════════════════════════ -->
+<div class="reassurance">
+  <div class="reassurance-item">
+    <span class="reassurance-icon">🤝</span>
+    <div class="reassurance-text">
+      <div class="reassurance-label">No Pressure, Ever</div>
+      <div class="reassurance-desc">The first call is just a conversation. No obligation.</div>
+    </div>
+  </div>
+  <div class="reassurance-item">
+    <span class="reassurance-icon">⚡</span>
+    <div class="reassurance-text">
+      <div class="reassurance-label">Same-Day Response</div>
+      <div class="reassurance-desc">Inquiries before 3pm usually get a same-day reply.</div>
+    </div>
+  </div>
+  <div class="reassurance-item">
+    <span class="reassurance-icon">🔒</span>
+    <div class="reassurance-text">
+      <div class="reassurance-label">Your Info Stays Private</div>
+      <div class="reassurance-desc">We don't sell leads. Your info goes directly to Chris &amp; Ryan.</div>
+    </div>
+  </div>
+  <div class="reassurance-item">
+    <span class="reassurance-icon">⭐</span>
+    <div class="reassurance-text">
+      <div class="reassurance-label">4.0 Stars on Google</div>
+      <div class="reassurance-desc">34 verified reviews from real NEPA homeowners.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="index.html"><img src="https://denzalconstruction.com/wp-content/uploads/2019/03/DenZal_Logo-2-MED-1024x593.png"
+           alt="DenZal Construction" style="height:72px;width:auto;display:block;"></a>
+      <p>NEPA's premier custom home builder. Fine building, quality craftsmanship, exceptional value — home by home.</p>
+      <div class="footer-social-row" style="margin-top:16px;">
+        <a href="https://www.facebook.com/denzalconstruction/" class="footer-social-btn">f</a>
+        <a href="https://www.instagram.com/denzalconstruction/" class="footer-social-btn">📷</a>
+        <a href="https://www.youtube.com/@denzalconstruction" class="footer-social-btn">▶</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+            <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="our-homes.html">Our Homes</a></li>
+        <li><a href="process.html">Our Process</a></li>
+        <li><a href="testimonials.html">Testimonials</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Home Models</h5>
+      <ul>
+        <li><a href="our-homes.html">The Ardamore</a></li>
+        <li><a href="our-homes.html">The Chatham</a></li>
+        <li><a href="our-homes.html">The Fairmont</a></li>
+        <li><a href="our-homes.html">The Glen Brooke</a></li>
+        <li><a href="our-homes.html">The Oakmont</a></li>
+        <li><a href="our-homes.html">View All →</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="tel:5708764663">(570) 876-4663</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#d8bcbdb6a2b9b4bbb7b6abacaaadbbacb1b7b698bfb5b9b1b4f6bbb7b5"><span class="__cf_email__" data-cfemail="7216171c08131e111d1c0106000711061b1d1c32151f131b1e5c111d1f">[email&#160;protected]</span></a></li>
+        <li><a href="https://www.google.com/maps/place/Denzal+Construction" target="_blank">466 N Main St, Eynon PA</a></li>
+        <li style="margin-top:12px;"><a href="#form" style="color:var(--gold-light);">Start Your Consultation →</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 DenZal Construction Co. LLC · Licensed & Insured · Eynon, PA 18403</span>
+    <span class="footer-copy">Built with ❤️ in NEPA</span>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // ── TILE SELECTION ──
+  function selectTile(el, group) {
+    document.querySelectorAll(`#projectTiles .option-tile`).forEach(t => t.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  // ── BUDGET SELECTION ──
+  function selectBudget(el) {
+    document.querySelectorAll('.budget-btn').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  // ── TIMELINE CHIPS ──
+  function selectChip(el) {
+    document.querySelectorAll('.timeline-chip').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  // ── STEP NAVIGATION ──
+  let currentStep = 1;
+
+  function goToStep(step) {
+    // hide all panels
+    document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+    // deactivate all tabs
+    document.querySelectorAll('.form-step-tab').forEach(t => t.classList.remove('active'));
+    // mark previous steps completed
+    for (let i = 1; i < step; i++) {
+      const tab = document.getElementById('tab' + i);
+      tab.classList.add('completed');
+      tab.querySelector('.form-step-num').textContent = '✓';
+    }
+    // activate current
+    document.getElementById('panel' + step).classList.add('active');
+    document.getElementById('tab' + step).classList.add('active');
+    currentStep = step;
+
+    // If step 3, build summary
+    if (step === 3) buildSummary();
+
+    // Scroll to form top
+    document.getElementById('form').scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+
+  function buildSummary() {
+    const projectTile = document.querySelector('.option-tile.selected .option-tile-name');
+    const lotStatus = document.getElementById('lotStatus');
+    const budget = document.querySelector('.budget-btn.selected');
+    const timeline = document.querySelector('.timeline-chip.selected');
+    const firstName = document.getElementById('firstName').value || '—';
+    const lastName  = document.getElementById('lastName').value  || '—';
+    const phone     = document.getElementById('phone').value     || '—';
+    const email     = document.getElementById('email').value     || '—';
+    const location  = document.getElementById('location').value  || '—';
+    const pref      = document.getElementById('contactPref');
+    const callTime  = document.getElementById('callTime');
+
+    document.getElementById('summaryText').innerHTML = `
+      <b>Project:</b> ${projectTile ? projectTile.textContent : '—'}<br>
+      <b>Land / Lot:</b> ${lotStatus.value || '—'}<br>
+      <b>Budget:</b> ${budget ? budget.textContent : '—'}<br>
+      <b>Timeline:</b> ${timeline ? timeline.textContent : '—'}<br>
+      <b>Name:</b> ${first

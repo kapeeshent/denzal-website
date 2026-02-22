@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DenZal Construction | NEPA's Premier Custom Home Builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a3a6b;        /* deep navy for dark backgrounds */
+    --blue: #2558a8;        /* primary cobalt blue from logo */
+    --blue-dark: #1c4790;  /* darker blue for hover/depth */
+    --blue-light: #3a6bbf; /* lighter blue for accents */
+    --gold: #d4960a;        /* warm gold from logo lettering */
+    --gold-light: #f0c030;  /* bright gold highlight from logo */
+    --red: #8b1a1a;         /* red border accent from logo */
+    --cream: #f4f6fa;       /* light blue-tinted page bg */
+    --white: #ffffff;
+    --gray-light: #e8edf5;  /* light blue-gray panels */
+    --gray-mid: #7a90b0;    /* blue-gray secondary text */
+    --text-dark: #1a1a1a;
+    --text-mid: #3a4a5a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ---- TOP BAR ---- */
+  .top-bar {
+    background: var(--navy);
+    color: rgba(255,255,255,0.65);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    padding: 8px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .top-bar a { color: var(--gold-light); text-decoration: none; }
+  .top-bar .cta-bar { display: flex; gap: 24px; align-items: center; }
+  .top-bar span { display: flex; align-items: center; gap: 6px; }
+
+  /* ---- NAV ---- */
+  nav {
+    background: var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    height: 88px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--blue);
+    letter-spacing: -0.01em;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--blue); }
+  .nav-cta {
+    background: var(--blue);
+    color: var(--white);
+    padding: 12px 28px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { background: var(--navy); }
+
+  /* ---- HERO ---- */
+  .hero {
+    position: relative;
+    height: 88vh;
+    min-height: 600px;
+    background: var(--blue);
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom right, rgba(26,58,107,0.88) 40%, rgba(37,88,168,0.4) 100%),
+      url('https://denzalconstruction.com/wp-content/uploads/2019/03/221-skyline3-1024x684.jpg') center/cover no-repeat;
+    animation: slowzoom 18s ease-in-out infinite alternate;
+  }
+  @keyframes slowzoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.06); }
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 60px 80px;
+    max-width: 800px;
+    animation: fadeup 1s ease both;
+  }
+  @keyframes fadeup {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: var(--gold);
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.0;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.75);
+    font-weight: 300;
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 36px;
+  }
+  .hero-btns {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--blue);
+    color: var(--white);
+    padding: 16px 40px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--blue-dark); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    padding: 16px 40px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: 2px solid rgba(255,255,255,0.5);
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
+
+  /* hero stats strip */
+  .hero-stats {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: var(--gold);
+    display: flex;
+    z-index: 3;
+  }
+  .hero-stat {
+    padding: 24px 40px;
+    border-right: 1px solid rgba(255,255,255,0.25);
+    text-align: center;
+    color: var(--white);
+  }
+  .hero-stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    display: block;
+  }
+  .stat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.9;
+  }
+
+  /* ---- TRUST BAND ---- */
+  .trust-band {
+    background: var(--blue);
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+  }
+  .trust-icon {
+    width: 20px;
+    height: 20px;
+    fill: var(--gold);
+  }
+  .trust-divider { width: 1px; height: 24px; background: rgba(255,255,255,0.2); }
+
+  /* ---- SECTION UTILITY ---- */
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 2px;
+    background: var(--gold);
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--blue-dark);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .section-title em { font-style: italic; color: var(--blue); }
+
+  /* ---- WHY DENZAL ---- */
+  .why-section {
+    padding: 100px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    background: var(--white);
+  }
+  .why-text p {
+    font-size: 1.05rem;
+    color: var(--text-mid);
+    line-height: 1.8;
+    margin-top: 20px;
+    margin-bottom: 36px;
+  }
+  .why-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .why-feature {
+    padding: 24px;
+    background: var(--gray-light);
+    border-left: 3px solid var(--blue);
+  }
+  .why-feature-icon {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+  .why-feature h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--blue-dark);
+    margin-bottom: 4px;
+  }
+  .why-feature p {
+    font-size: 0.85rem;
+    color: var(--text-mid);
+    line-height: 1.5;
+    margin: 0;
+  }
+  .why-image-block {
+    position: relative;
+  }
+  .why-image-block img {
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+    display: block;
+  }
+  .why-image-overlay {
+    position: absolute;
+    bottom: -30px;
+    left: -30px;
+    background: var(--blue);
+    color: var(--white);
+    padding: 24px 32px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    max-width: 280px;
+    line-height: 1.5;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+    border-left: 4px solid var(--gold-light);
+  }
+  .why-image-overlay strong {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-style: normal;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 8px;
+    opacity: 0.85;
+  }
+
+  /* ---- HOMES GALLERY ---- */
+  .homes-section {
+    padding: 100px 80px;
+    background: var(--cream);
+  }
+  .homes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 48px;
+  }
+  .homes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .home-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .home-card img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .home-card:hover img { transform: scale(1.05); }
+  .home-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(13,27,42,0.85) 0%, transparent 60%);
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .home-card:hover .home-card-overlay { opacity: 1; }
+  .home-card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .home-card-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 4px;
+  }
+  .home-card-large {
+    grid-column: span 2;
+  }
+  .home-card-large img { height: 400px; }
+
+  /* ---- PROCESS ---- */
+  .process-section {
+    background: var(--blue);
+    padding: 100px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .process-section::before {
+    content: 'PROCESS';
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: 18vw;
+    font-weight: 900;
+    color: rgba(255,255,255,0.05);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    letter-spacing: -0.05em;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .process-section .section-title { color: var(--white); margin-bottom: 60px; }
+  .process-section .section-title em { color: var(--gold-light); }
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    position: relative;
+    z-index: 2;
+  }
+  .process-step {
+    position: relative;
+    padding-top: 48px;
+    border-top: 2px solid rgba(255,255,255,0.25);
+  }
+  .process-step-num {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .process-step h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  .process-step p {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.7;
+  }
+
+  /* ---- TESTIMONIALS ---- */
+  .testimonials-section {
+    padding: 100px 80px;
+    background: var(--white);
+  }
+  .testimonials-section .section-title { margin-bottom: 48px; }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .testimonial-card {
+    background: var(--cream);
+    padding: 40px;
+    position: relative;
+    border-bottom: 3px solid var(--blue);
+  }
+  .testimonial-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    line-height: 0.5;
+    color: var(--blue);
+    margin-bottom: 16px;
+    opacity: 0.3;
+  }
+  .testimonial-text {
+    font-size: 0.98rem;
+    color: var(--text-mid);
+    line-height: 1.8;
+    margin-bottom: 24px;
+    font-style: italic;
+  }
+  .testimonial-stars {
+    color: var(--gold);
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+  }
+  .testimonial-author {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--blue-dark);
+  }
+  .testimonial-featured {
+    background: var(--blue);
+    grid-row: span 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .testimonial-featured .testimonial-quote { color: var(--gold-light); opacity: 0.6; }
+  .testimonial-featured .testimonial-text { color: rgba(255,255,255,0.85); }
+  .testimonial-featured .testimonial-author { color: var(--gold-light); }
+
+  /* ---- SERVICE AREA ---- */
+  .service-section {
+    background: var(--gray-light);
+    padding: 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .service-map {
+    background: var(--blue);
+    height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-map-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+  }
+  .map-pin { font-size: 3rem; display: block; margin-bottom: 8px; }
+  .service-areas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .area-tag {
+    background: var(--white);
+    border: 1px solid var(--blue);
+    padding: 6px 16px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--blue-dark);
+    font-weight: 600;
+  }
+
+  /* ---- CTA BAND ---- */
+  .cta-band {
+    background: var(--gold);
+    padding: 80px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: center;
+    border-top: 5px solid var(--blue);
+    border-bottom: 5px solid var(--blue);
+  }
+  .cta-band h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.2;
+  }
+  .cta-band p {
+    font-size: 1rem;
+    color: rgba(26,58,107,0.8);
+    margin-top: 8px;
+    line-height: 1.6;
+  }
+  .btn-dark {
+    background: var(--blue);
+    color: var(--white);
+    padding: 18px 48px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s;
+    display: inline-block;
+  }
+  .btn-dark:hover { background: var(--navy); }
+
+  /* ---- CONTACT SECTION ---- */
+  .contact-section {
+    padding: 100px 80px;
+    background: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+  }
+  .contact-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .contact-info p {
+    color: var(--text-mid);
+    line-height: 1.7;
+    margin-bottom: 32px;
+    font-size: 0.95rem;
+  }
+  .contact-detail {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+  .contact-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1rem;
+    color: var(--gold-light);
+  }
+  .contact-detail-text {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    line-height: 1.6;
+  }
+  .contact-detail-text strong {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--blue-dark);
+    margin-bottom: 2px;
+  }
+  .contact-form input,
+  .contact-form textarea,
+  .contact-form select {
+    width: 100%;
+    padding: 14px 18px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.95rem;
+    border: 1px solid #d4cfc7;
+    background: var(--white);
+    color: var(--text-dark);
+    outline: none;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus { border-color: var(--blue); }
+  .contact-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .contact-form textarea { height: 120px; resize: vertical; }
+  .contact-form .section-label { margin-bottom: 24px; }
+
+  /* ---- FOOTER ---- */
+  footer {
+    background: var(--navy);
+    padding: 60px 80px 32px;
+    border-top: 4px solid var(--blue);
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 32px;
+  }
+  .footer-brand .nav-logo { font-size: 1.8rem; margin-bottom: 16px; display: block; }
+  .footer-brand p {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+    max-width: 280px;
+  }
+  .footer-col h5 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 10px; }
+  .footer-col a {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--white); }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-copy {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.05em;
+  }
+  .footer-social { display: flex; gap: 16px; }
+  .social-btn {
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .social-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ---- ANNOTATIONS (for mockup review) ---- */
+  .annotation {
+    position: relative;
+  }
+  .annotation-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff4757;
+    color: white;
+    font-size: 0.68rem;
+    font-family: monospace;
+    padding: 4px 8px;
+    letter-spacing: 0.05em;
+    z-index: 99;
+    border-radius: 2px;
+    pointer-events: none;
+  }
+
+  /* MOCKUP BANNER */
+  .mockup-banner {
+    background: #ff4757;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-family: monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+  }
+</style>
+</head>
+<body>
+
+<div class="mockup-banner">🎨 MOCKUP — DenZal Construction Website Redesign Concept — For Review Only</div>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <span>📍 Serving NEPA: Scranton, Wilkes-Barre, Lackawanna & Luzerne Counties</span>
+  <div class="cta-bar">
+    <span>✉ <a href="/cdn-cgi/l/email-protection#c9adaca7b3a8a5aaa6a7babdbbbcaabda0a6a789aea4a8a0a5e7aaa6a4"><span class="__cf_email__" data-cfemail="d2b6b7bca8b3beb1bdbca1a6a0a7b1a6bbbdbc92b5bfb3bbbefcb1bdbf">[email&#160;protected]</span></a></span>
+    <span>📞 <a href="tel:5708764663">(570) 876-4663</a></span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" style="display:flex;align-items:center;text-decoration:none;">
+    <img src="https://denzalconstruction.com/wp-content/uploads/2019/03/DenZal_Logo-2-MED-1024x593.png"
+         alt="DenZal Construction Co. LLC" style="height:62px;width:auto;display:block;">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="our-homes.html">Our Homes</a></li>
+    <li><a href="process.html">Our Process</a></li>
+    <li><a href="testimonials.html">Testimonials</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Get a Free Consultation</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero annotation">
+  <div class="annotation-tag">NEW: Full-bleed hero w/ parallax + stats</div>
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">NEPA's Premier Custom Home Builder</div>
+    <h1>Build the Home<br>You've Always <em>Imagined.</em></h1>
+    <p class="hero-sub">From concept to keys in hand — DenZal Construction delivers fine craftsmanship, quality materials, and exceptional value across Northeastern Pennsylvania.</p>
+    <div class="hero-btns">
+      <a href="#homes" class="btn-primary">View Our Homes</a>
+      <a href="#contact" class="btn-outline">Start Your Project</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="stat-num">200+</span>
+      <span class="stat-label">Homes Built</span>
+    </div>
+    <div class="hero-stat">
+      <span class="stat-num">20+</span>
+      <span class="stat-label">Years in Business</span>
+    </div>
+    <div class="hero-stat">
+      <span class="stat-num">100%</span>
+      <span class="stat-label">On-Budget Guarantee</span>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAND -->
+<div class="trust-band annotation">
+  <div class="annotation-tag">NEW: Trust signals strip</div>
+  <div class="trust-item">
+    <svg class="trust-icon" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    Licensed & Insured
+  </div>
+  <div class="trust-divider"></div>
+  <div class="trust-item">
+    <svg class="trust-icon" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+    Custom & Model Homes
+  </div>
+  <div class="trust-divider"></div>
+  <div class="trust-item">
+    <svg class="trust-icon" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    On-Time Delivery
+  </div>
+  <div class="trust-divider"></div>
+  <div class="trust-item">
+    <svg class="trust-icon" viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+    Family-Owned Business
+  </div>
+  <div class="trust-divider"></div>
+  <div class="trust-item">
+    <svg class="trust-icon" viewBox="0 0 24 24"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+    5-Star Rated
+  </div>
+</div>
+
+<!-- WHY DENZAL -->
+<section class="why-section annotation">
+  <div class="annotation-tag">NEW: Split-layout about section</div>
+  <div class="why-text">
+    <div class="section-label">Why DenZal</div>
+    <h2 class="section-title">Craftsmanship Meets<br><em>Accountability.</em></h2>
+    <p>When you build with DenZal, you're not hiring a faceless company — you're working directly with Chris and Ryan, NEPA locals with decades of combined experience and a reputation built home by home. Your project is never handed off. We stay with you from blueprint to keys.</p>
+    <div class="why-features">
+      <div class="why-feature">
+        <div class="why-feature-icon">🏗️</div>
+        <h4>Design-Build</h4>
+        <p>Full-service from concept to completion, no handoffs or gaps.</p>
+      </div>
+      <div class="why-feature">
+        <div class="why-feature-icon">💰</div>
+        <h4>Transparent Pricing</h4>
+        <p>Fixed-price contracts. No surprise overruns, ever. Guaranteed.</p>
+      </div>
+      <div class="why-feature">
+        <div class="why-feature-icon">🤝</div>
+        <h4>Direct Access</h4>
+        <p>Chris and Ryan's number. No call centers, no project managers in the way.</p>
+      </div>
+      <div class="why-feature">
+        <div class="why-feature-icon">🏆</div>
+        <h4>NEPA's Best Value</h4>
+        <p>Premium materials and craftsmanship priced fairly for our community.</p>
+      </div>
+    </div>
+  </div>
+  <div class="why-image-block">
+    <img src="https://denzalconstruction.com/wp-content/uploads/2019/03/321-celli-dr-1024x684.jpg" alt="DenZal custom home example">
+    <div class="why-image-overlay">
+      "They communicated with us before we had a chance to reach out."
+      <strong>— Brian C., Satisfied Homeowner</strong>
+    </div>
+  </div>
+</section>
+
+<!-- HOMES GALLERY -->
+<section class="homes-section" id="homes">
+  <div class="annotation-tag" style="position:relative; display:inline-block; margin-bottom:-30px; z-index:10;">NEW: Gallery grid w/ hover overlays + model names</div>
+  <div class="homes-header">
+    <div>
+      <div class="section-label">Our Portfolio</div>
+      <h2 class="section-title">Custom Built Homes<br>Across <em>NEPA</em></h2>
+    </div>
+    <a href="our-homes.html" class="btn-primary">View All Homes →</a>
+  </div>
+  <div class="homes-grid">
+    <div class="home-card home-card-large">
+      <img src="https://denzalconstruction.com/wp-content/uploads/2019/03/305-vincent-ave3-1024x684.jpg" alt="Custom Home - Vincent Ave">
+      <div class="home-card-overlay">
+        <div>
+          <div class="home-card-label">Luzerne County</div>
+          <div class="home-card-name">The Chatham Model</div>
+        </div>
+      </div>
+    </div>
+    <div class="home-card">
+      <img src="https://denzalconstruction.com/wp-content/uploads/2019/03/309-riverside-dr-1024x684.jpg" alt="Riverside Drive">
+      <div class="home-card-overlay">
+        <div>
+          <div class="home-card-label">Lackawanna County</div>
+          <div class="home-card-name">The Fairmont</div>
+        </div>
+      </div>
+    </div>
+    <div class="home-card">
+      <img src="https://denzalconstruction.com/wp-content/uploads/2020/02/Ardamore-sm-copy-300x199.jpg" alt="Ardamore Model">
+      <div class="home-card-overlay">
+        <div>
+          <div class="home-card-label">Quick Delivery</div>
+          <div class="home-card-name">The Ardamore</div>
+        </div>
+      </div>
+    </div>
+    <div class="home-card">
+      <img src="https://denzalconstruction.com/wp-content/uploads/2020/02/Waterford-sm-copy-300x187.jpg" alt="Waterford Model">
+      <div class="home-card-overlay">
+        <div>
+          <div class="home-card-label">Custom Model</div>
+          <div class="home-card-name">The Waterford</div>
+        </div>
+      </div>
+    </div>
+    <div class="home-card">
+      <img src="https://denzalconstruction.com/wp-content/uploads/2020/02/Oakmont-sm-copy-300x206.jpg" alt="Oakmont Model">
+      <div class="home-card-overlay">
+        <div>
+          <div class="home-card-label">Custom Model</div>
+          <div class="home-card-name">The Oakmont</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section">
+  <div class="section-label" style="color: var(--gold-light);">How It Works</div>
+  <h2 class="section-title">From Dream to <em>Done</em> —<br>Our Simple 4-Step Process</h2>
+  <div class="process-steps">
+    <div class="process-step">
+      <span class="process-step-num">01</span>
+      <h4>Free Consultation</h4>
+      <p>Sit down with Chris and Ryan. Share your vision, budget, and timeline. No pressure, no obligation.</p>
+    </div>
+    <div class="process-step">
+      <span class="process-step-num">02</span>
+      <h4>Design & Planning</h4>
+      <p>Choose from our signature models or go fully custom. We finalize your floor plan, selections, and fixed-price contract.</p>
+    </div>
+    <div class="process-step">
+      <span class="process-step-num">03</span>
+      <h4>Construction</h4>
+      <p>Our craftsmen get to work. You stay informed at every milestone with regular updates from the team.</p>
+    </div>
+    <div class="process-step">
+      <span class="process-step-num">04</span>
+      <h4>Keys in Hand</h4>
+      <p>Final walkthrough, punch list completed, and you move into your dream home — on time and on budget.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="section-label">What Clients Say</div>
+  <h2 class="section-title">Real Homeowners.<br><em>Real Results.</em></h2>
+  <div class="testimonials-grid" style="margin-top: 48px;">
+    <div class="testimonial-card testimonial-featured">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">We are in love with our home. DenZal built us a quality home on budget. Many people told us they went over budget by 20% with other builders — Chris and Ryan kept their word and also provided great ideas. These two gentlemen will always be welcome in our home.</p>
+      <div class="testimonial-stars">★★★★★</div>
+      <div class="testimonial-author">Jennifer C. — Homeowner</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">As someone in the construction industry, I would highly recommend DenZal. They communicated with us before we even had a chance to reach out. Questions were answered promptly. You will not be disappointed.</p>
+      <div class="testimonial-stars">★★★★★</div>
+      <div class="testimonial-author">Brian C. — Construction Professional</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">DenZal "held my hand" through each step of the building process for both the administrative and design aspects. Absolutely wonderful to work with!</p>
+      <div class="testimonial-stars">★★★★★</div>
+      <div class="testimonial-author">Christine M. — Homeowner</div>
+    </div>
+    <div class="testimonial-card" style="grid-column: 1 / -1; background: var(--blue-dark); color: white;">
+      <div class="testimonial-quote" style="color: var(--gold-light);">"</div>
+      <p class="testimonial-text" style="color: rgba(255,255,255,0.85);">We chose DenZal based on their excellent reputation. They did an amazing job on our home, our basement finishing, and an enclosed deck. From our first meeting through the last day of construction, they were a pleasure. You will be thrilled with the experience and the results.</p>
+      <div class="testimonial-stars">★★★★★</div>
+      <div class="testimonial-author" style="color: var(--gold-light);">Kelly M. — Homeowner</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE AREA -->
+<section class="service-section annotation">
+  <div class="annotation-tag">NEW: Service area section w/ location tags</div>
+  <div>
+    <div class="section-label">Where We Build</div>
+    <h2 class="section-title">Proudly Serving<br><em>Northeastern PA</em></h2>
+    <p style="color: var(--text-mid); line-height:1.8; margin: 20px 0; font-size: 0.95rem;">Based in Eynon, PA, DenZal Construction builds throughout Lackawanna and Luzerne counties, as well as surrounding NEPA communities.</p>
+    <div class="service-areas">
+      <span class="area-tag">Scranton</span>
+      <span class="area-tag">Wilkes-Barre</span>
+      <span class="area-tag">Lackawanna County</span>
+      <span class="area-tag">Luzerne County</span>
+      <span class="area-tag">Dunmore</span>
+      <span class="area-tag">Clarks Summit</span>
+      <span class="area-tag">Moscow</span>
+      <span class="area-tag">Eynon</span>
+      <span class="area-tag">Carbondale</span>
+      <span class="area-tag">Old Forge</span>
+      <span class="area-tag">+ All NEPA</span>
+    </div>
+  </div>
+  <div class="service-map">
+    <div class="service-map-label">
+      <span class="map-pin">📍</span>
+      466 N Main St, Eynon PA 18403<br>
+      <small style="font-size:0.7rem; opacity:0.5;">(Interactive map would go here)</small>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div>
+    <h2>Ready to Build Your Dream Home in NEPA?</h2>
+    <p>Contact Chris and Ryan for a free, no-obligation consultation. Let's make it happen.</p>
+  </div>
+  <a href="#contact" class="btn-dark">Schedule Free Consultation</a>
+</div>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-info">
+    <div class="section-label">Get In Touch</div>
+    <h3 class="section-title" style="margin-bottom: 16px;">Let's Talk About<br><em>Your Project</em></h3>
+    <p>Have questions or ready to start your custom home journey? Reach out to Chris and Ryan directly. We respond promptly — because that's how we do business.</p>
+    <div class="contact-detail">
+      <div class="contact-icon">📞</div>
+      <div class="contact-detail-text">
+        <strong>Phone</strong>
+        (570) 876-4663
+      </div>
+    </div>
+    <div class="contact-detail">
+      <div class="contact-icon">✉️</div>
+      <div class="contact-detail-text">
+        <strong>Email</strong>
+        <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c5a1a0abbfa4a9a6aaabb6b1b7b0a6b1acaaab85a2a8a4aca9eba6aaa8">[email&#160;protected]</a>
+      </div>
+    </div>
+    <div class="contact-detail">
+      <div class="contact-icon">📍</div>
+      <div class="contact-detail-text">
+        <strong>Office</strong>
+        466 N Main St, Eynon, PA 18403
+      </div>
+    </div>
+    <div class="contact-detail">
+      <div class="contact-icon">🕐</div>
+      <div class="contact-detail-text">
+        <strong>Hours</strong>
+        Mon–Fri: 8am – 5pm<br>Sat: By Appointment
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="contact-form annotation">
+      <div class="annotation-tag">IMPROVED: Smart inquiry form</div>
+      <div class="section-label" style="margin-bottom:24px;">Send a Message</div>
+      <div class="form-row">
+        <input type="text" placeholder="First Name">
+        <input type="text" placeholder="Last Name">
+      </div>
+      <input type="email" placeholder="Email Address">
+      <input type="tel" placeholder="Phone Number">
+      <select>
+        <option value="" disabled selected>I'm interested in...</option>
+        <option>Custom Home Build</option>
+        <option>Model Home Purchase</option>
+        <option>Home Renovation</option>
+        <option>Basement Finishing</option>
+        <option>Addition / Deck</option>
+        <option>Just Exploring</option>
+      </select>
+      <textarea placeholder="Tell us about your project, timeline, and any questions you have..."></textarea>
+      <a href="contact.html" class="btn-primary" style="width: 100%; text-align: center; display: block; padding: 16px;">Send Message →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="index.html" style="display:inline-block; margin-bottom: 16px;">
+        <img src="https://denzalconstruction.com/wp-content/uploads/2019/03/DenZal_Logo-2-MED-1024x593.png" alt="DenZal Construction Co. LLC" style="height: 80px; width: auto; display: block;">
+      </a>
+      <p>NEPA's premier custom home builder. Fine building, quality craftsmanship, and exceptional value — since the very first home we built.</p>
+      <div class="footer-social" style="margin-top:20px;">
+        <a href="https://www.facebook.com/denzalconstruction/" class="social-btn">f</a>
+        <a href="https://www.instagram.com/denzalconstruction/" class="social-btn">📸</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+            <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="our-homes.html">Our Homes</a></li>
+        <li><a href="process.html">Our Process</a></li>
+        <li><a href="testimonials.html">Testimonials</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="our-homes.html">Custom Home Builds</a></li>
+        <li><a href="our-homes.html">Model Homes</a></li>
+        <li><a href="contact.html">Home Renovations</a></li>
+        <li><a href="contact.html">Basement Finishing</a></li>
+        <li><a href="index.html">Decks & Additions</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Service Areas</h5>
+      <ul>
+        <li><a href="contact.html">Scranton</a></li>
+        <li><a href="contact.html">Wilkes-Barre</a></li>
+        <li><a href="index.html">Lackawanna County</a></li>
+        <li><a href="index.html">Luzerne County</a></li>
+        <li><a href="index.html">Eynon & Archbald</a></li>
+        <li><a href="index.html">All of NEPA</a></li>
+     

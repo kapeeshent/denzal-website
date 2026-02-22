@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Testimonials | DenZal Construction Co.</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #1a3a6b;
+    --blue:       #2558a8;
+    --blue-dark:  #1c4790;
+    --blue-light: #3a6bbf;
+    --blue-pale:  #dce8f7;
+    --gold:       #d4960a;
+    --gold-light: #f0c030;
+    --gold-pale:  #fdf6e0;
+    --cream:      #f4f6fa;
+    --white:      #ffffff;
+    --gray-light: #e8edf5;
+    --gray-mid:   #7a90b0;
+    --text-dark:  #1a1a1a;
+    --text-mid:   #3a4a5a;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Barlow',sans-serif; background:var(--cream); color:var(--text-dark); overflow-x:hidden; }
+
+  /* ─── MOCKUP BANNER ─── */
+  .mockup-banner {
+    background:#ff4757; color:#fff; text-align:center;
+    padding:10px; font-family:monospace; font-size:.8rem; letter-spacing:.08em;
+  }
+
+  /* ─── TOP BAR ─── */
+  .top-bar {
+    background:var(--navy); color:rgba(255,255,255,.6);
+    font-size:.78rem; letter-spacing:.08em;
+    padding:8px 40px;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .top-bar a { color:var(--gold-light); text-decoration:none; }
+  .top-bar .right { display:flex; gap:24px; align-items:center; }
+
+  /* ─── NAV ─── */
+  nav {
+    background:var(--white);
+    display:flex; justify-content:space-between; align-items:center;
+    padding:0 40px; height:88px;
+    position:sticky; top:0; z-index:200;
+    box-shadow:0 2px 20px rgba(0,0,0,.08);
+  }
+  .nav-links { display:flex; gap:32px; list-style:none; }
+  .nav-links a {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.88rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--text-mid); text-decoration:none; font-weight:600; transition:color .2s;
+  }
+  .nav-links a:hover { color:var(--blue); }
+  .nav-links a.active { color:var(--blue); border-bottom:2px solid var(--gold); padding-bottom:2px; }
+  .nav-cta {
+    background:var(--blue); color:#fff; padding:12px 28px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.85rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+    text-decoration:none; transition:background .2s;
+  }
+  .nav-cta:hover { background:var(--navy); }
+
+  /* ─── HERO ─── */
+  .hero {
+    background:var(--blue);
+    padding:88px 80px 80px;
+    position:relative; overflow:hidden;
+    display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;
+  }
+  .hero::before {
+    content:'';
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at 80% 50%, rgba(240,192,48,.13) 0%, transparent 55%),
+      repeating-linear-gradient(-45deg, transparent, transparent 36px,
+        rgba(255,255,255,.025) 36px, rgba(255,255,255,.025) 37px);
+  }
+  .hero-left { position:relative; z-index:2; }
+  .eyebrow {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.75rem; font-weight:700; letter-spacing:.3em; text-transform:uppercase;
+    color:var(--gold-light);
+    display:flex; align-items:center; gap:12px; margin-bottom:20px;
+  }
+  .eyebrow::before { content:''; display:block; width:30px; height:2px; background:var(--gold-light); }
+  .hero h1 {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2.4rem,4vw,3.8rem); font-weight:900;
+    color:#fff; line-height:1.05; letter-spacing:-.02em; margin-bottom:22px;
+  }
+  .hero h1 em { font-style:italic; color:var(--gold-light); }
+  .hero-desc {
+    font-size:1rem; color:rgba(255,255,255,.75); font-weight:300;
+    line-height:1.8; margin-bottom:36px;
+  }
+  .google-badge {
+    display:inline-flex; align-items:center; gap:14px;
+    background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2);
+    padding:14px 20px;
+  }
+  .google-badge-icon { font-size:1.6rem; }
+  .google-badge-text {}
+  .google-badge-rating {
+    font-family:'Playfair Display',serif;
+    font-size:1.5rem; font-weight:900; color:var(--gold-light); display:block; line-height:1;
+  }
+  .google-badge-stars { color:var(--gold-light); font-size:.75rem; letter-spacing:2px; }
+  .google-badge-count {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.7rem; letter-spacing:.15em; text-transform:uppercase;
+    color:rgba(255,255,255,.55); display:block; margin-top:2px;
+  }
+  .breadcrumb {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.72rem; letter-spacing:.12em; text-transform:uppercase;
+    color:rgba(255,255,255,.35); margin-top:36px;
+  }
+  .breadcrumb a { color:rgba(255,255,255,.55); text-decoration:none; }
+  .breadcrumb span { margin:0 8px; }
+
+  /* Hero right — featured review */
+  .hero-right { position:relative; z-index:2; }
+  .hero-featured-review {
+    background:var(--white);
+    padding:44px 44px 36px;
+    position:relative;
+  }
+  .hero-featured-review::before {
+    content:'"';
+    font-family:'Playfair Display',serif; font-size:8rem; font-weight:900;
+    color:var(--blue-pale); line-height:.6;
+    position:absolute; top:20px; left:32px;
+    pointer-events:none;
+  }
+  .featured-stars { color:var(--gold); font-size:1rem; letter-spacing:3px; margin-bottom:20px; }
+  .featured-text {
+    font-family:'Playfair Display',serif; font-style:italic;
+    font-size:1.12rem; color:var(--text-dark); line-height:1.75;
+    margin-bottom:28px; position:relative; z-index:1;
+  }
+  .featured-author {
+    display:flex; align-items:center; gap:14px;
+    border-top:2px solid var(--blue-pale); padding-top:20px;
+  }
+  .featured-avatar {
+    width:46px; height:46px; border-radius:50%;
+    background:var(--blue); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700;
+    flex-shrink:0;
+  }
+  .featured-name {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.9rem; font-weight:700; letter-spacing:.06em;
+    color:var(--navy); display:block;
+  }
+  .featured-detail {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.7rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--gray-mid); margin-top:2px;
+  }
+  .featured-google {
+    margin-left:auto;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.65rem; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--gray-mid); display:flex; align-items:center; gap:4px;
+  }
+
+  /* ─── RATING BREAKDOWN ─── */
+  .rating-strip {
+    background:var(--navy);
+    padding:40px 80px;
+    display:grid; grid-template-columns:auto 1fr auto; gap:60px; align-items:center;
+  }
+  .rating-big {
+    text-align:center;
+  }
+  .rating-num {
+    font-family:'Playfair Display',serif;
+    font-size:5rem; font-weight:900; color:#fff; line-height:1; display:block;
+  }
+  .rating-stars { color:var(--gold); font-size:1.1rem; letter-spacing:3px; margin:6px 0; display:block; }
+  .rating-total {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.72rem; letter-spacing:.15em; text-transform:uppercase;
+    color:rgba(255,255,255,.45);
+  }
+  .rating-bars { display:flex; flex-direction:column; gap:8px; }
+  .rating-bar-row {
+    display:grid; grid-template-columns:60px 1fr 30px;
+    gap:12px; align-items:center;
+  }
+  .rating-bar-label {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.72rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+    color:rgba(255,255,255,.55); text-align:right;
+  }
+  .rating-bar-track {
+    height:6px; background:rgba(255,255,255,.1); border-radius:3px; overflow:hidden;
+  }
+  .rating-bar-fill {
+    height:100%; background:var(--gold); border-radius:3px;
+    transition:width .8s ease;
+  }
+  .rating-bar-count {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.7rem; color:rgba(255,255,255,.4);
+  }
+  .rating-source {
+    text-align:center;
+  }
+  .rating-source-logo {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:1.4rem; font-weight:700; letter-spacing:.05em;
+    color:#fff; margin-bottom:6px; display:block;
+  }
+  .rating-source-logo span { color:#4285f4; }
+  .rating-source p {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.68rem; letter-spacing:.12em; text-transform:uppercase;
+    color:rgba(255,255,255,.35);
+  }
+  .rating-source a {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.72rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--gold-light); text-decoration:none; margin-top:8px; display:block;
+    transition:opacity .2s;
+  }
+  .rating-source a:hover { opacity:.8; }
+
+  /* ─── FILTER BAR ─── */
+  .filter-bar {
+    background:var(--white); border-bottom:1px solid var(--gray-light);
+    padding:0 80px;
+    display:flex; align-items:center; gap:0;
+    position:sticky; top:88px; z-index:100;
+    box-shadow:0 2px 10px rgba(0,0,0,.04);
+  }
+  .filter-label {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.72rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--gray-mid); padding:0 20px 0 0;
+    border-right:1px solid var(--gray-light); margin-right:20px; white-space:nowrap;
+  }
+  .filter-btn {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.82rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--text-mid); background:none; border:none; cursor:pointer;
+    padding:20px 20px; border-bottom:3px solid transparent;
+    transition:color .2s, border-color .2s; white-space:nowrap;
+  }
+  .filter-btn:hover { color:var(--blue); }
+  .filter-btn.active { color:var(--blue); border-bottom-color:var(--gold); }
+  .filter-spacer { flex:1; }
+  .review-count-tag {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.75rem; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--gray-mid);
+  }
+  .review-count-tag strong { color:var(--blue); }
+
+  /* ─── MAIN GRID ─── */
+  .reviews-main { padding:60px 80px 80px; }
+
+  /* ─── MASONRY-STYLE GRID ─── */
+  .reviews-grid {
+    columns:3; column-gap:24px;
+    margin-bottom:60px;
+  }
+  .review-card {
+    break-inside:avoid;
+    background:var(--white);
+    padding:32px 32px 28px;
+    margin-bottom:24px;
+    border-left:4px solid var(--blue);
+    transition:transform .3s, box-shadow .3s;
+    display:block;
+    animation:fadeUp .5s ease both;
+  }
+  .review-card:hover {
+    transform:translateY(-4px);
+    box-shadow:0 16px 40px rgba(37,88,168,.12);
+  }
+  .review-card.gold-border { border-left-color:var(--gold); }
+  .review-card.hidden { display:none; }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(16px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  .review-card:nth-child(1)  { animation-delay:.04s; }
+  .review-card:nth-child(2)  { animation-delay:.08s; }
+  .review-card:nth-child(3)  { animation-delay:.12s; }
+  .review-card:nth-child(4)  { animation-delay:.16s; }
+  .review-card:nth-child(5)  { animation-delay:.20s; }
+  .review-card:nth-child(6)  { animation-delay:.24s; }
+  .review-card:nth-child(7)  { animation-delay:.28s; }
+  .review-card:nth-child(8)  { animation-delay:.32s; }
+  .review-card:nth-child(9)  { animation-delay:.36s; }
+  .review-card:nth-child(10) { animation-delay:.40s; }
+  .review-card:nth-child(11) { animation-delay:.44s; }
+  .review-card:nth-child(12) { animation-delay:.48s; }
+
+  .review-stars { color:var(--gold); font-size:.85rem; letter-spacing:2px; margin-bottom:14px; }
+  .review-text {
+    font-family:'Playfair Display',serif; font-style:italic;
+    font-size:.95rem; color:var(--text-mid); line-height:1.75; margin-bottom:22px;
+  }
+  .review-tag {
+    display:inline-block;
+    background:var(--blue-pale); color:var(--blue);
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.65rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
+    padding:3px 10px; margin-bottom:18px;
+  }
+  .review-card.gold-border .review-tag { background:var(--gold-pale); color:#7a5000; }
+  .review-divider { height:1px; background:var(--gray-light); margin-bottom:16px; }
+  .review-author { display:flex; align-items:center; gap:12px; }
+  .review-avatar {
+    width:38px; height:38px; border-radius:50%;
+    background:var(--blue); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Playfair Display',serif; font-size:.95rem; font-weight:700;
+    flex-shrink:0;
+  }
+  .review-card.gold-border .review-avatar { background:var(--gold); color:var(--navy); }
+  .review-author-name {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.82rem; font-weight:700; letter-spacing:.06em;
+    color:var(--navy); display:block;
+  }
+  .review-author-detail {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.67rem; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--gray-mid); margin-top:1px;
+  }
+  .review-google-icon {
+    margin-left:auto; font-size:.7rem;
+    font-family:'Barlow Condensed',sans-serif; letter-spacing:.06em;
+    color:var(--gray-mid);
+    display:flex; align-items:center; gap:3px;
+  }
+
+  /* ─── WIDE FEATURE CARDS ─── */
+  .feature-review {
+    background:var(--navy); padding:52px 56px;
+    display:grid; grid-template-columns:1fr auto; gap:40px; align-items:center;
+    margin-bottom:24px;
+    break-inside:avoid;
+  }
+  .feature-review-text {}
+  .feature-review-stars { color:var(--gold-light); font-size:.9rem; letter-spacing:3px; margin-bottom:16px; }
+  .feature-review-quote {
+    font-family:'Playfair Display',serif; font-style:italic;
+    font-size:1.15rem; color:#fff; line-height:1.7; margin-bottom:24px;
+  }
+  .feature-review-author {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.8rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--gold-light);
+  }
+  .feature-review-detail { color:rgba(255,255,255,.45); font-weight:400; }
+  .feature-review-side {
+    text-align:center; border-left:1px solid rgba(255,255,255,.1); padding-left:40px;
+  }
+  .feature-big-num {
+    font-family:'Playfair Display',serif;
+    font-size:5rem; font-weight:900; color:var(--gold-light); line-height:1; display:block;
+  }
+  .feature-big-label {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.65rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase;
+    color:rgba(255,255,255,.4);
+  }
+
+  /* ─── SECTION LABEL ─── */
+  .section-label {
+    display:flex; align-items:center; gap:16px;
+    margin-bottom:32px;
+  }
+  .section-label-line { flex:1; height:1px; background:var(--gray-light); }
+  .section-label-text {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.72rem; font-weight:700; letter-spacing:.25em; text-transform:uppercase;
+    color:var(--gray-mid); white-space:nowrap;
+  }
+
+  /* ─── LEAVE A REVIEW CTA ─── */
+  .leave-review {
+    background:var(--gold-pale); border:1px solid var(--gold);
+    padding:36px 40px;
+    display:flex; align-items:center; justify-content:space-between; gap:32px;
+    margin-bottom:60px;
+  }
+  .leave-review-left {}
+  .leave-review-eyebrow {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.7rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:6px;
+  }
+  .leave-review-text {
+    font-family:'Playfair Display',serif;
+    font-size:1.2rem; font-weight:700; color:var(--navy); margin-bottom:6px;
+  }
+  .leave-review-sub { font-size:.88rem; color:var(--text-mid); }
+  .btn-google {
+    background:var(--blue); color:#fff; padding:14px 32px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.85rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+    text-decoration:none; white-space:nowrap; transition:background .2s; display:inline-block;
+  }
+  .btn-google:hover { background:var(--navy); }
+
+  /* ─── FINAL CTA ─── */
+  .final-cta {
+    background:var(--blue);
+    padding:80px;
+    display:grid; grid-template-columns:1fr auto; gap:60px; align-items:center;
+    border-top:5px solid var(--gold);
+  }
+  .final-cta h2 {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(1.8rem,3vw,2.8rem); font-weight:700;
+    color:#fff; line-height:1.2; margin-bottom:10px;
+  }
+  .final-cta h2 em { font-style:italic; color:var(--gold-light); }
+  .final-cta p { font-size:.97rem; color:rgba(255,255,255,.72); line-height:1.7; }
+  .cta-actions { display:flex; flex-direction:column; gap:14px; align-items:flex-end; }
+  .btn-gold-lg {
+    background:var(--gold); color:var(--navy); padding:18px 48px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.95rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
+    text-decoration:none; white-space:nowrap; transition:background .2s; display:inline-block;
+  }
+  .btn-gold-lg:hover { background:var(--gold-light); }
+  .cta-phone {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.82rem; font-weight:700; letter-spacing:.1em;
+    color:rgba(255,255,255,.55); text-align:right;
+  }
+  .cta-phone a { color:var(--gold-light); text-decoration:none; font-size:1.05rem; display:block; margin-top:2px; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background:var(--navy); padding:52px 80px 28px;
+    border-top:4px solid var(--blue);
+  }
+  .footer-top {
+    display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:50px;
+    padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,.1); margin-bottom:28px;
+  }
+  .footer-brand p { font-size:.85rem; color:rgba(255,255,255,.4); line-height:1.7; max-width:260px; margin-top:12px; }
+  .footer-col h5 {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.72rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:14px;
+  }
+  .footer-col ul { list-style:none; }
+  .footer-col li { margin-bottom:9px; }
+  .footer-col a { font-size:.85rem; color:rgba(255,255,255,.4); text-decoration:none; transition:color .2s; }
+  .footer-col a:hover { color:#fff; }
+  .footer-bottom { display:flex; justify-content:space-between; align-items:center; }
+  .footer-copy { font-size:.75rem; color:rgba(255,255,255,.25); letter-spacing:.04em; }
+  .social-row { display:flex; gap:12px; }
+  .social-btn {
+    width:34px; height:34px; border:1px solid rgba(255,255,255,.2);
+    display:flex; align-items:center; justify-content:center;
+    color:rgba(255,255,255,.4); text-decoration:none; font-size:.8rem;
+    transition:border-color .2s, color .2s;
+  }
+  .social-btn:hover { border-color:var(--gold); color:var(--gold); }
+</style>
+</head>
+<body>
+
+<div class="mockup-banner">🎨 MOCKUP — DenZal Construction · Testimonials Page — Real Google Reviews — For Review Only</div>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <span>📍 Serving Lackawanna &amp; Luzerne County, NEPA</span>
+  <div class="right">
+    <span>✉ <a href="/cdn-cgi/l/email-protection#fa9e9f94809b96999594898e888f998e939594ba9d979b9396d4999597"><span class="__cf_email__" data-cfemail="761213180c171a1519180502040315021f191836111b171f1a5815191b">[email&#160;protected]</span></a></span>
+    <span>📞 <a href="tel:5708764663">(570) 876-4663</a></span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" style="display:flex;align-items:center;text-decoration:none;">
+    <img src="https://denzalconstruction.com/wp-content/uploads/2019/03/DenZal_Logo-2-MED-1024x593.png"
+         alt="DenZal Construction Co. LLC" style="height:62px;width:auto;display:block;">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="our-homes.html">Our Homes</a></li>
+    <li><a href="process.html">Our Process</a></li>
+    <li><a href="testimonials.html" class="active">Testimonials</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Get a Free Consultation</a>
+</nav>
+
+<!-- ══════════════════════════════
+     HERO
+══════════════════════════════ -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="eyebrow">What Our Clients Say</div>
+    <h1>Real People.<br><em>Real Homes.</em><br>Real Reviews.</h1>
+    <p class="hero-desc">We don't write our own testimonials — we don't have to. These are the words of real NEPA families who trusted Chris and Ryan to build or renovate their home. Every review below is pulled directly from Google.</p>
+    <div class="google-badge">
+      <span class="google-badge-icon">⭐</span>
+      <div class="google-badge-text">
+        <span class="google-badge-rating">4.0</span>
+        <span class="google-badge-stars">★★★★☆</span>
+        <span class="google-badge-count">34 verified Google reviews</span>
+      </div>
+    </div>
+    <div class="breadcrumb"><a href="index.html">Home</a><span>›</span>Testimonials</div>
+  </div>
+
+  <!-- Featured hero review -->
+  <div class="hero-right">
+    <div class="hero-featured-review">
+      <div class="featured-stars">★★★★★</div>
+      <div class="featured-text">
+        "Truly the most professional and talented builders! We took years deciding to build. When we met with Chris for the very first time, he made us feel like family. He listened carefully and showed us plans that met with our thoughts. We knew immediately that DenZal was the right choice for us."
+      </div>
+      <div class="featured-author">
+        <div class="featured-avatar">H</div>
+        <div>
+          <span class="featured-name">Heather Seitzinger</span>
+          <span class="featured-detail">Custom Home Build · 2 months ago</span>
+        </div>
+        <div class="featured-google">⭐ Google</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     RATING BREAKDOWN
+══════════════════════════════ -->
+<div class="rating-strip">
+  <div class="rating-big">
+    <span class="rating-num">4.0</span>
+    <span class="rating-stars">★★★★☆</span>
+    <span class="rating-total">34 Google Reviews</span>
+  </div>
+  <div class="rating-bars">
+    <div class="rating-bar-row">
+      <span class="rating-bar-label">5 ★</span>
+      <div class="rating-bar-track"><div class="rating-bar-fill" style="width:65%"></div></div>
+      <span class="rating-bar-count">22</span>
+    </div>
+    <div class="rating-bar-row">
+      <span class="rating-bar-label">4 ★</span>
+      <div class="rating-bar-track"><div class="rating-bar-fill" style="width:6%"></div></div>
+      <span class="rating-bar-count">2</span>
+    </div>
+    <div class="rating-bar-row">
+      <span class="rating-bar-label">3 ★</span>
+      <div class="rating-bar-track"><div class="rating-bar-fill" style="width:3%"></div></div>
+      <span class="rating-bar-count">1</span>
+    </div>
+    <div class="rating-bar-row">
+      <span class="rating-bar-label">2 ★</span>
+      <div class="rating-bar-track"><div class="rating-bar-fill" style="width:3%"></div></div>
+      <span class="rating-bar-count">1</span>
+    </div>
+    <div class="rating-bar-row">
+      <span class="rating-bar-label">1 ★</span>
+      <div class="rating-bar-track"><div class="rating-bar-fill" style="width:24%"></div></div>
+      <span class="rating-bar-count">8</span>
+    </div>
+  </div>
+  <div class="rating-source">
+    <span class="rating-source-logo"><span>G</span>oogle</span>
+    <p>Verified Reviews</p>
+    <p style="margin-top:6px; color:rgba(255,255,255,.25);">Google Business Profile</p>
+    <a href="https://www.google.com/maps/place/Denzal+Construction" target="_blank" rel="noopener">View on Google →</a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     FILTER BAR
+══════════════════════════════ -->
+<div class="filter-bar">
+  <span class="filter-label">Show</span>
+  <button class="filter-btn active" onclick="filterReviews('all', this)">All Reviews</button>
+  <button class="filter-btn" onclick="filterReviews('new-home', this)">New Home Builds</button>
+  <button class="filter-btn" onclick="filterReviews('renovation', this)">Renovations</button>
+  <button class="filter-btn" onclick="filterReviews('deck', this)">Decks &amp; Additions</button>
+  <div class="filter-spacer"></div>
+  <span class="review-count-tag">Showing <strong id="visibleCount">12</strong> reviews</span>
+</div>
+
+<!-- ══════════════════════════════
+     REVIEWS GRID
+══════════════════════════════ -->
+<div class="reviews-main">
+
+  <!-- LEAVE A REVIEW PROMPT -->
+  <div class="leave-review">
+    <div class="leave-review-left">
+      <div class="leave-review-eyebrow">Happy with your DenZal home?</div>
+      <div class="leave-review-text">Your review helps other NEPA families find a builder they can trust.</div>
+      <div class="leave-review-sub">Takes about 2 minutes. Means the world to Chris and Ryan.</div>
+    </div>
+    <a href="https://www.google.com/maps/place/Denzal+Construction" target="_blank" rel="noopener" class="btn-google">⭐ Leave a Google Review</a>
+  </div>
+
+  <div class="section-label">
+    <div class="section-label-line"></div>
+    <span class="section-label-text">Verified Google Reviews</span>
+    <div class="section-label-line"></div>
+  </div>
+
+  <div class="reviews-grid" id="reviewsGrid">
+
+    <!-- ★★★★★ Bryan Holod — recent, great -->
+    <div class="review-card gold-border" data-category="new-home">
+      <div class="review-stars">★★★★★</div>
+      <span class="review-tag">New Home Build</span>
+      <div class="review-text">"A true pleasure being able to work with a company like DenZal. Knowledgeable, helpful, and quality craftsmanship from start to finish. DenZal takes all the worry out of a once in a lifetime process and they truly put their customers first! Thanks for all you do and all you have done for me and my family!"</div>
+      <div class="review-divider"></div>
+      <div class="review-author">
+        <div class="review-avatar">B</div>
+        <div>
+          <span class="review-author-name">Bryan Holod</span>
+          <span class="review-author-detail">3 months ago · Google</span>
+        </div>
+        <span class="review-google-icon">⭐ Google</span>
+      </div>
+    </div>
+
+    <!-- ★★★★★ Tom Stefursky — deck, very recent -->
+    <div class="review-card" data-category="deck">
+      <div class="review-stars">★★★★★</div>
+      <span class="review-tag">Deck Replacement</span>
+      <div class="review-text">"DENZAL did a full deck replacement on our house. From start to finish they did a great job. Ryan and his workers were there daily and kept us updated regularly. The workmanship is superb and we could not be happier. Thank you for an outstanding experience."</div>
+      <div class="review-divider"></div>
+      <div class="review-author">
+        <div class="review-avatar">T</div>
+        <div>
+          <span class="review-author-name">Tom Stefursky</span>
+          <span class="review-author-detail">4 months ago · Google</span>
+        </div>
+        <span class="review-google-icon">⭐ Google</span>
+      </div>
+    </div>
+
+    <!-- ★★★★★ Jennifer Dellamalva -->
+    <div class="review-card gold-border" data-category="new-home">
+      <div class="review-stars">★★★★★</div>
+      <span class="review-tag">Custom Home Build</span>
+      <div class="review-text">"Denzel Construction built a beautiful custom home in record time. They were very personable and answered all of my questions promptly. I love my new home!"</div>
+      <div class="review-divider"></div>
+      <div class="review-author">
+        <div class="review-avatar">J</div>
+        <div>
+          <span class="review-author-name">Jennifer Dellamalva</span>
+          <span class="review-author-detail">1 year ago · Google</span>
+        </div>
+        <span class="review-google-icon">⭐ Google</span>
+      </div>
+    </div>
+
+    <!-- ★★★★★ Gela Griffin -->
+    <div class="review-card" data-category="new-home">
+      <div class="review-stars">★★★★★</div>
+      <span class="review-tag">Dream Home Build</span>
+      <div class="review-text">"My husband and I had a great experience building our dream house, thanks to everyone at Denzal! Chris and Ryan were quick to resolve any problems that presented itself through the whole process. We highly recommend using Denzal construction for building a new home."</div>
+      <div class="review-divider"></div>
+      <div class="review-author">
+        <div class="review-avatar">G</div>
+        <div>
+          <span class="review-author-name">Gela Griffin</span>
+          <span class="review-author-detail">3 years ago · Google</span>
+        </div>
+        <span class="review-google-icon">⭐ Google</span>
+      </div>
+    </div>
+
+    <!-- ★★★★★ Sierra Lancia -->
+    <div class="review-card gold-border" data-category="new-home">
+      <div class="review-stars">★★★★★</div>
+      <span class="review-tag">Forever Home Build</span>
+      <div class="review-text">"We built with Chris and Ryan a little over two years ago and I was extremely pleased with our forever home. I was quite a pain in the butt during the building process, but Chris and Ryan were so easy to work with and never had a problem with any of my requests. I would highly recommend them to anyone!"</div>
+      <div class="review-divider"></div>
+      <div class="review-author">
+        <div class="review-avatar">S</div>
+        <div>
+          <span class="review-author-name">Sierra Lancia</span>
+          <span class="review-author-detail">6 years ago · Google</span>
+        </div>
+        <span class="review-google-icon">⭐ Google</span>
+      </div>
+    </div>
+
+    <!-- ★★★★★ Keith Mercatili -->
+    <div class="review-card" data-category="new-home">
+      <div class="review-stars">★★★★★</div>
+      <span class="review-tag">Construction</span>
+      <div class="review-text">"Denzal Construction does excellent work. Total trust in their work. They get it right from beginning with very reasonable prices. Quality is their mission and they deliver. Would recommend them for any job."</div>
+      <div class="review-divider"></div>
+      <div class="review-author">
+        <div class="review-avatar">K</div>
+        <div>
+          <span class="review-author-name">Keith Mercatili</span>
+          <span class="review-author-detail">7 years ago · Google</span>
+        </div>
+        <span class="review-google-icon">⭐ Google</span>
+      </div>
+    </div>
+
+    <!-- ★★★★★ Jill Liparulo -->
+    <div class="review-card gold-border" data-category="renovation">
+      <div class="review-stars">★★★★★</div>
+      <span class="review-tag">Basement Finish</span>
+      <div class="review-text">"From our initial planning meeting to our gorgeous finished basement, Denzal Construction went above and beyond! The attention to detail was like no one we have ever worked with! They were awesome! I recommend them 100% to anyone who's looking to do a home project or build a home."</div>
+      <div class="review-divider"></div>
+      <div class="review-author">
+        <div class="review-avatar">J</div>
+        <div>
+          <span class="review-author-name">Jill Liparulo</span>
+          <span class="review-author-detail">6 years ago · Google</span>
+        </div>
+        <span class="review-google-icon">⭐ Google</span>
+      </div>
+    </div>
+
+    <!-- ★★★★★ Chris McAndrew -->
+    <div class="review-card" data-category="new-home">
+      <div class="review-stars">★★★★★</div>
+      <span class="review-tag">Home Build · 10 Years Later</span>
+      <div class="review-text">"Denzal built our home 10 years ago and we couldn't be happier. They were professional and knowledgeable which made the entire process enjoyable. I'd highly recommend them to anyone."</div>
+      <div class="review-divider"></div>
+      <div class="review-author">
+        <div class="review-avatar">C</div>
+        <div>
+          <span class="review-author-name">Chris McAndrew</span>
+          <span class="review-author-detail">6 years ago · Google</span>
+        </div>
+        <span class="review-google-icon">⭐ Google</span>
+      </div>
+    </div>
+
+    <!-- ★★★★★ Jill Stocks -->
+    <div class="review-card gold-border" data-category="renovation">
+      <div class="review-stars">★★★★★</div>
+      <span class="review-tag">Home Project</span>
+      <div class="review-text">"Denzal construction went above and beyond to meet our families needs! They were personable, punctual and the quality of work exceeded our expectations."</div>
+      <div class="review-divider"></div>
+      <div class="review-author">
+        <div class="review-avatar">J</div>
+        <div>
+          <span class="review-author-name">Jill Stocks</span>
+          <span class="review-author-detail">6 years ago · Google</span>
+        </div>
+        <span class="review-google-icon">⭐ Google</span>
+      </div>
+    </div>
+
+    <!-- ★★★★★ Kathleen Mullen -->
+    <div class="review-card" data-category="new-home">
+      <div class="review-stars">★★★★★</div>
+      <span class="review-tag">Home Build · 3 Years In</span>
+      <div class="review-text">"I've been in my Denzal home for three years now and I couldn't be happier. They build a strong solid home and I highly recommend them to anyone who is considering building."</div>
+      <div class="review-divider"></div>
+      <div class="review-author">
+        <div class="review-avatar">K</div>
+        <div>
+          <span class="review-author-name">Kathleen Mullen</span>
+          <span class="review-author-detail">6 years ago · Google</span>
+        </div>
+        <span class="review-google-icon">⭐ Google</span>
+      </div>
+    </div>
+
+    <!-- ★★★★★ Talia Walsh -->
+    <div class="review-card gold-border" data-category="new-home">
+      <div class="review-stars">★★★★★</div>
+      <span class="review-tag">Custom Home Build</span>
+      <div class="review-text">"Denzal Construction is a professional contracting company that goes above and beyond to create their client's dream home. Their team of contractors are the best of the trade and ensure all projects are completed with satisfaction. You won't be disappointed choosing Denzal!"</div>
+      <div class="review-divider"></div>
+      <div class="review-author">
+        <div class="review-avatar">T</div>
+        <div>
+          <span class="review-author-name">Talia Walsh</span>
+          <span class="review-author-detail">6 years ago · Google</span>
+        </div>
+        <span class="review-google-icon">⭐ Google</span>
+      </div>
+    </div>
+
+    <!-- ★★★★★ Professional / Epitome -->
+    <div class="review-card" data-category="renovation">
+      <div class="review-stars">★★★★★</div>
+      <span class="review-tag">Construction Project</span>
+      <div class="review-text">"Denzal Construction is the epitome of professionalism! Their attention to detail and responsiveness to their customers are top notch! Would highly recommend them to anyone looking for a quality construction company!!"</div>
+      <div class="review-divider"></div>
+      <div class="review-author">
+        <div class="review-avatar">G</div>
+        <div>
+          <span class="review-author-name">Google Reviewer</span>
+          <span class="review-author-detail">6 years ago · Google</span>
+        </div>
+        <span class="review-google-icon">⭐ Google</span>
+      </div>
+    </div>
+
+  </div><!-- /reviews-grid -->
+
+  <!-- ── WIDE FEATURED REVIEW — Mike & Stepha ── -->
+  <div class="section-label">
+    <div class="section-label-line"></div>
+    <span class="section-label-text">Featured Long-Form Reviews</span>
+    <div class="section-label-line"></div>
+  </div>
+
+  <div class="feature-review" style="margin-bottom:24px;">
+    <div class="feature-review-text">
+      <div class="feature-review-stars">★★★★★</div>
+      <div class="feature-review-quote">"My wife and I had spoken with many builders before we were introduced to Denzal. After our first meet, we both agreed that they were the ones we trusted to build our new home. Chris, Ryan and Ted worked with us to design a home in our price range. They were professional, communicative, and delivered exactly what they promised."</div>
+      <div class="feature-review-author">Mike M. <span class="feature-review-detail">· Custom Home Build · 3 years ago</span></div>
+    </div>
+    <div class="feature-review-side">
+      <span class="feature-big-num">5</span>
+      <span class="feature-big-label">Stars on<br>Google</span>
+    </div>
+  </div>
+
+  <div class="feature-review">
+    <div class="feature-review-text">
+      <div class="feature-review-stars">★★★★★</div>
+      <div class="feature-review-quote">"My husband and I had spoken with many builders before we were introduced to Denzal. After our first meet, we both agreed that they were the ones we trusted to build our new home. Chris, Ryan and Ted worked with us to design a home in our price range and made the entire experience feel personal, not transactional."</div>
+      <div class="feature-review-author">Stepha Martynuk <span class="feature-review-detail">· Custom Home Build · 3 years ago</span></div>
+    </div>
+    <div class="feature-review-side">
+      <span class="feature-big-num">5</span>
+      <span class="feature-big-label">Stars on<br>Google</span>
+    </div>
+  </div>
+
+</div><!-- /reviews-main -->
+
+<!-- ══════════════════════════════
+     FINAL CTA
+══════════════════════════════ -->
+<div class="final-cta">
+  <div>
+    <h2>Ready to Add Your Story<br>to This <em>List?</em></h2>
+    <p>Every one of those reviews started with a free, no-pressure conversation with Chris or Ryan. That's where yours starts too. Call or click — we'd love to hear about your project.</p>
+  </div>
+  <div class="cta-actions">
+    <a href="contact.html" class="btn-gold-lg">Schedule a Free Consultation</a>
+    <div class="cta-phone">
+      Or call us directly —
+      <a href="tel:5708764663">(570) 876-4663</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="index.html"><img src="https://denzalconstruction.com/wp-content/uploads/2019/03/DenZal_Logo-2-MED-1024x593.png"
+           alt="DenZal Construction" style="height:72px;width:auto;display:block;"></a>
+      <p>NEPA's premier custom home builder. Fine building, quality craftsmanship, exceptional value — home by home.</p>
+      <div class="social-row" style="margin-top:16px;">
+        <a href="https://www.facebook.com/denzalconstruction/" class="social-btn">f</a>
+        <a href="https://www.instagram.com/denzalconstruction/" class="social-btn">📷</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+            <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="our-homes.html">Our Homes</a></li>
+        <li><a href="process.html">Our Process</a></li>
+        <li><a href="testimonials.html">Testimonials</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Home Models</h5>
+      <ul>
+        <li><a href="our-homes.html">The Ardamore</a></li>
+        <li><a href="our-homes.html">The Chatham</a></li>
+        <li><a href="our-homes.html">The Fairmont</a></li>
+        <li><a href="our-homes.html">The Glen Brooke</a></li>
+        <li><a href="our-homes.html">The Oakmont</a></li>
+        <li><a href="our-homes.html">View All →</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="tel:5708764663">(570) 876-4663</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#f89c9d968299949b97968b8c8a8d9b8c919796b89f95999194d69b9795"><span class="__cf_email__" data-cfemail="8de9e8e3f7ece1eee2e3fef9fff8eef9e4e2e3cdeae0ece4e1a3eee2e0">[email&#160;protected]</span></a></li>
+        <li><a href="https://www.google.com/maps/place/Denzal+Construction" target="_blank">466 N Main St, Eynon PA</a></li>
+        <li style="margin-top:12px;"><a href="contact.html" style="color:var(--gold-light);">Get a Free Consultation →</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 DenZal Construction Co. LLC · Licensed & Insured · Eynon, PA 18403</span>
+    <span class="footer-copy">Built with ❤️ in NEPA</span>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  function filterReviews(category, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
