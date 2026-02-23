@@ -1,374 +1,375 @@
-<?php
-/**
- * DenZal Construction Theme Functions
- * Built by Kapeesh Enterprises
- */
+<?php get_header(); ?>
 
-defined( 'ABSPATH' ) || exit;
+<!-- =============================================
+     HERO  (background = Swiper slideshow of dz_home CPT)
+     ============================================= -->
+<section class="hero" id="hero" aria-label="Hero">
 
-/* =============================================
-   THEME SETUP
-   ============================================= */
-function denzal_theme_setup() {
-    add_theme_support( 'title-tag' );
-    add_theme_support( 'post-thumbnails' );
-    add_theme_support( 'html5', [ 'search-form', 'comment-form', 'gallery', 'caption', 'style', 'script' ] );
-    add_theme_support( 'customize-selective-refresh-widgets' );
-    add_theme_support( 'wp-block-styles' );
-    add_theme_support( 'responsive-embeds' );
-
-    // Image sizes
-    add_image_size( 'denzal-hero',      1920, 900,  true );
-    add_image_size( 'denzal-card',       800, 600,  true );
-    add_image_size( 'denzal-thumbnail',  400, 300,  true );
-
-    // Nav menus
-    register_nav_menus( [
-        'primary' => __( 'Primary Navigation', 'denzal' ),
-        'footer'  => __( 'Footer Navigation',  'denzal' ),
-    ] );
-}
-add_action( 'after_setup_theme', 'denzal_theme_setup' );
-
-/* =============================================
-   ENQUEUE STYLES & SCRIPTS
-   ============================================= */
-function denzal_enqueue_assets() {
-    $v = wp_get_theme()->get( 'Version' );
-
-    // Google Fonts
-    wp_enqueue_style(
-        'denzal-fonts',
-        'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Source+Sans+3:wght@400;600;700&display=swap',
-        [],
-        null
-    );
-
-    // Main stylesheet
-    wp_enqueue_style( 'denzal-style', get_stylesheet_uri(), [ 'denzal-fonts' ], $v );
-
-    // Main JS
-    wp_enqueue_script( 'denzal-main', get_template_directory_uri() . '/assets/js/main.js', [], $v, true );
-
-    // Localize for AJAX
-    wp_localize_script( 'denzal-main', 'denzalAjax', [
-        'ajaxurl' => admin_url( 'admin-ajax.php' ),
-        'nonce'   => wp_create_nonce( 'denzal_nonce' ),
-    ] );
-}
-add_action( 'wp_enqueue_scripts', 'denzal_enqueue_assets' );
-
-/* =============================================
-   CUSTOM POST TYPE: HOME MODELS
-   ============================================= */
-function denzal_register_post_types() {
-
-    // Home Models (portfolio entries)
-    register_post_type( 'dz_home', [
-        'label'  => 'Home Models',
-        'labels' => [
-            'name'               => 'Home Models',
-            'singular_name'      => 'Home Model',
-            'add_new'            => 'Add New Home',
-            'add_new_item'       => 'Add New Home Model',
-            'edit_item'          => 'Edit Home Model',
-            'view_item'          => 'View Home',
-            'search_items'       => 'Search Homes',
-            'not_found'          => 'No homes found',
-            'not_found_in_trash' => 'No homes in trash',
-        ],
-        'public'       => true,
-        'show_in_menu' => true,
-        'menu_icon'    => 'dashicons-building',
-        'supports'     => [ 'title', 'editor', 'thumbnail', 'excerpt', 'page-attributes' ],
-        'has_archive'  => 'home-models',
-        'rewrite'      => [ 'slug' => 'home-models' ],
-        'show_in_rest' => true,
-    ] );
-
-    // Testimonials CPT
-    register_post_type( 'dz_testimonial', [
-        'label'  => 'Testimonials',
-        'labels' => [
-            'name'          => 'Testimonials',
-            'singular_name' => 'Testimonial',
-            'add_new_item'  => 'Add New Testimonial',
-            'edit_item'     => 'Edit Testimonial',
-        ],
-        'public'       => false,
-        'show_ui'      => true,
-        'show_in_menu' => true,
-        'menu_icon'    => 'dashicons-format-quote',
-        'supports'     => [ 'title', 'editor' ],
-        'show_in_rest' => true,
-    ] );
-}
-add_action( 'init', 'denzal_register_post_types' );
-
-/* =============================================
-   CUSTOM TAXONOMY: HOME TYPES
-   ============================================= */
-function denzal_register_taxonomies() {
-    // Home Type (Ranch, Colonial, Cape Cod, Two-Story)
-    register_taxonomy( 'home_type', 'dz_home', [
-        'label'        => 'Home Type',
-        'hierarchical' => true,
-        'rewrite'      => [ 'slug' => 'home-type' ],
-        'show_in_rest' => true,
-    ] );
-
-    // Availability (Quick Delivery, Custom)
-    register_taxonomy( 'home_availability', 'dz_home', [
-        'label'        => 'Availability',
-        'hierarchical' => true,
-        'rewrite'      => [ 'slug' => 'availability' ],
-        'show_in_rest' => true,
-    ] );
-
-    // County / Service Area
-    register_taxonomy( 'service_area', 'dz_home', [
-        'label'        => 'Service Area / County',
-        'hierarchical' => true,
-        'rewrite'      => [ 'slug' => 'area' ],
-        'show_in_rest' => true,
-    ] );
-}
-add_action( 'init', 'denzal_register_taxonomies' );
-
-/* =============================================
-   CUSTOM META BOXES (no ACF required)
-   ============================================= */
-function denzal_add_meta_boxes() {
-    add_meta_box(
-        'dz_home_details',
-        'Home Specifications',
-        'denzal_home_details_cb',
-        'dz_home',
-        'normal',
-        'high'
-    );
-    add_meta_box(
-        'dz_testimonial_meta',
-        'Testimonial Details',
-        'denzal_testimonial_meta_cb',
-        'dz_testimonial',
-        'normal',
-        'high'
-    );
-}
-add_action( 'add_meta_boxes', 'denzal_add_meta_boxes' );
-
-function denzal_home_details_cb( $post ) {
-    wp_nonce_field( 'dz_home_meta', 'dz_home_nonce' );
-    $beds   = get_post_meta( $post->ID, '_dz_beds',   true );
-    $baths  = get_post_meta( $post->ID, '_dz_baths',  true );
-    $sqft   = get_post_meta( $post->ID, '_dz_sqft',   true );
-    $county = get_post_meta( $post->ID, '_dz_county', true );
-    $model  = get_post_meta( $post->ID, '_dz_model_name', true );
-    ?>
-    <style>.dz-meta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}.dz-meta-grid label{display:block;font-weight:600;font-size:12px;text-transform:uppercase;margin-bottom:4px;color:#666}.dz-meta-grid input,.dz-meta-full input,.dz-meta-full select{width:100%;padding:8px;border:1px solid #ddd;border-radius:4px}.dz-meta-full{margin-top:16px}</style>
-    <div class="dz-meta-grid">
-        <div>
-            <label>Model Name</label>
-            <input type="text" name="dz_model_name" value="<?php echo esc_attr( $model ); ?>" placeholder="The Chatham" />
-        </div>
-        <div>
-            <label>Bedrooms</label>
-            <input type="text" name="dz_beds" value="<?php echo esc_attr( $beds ); ?>" placeholder="3–4" />
-        </div>
-        <div>
-            <label>Bathrooms</label>
-            <input type="text" name="dz_baths" value="<?php echo esc_attr( $baths ); ?>" placeholder="2.5" />
-        </div>
-        <div>
-            <label>Sq Ft (Est.)</label>
-            <input type="text" name="dz_sqft" value="<?php echo esc_attr( $sqft ); ?>" placeholder="2,200" />
-        </div>
-        <div>
-            <label>County / Area</label>
-            <input type="text" name="dz_county" value="<?php echo esc_attr( $county ); ?>" placeholder="Lackawanna County" />
+    <!-- SWIPER BACKGROUND CAROUSEL (replaces static .hero-bg) -->
+    <div class="hero-swiper swiper">
+        <div class="swiper-wrapper">
+            <?php
+            $hero_homes = new WP_Query( [
+                'post_type'      => 'dz_home',
+                'posts_per_page' => 10,
+                'post_status'    => 'publish',
+                'orderby'        => 'date',
+                'order'          => 'DESC',
+            ] );
+            if ( $hero_homes->have_posts() ) :
+                while ( $hero_homes->have_posts() ) :
+                    $hero_homes->the_post();
+                    $img_url = get_the_post_thumbnail_url( get_the_ID(), 'denzal-hero' );
+                    if ( ! $img_url ) continue; // skip slides with no photo
+                    ?>
+                    <div class="swiper-slide hero-swiper-slide" style="background-image:url('<?php echo esc_url( $img_url ); ?>');" role="img" aria-label="<?php the_title_attribute(); ?>"></div>
+                <?php
+                endwhile;
+                wp_reset_postdata();
+            else :
+                // Fallback: static image if no CPT posts yet
+                ?>
+                <div class="swiper-slide hero-swiper-slide" style="background-image:url('https://denzalconstruction.com/wp-content/uploads/2019/03/321-celli-dr-1024x684.jpg');"></div>
+                <div class="swiper-slide hero-swiper-slide" style="background-image:url('https://denzalconstruction.com/wp-content/uploads/2019/03/305-vincent-ave3-1024x684.jpg');"></div>
+                <div class="swiper-slide hero-swiper-slide" style="background-image:url('https://denzalconstruction.com/wp-content/uploads/2019/03/309-riverside-dr-1024x684.jpg');"></div>
+            <?php endif; ?>
         </div>
     </div>
-    <?php
-}
+    <!-- END SWIPER BACKGROUND -->
 
-function denzal_testimonial_meta_cb( $post ) {
-    wp_nonce_field( 'dz_testimonial_meta', 'dz_testimonial_nonce' );
-    $author = get_post_meta( $post->ID, '_dz_author', true );
-    $role   = get_post_meta( $post->ID, '_dz_role',   true );
-    $rating = get_post_meta( $post->ID, '_dz_rating', true ) ?: '5';
-    ?>
-    <style>.dz-t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.dz-t-grid label{display:block;font-weight:600;font-size:12px;margin-bottom:4px;color:#666}.dz-t-grid input,.dz-t-grid select{width:100%;padding:8px;border:1px solid #ddd;border-radius:4px}</style>
-    <div class="dz-t-grid">
-        <div>
-            <label>Author Name</label>
-            <input type="text" name="dz_author" value="<?php echo esc_attr( $author ); ?>" placeholder="Jennifer C." />
-        </div>
-        <div>
-            <label>Role / Description</label>
-            <input type="text" name="dz_role" value="<?php echo esc_attr( $role ); ?>" placeholder="Homeowner" />
-        </div>
-        <div>
-            <label>Star Rating</label>
-            <select name="dz_rating">
-                <?php for ( $i = 5; $i >= 1; $i-- ) : ?>
-                    <option value="<?php echo $i; ?>" <?php selected( $rating, $i ); ?>><?php echo $i; ?> Stars</option>
-                <?php endfor; ?>
-            </select>
+    <!-- Soft left-side gradient so white text stays legible -->
+    <div class="hero-overlay"></div>
+
+    <div class="container">
+        <div class="hero-content">
+            <p class="hero-eyebrow">NEPA's Premier Custom Home Builder</p>
+            <h1>Build the Home You've Always <em>Imagined.</em></h1>
+            <p class="hero-sub">
+                From concept to keys in hand — DenZal Construction delivers fine craftsmanship, quality materials, and exceptional value across Northeastern Pennsylvania.
+            </p>
+            <div class="hero-actions">
+                <a href="#homes" class="btn btn-primary">View Our Homes</a>
+                <a href="#contact" class="btn btn-outline">Start Your Project</a>
+            </div>
+            <div class="hero-stats">
+                <div>
+                    <div class="hero-stat-value">200+</div>
+                    <div class="hero-stat-label">Homes Built</div>
+                </div>
+                <div>
+                    <div class="hero-stat-value">20+</div>
+                    <div class="hero-stat-label">Years in Business</div>
+                </div>
+                <div>
+                    <div class="hero-stat-value">100%</div>
+                    <div class="hero-stat-label">On-Budget Guarantee</div>
+                </div>
+            </div>
         </div>
     </div>
-    <?php
-}
+</section>
 
-function denzal_save_meta( $post_id ) {
-    // Home meta
-    if ( isset( $_POST['dz_home_nonce'] ) && wp_verify_nonce( $_POST['dz_home_nonce'], 'dz_home_meta' ) ) {
-        $fields = [ 'dz_beds', 'dz_baths', 'dz_sqft', 'dz_county', 'dz_model_name' ];
-        foreach ( $fields as $field ) {
-            if ( isset( $_POST[ $field ] ) ) {
-                update_post_meta( $post_id, '_' . $field, sanitize_text_field( $_POST[ $field ] ) );
-            }
-        }
-    }
+<!-- =============================================
+     TRUST STRIP
+     ============================================= -->
+<div class="trust-strip" aria-label="Trust signals">
+    <div class="container">
+        <div class="trust-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Licensed &amp; Insured
+        </div>
+        <div class="trust-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            Custom &amp; Model Homes
+        </div>
+        <div class="trust-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            On-Time Delivery
+        </div>
+        <div class="trust-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            NEPA Family-Owned
+        </div>
+    </div>
+</div>
 
-    // Testimonial meta
-    if ( isset( $_POST['dz_testimonial_nonce'] ) && wp_verify_nonce( $_POST['dz_testimonial_nonce'], 'dz_testimonial_meta' ) ) {
-        $fields = [ 'dz_author', 'dz_role', 'dz_rating' ];
-        foreach ( $fields as $field ) {
-            if ( isset( $_POST[ $field ] ) ) {
-                update_post_meta( $post_id, '_' . $field, sanitize_text_field( $_POST[ $field ] ) );
-            }
-        }
-    }
-}
-add_action( 'save_post', 'denzal_save_meta' );
+<!-- =============================================
+     ABOUT STRIP
+     ============================================= -->
+<section class="section" id="about">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-text">
+                <p class="section-label">Who We Are</p>
+                <h2 class="section-headline">Built on Trust. <em>Rooted in NEPA.</em></h2>
+                <p>DenZal Construction Co. LLC was founded by Chris and Ryan — two lifelong Northeastern Pennsylvania tradesmen who saw a gap between cookie-cutter builders and true custom craftsmen. They built DenZal to close that gap.</p>
+                <p>Every home is designed around the family living in it. Every build is backed by a fixed-price contract, clear communication, and a commitment to on-time delivery that has earned DenZal a reputation across Lackawanna and Luzerne Counties.</p>
+                <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="btn btn-outline-dark">Meet Chris &amp; Ryan →</a>
+            </div>
+            <div class="about-image-wrap">
+                <img src="https://denzalconstruction.com/wp-content/uploads/2019/03/305-vincent-ave3-1024x684.jpg" alt="DenZal custom home in NEPA" loading="lazy" />
+                <div class="about-quote">
+                    "We won't sign off on anything we wouldn't put in our own family's home."
+                    <cite>— Chris &amp; Ryan, DenZal Construction</cite>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-/* =============================================
-   WIDGET AREAS
-   ============================================= */
-function denzal_register_sidebars() {
-    register_sidebar( [
-        'name'          => 'Footer Column 1',
-        'id'            => 'footer-1',
-        'before_widget' => '<div class="footer-widget">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<h5>',
-        'after_title'   => '</h5>',
-    ] );
-}
-add_action( 'widgets_init', 'denzal_register_sidebars' );
+<!-- =============================================
+     PORTFOLIO GRID
+     ============================================= -->
+<section class="section section--cream" id="homes">
+    <div class="container">
+        <div class="portfolio-header">
+            <div>
+                <p class="section-label">Our Portfolio</p>
+                <h2 class="section-headline">Custom Built Homes Across <em>NEPA</em></h2>
+            </div>
+            <a href="<?php echo esc_url( home_url( '/our-homes/' ) ); ?>" class="btn btn-outline-dark">
+                View All Homes →
+            </a>
+        </div>
 
-/* =============================================
-   TEMPLATE HELPERS
-   ============================================= */
+        <div class="portfolio-grid">
+            <?php
+            $homes = denzal_get_homes( [ 'posts_per_page' => 5 ] );
+            $i = 0;
+            if ( $homes->have_posts() ) :
+                while ( $homes->have_posts() ) :
+                    $homes->the_post();
+                    $county  = get_post_meta( get_the_ID(), '_dz_county', true );
+                    $model   = get_post_meta( get_the_ID(), '_dz_model_name', true );
+                    $is_featured = ( $i === 0 );
+                    $avail   = get_the_terms( get_the_ID(), 'home_availability' );
+                    $badge   = $avail ? $avail[0]->name : 'Custom Model';
+                    ?>
+                    <article class="portfolio-card <?php echo $is_featured ? 'card-featured' : ''; ?>">
+                        <?php if ( has_post_thumbnail() ) : ?>
+                            <?php the_post_thumbnail( 'denzal-card', [ 'alt' => get_the_title(), 'loading' => 'lazy' ] ); ?>
+                        <?php else : ?>
+                            <img src="https://denzalconstruction.com/wp-content/uploads/2019/03/305-vincent-ave3-1024x684.jpg" alt="<?php the_title_attribute(); ?>" loading="lazy" />
+                        <?php endif; ?>
+                        <div class="portfolio-card-overlay">
+                            <span class="card-badge"><?php echo esc_html( $county ?: $badge ); ?></span>
+                            <div class="card-title"><?php echo esc_html( $model ?: get_the_title() ); ?></div>
+                        </div>
+                    </article>
+                    <?php
+                    $i++;
+                endwhile;
+                wp_reset_postdata();
+            else :
+                $static_homes = [
+                    [ 'img' => 'https://denzalconstruction.com/wp-content/uploads/2019/03/305-vincent-ave3-1024x684.jpg', 'badge' => 'Luzerne County',     'name' => 'The Chatham Model',  'featured' => true ],
+                    [ 'img' => 'https://denzalconstruction.com/wp-content/uploads/2019/03/309-riverside-dr-1024x684.jpg',  'badge' => 'Lackawanna County',  'name' => 'The Fairmont',       'featured' => false ],
+                    [ 'img' => 'https://denzalconstruction.com/wp-content/uploads/2020/02/Ardamore-sm-copy-300x199.jpg',   'badge' => 'Quick Delivery',     'name' => 'The Ardamore',       'featured' => false ],
+                    [ 'img' => 'https://denzalconstruction.com/wp-content/uploads/2020/02/Waterford-sm-copy-300x187.jpg',  'badge' => 'Custom Model',       'name' => 'The Waterford',      'featured' => false ],
+                    [ 'img' => 'https://denzalconstruction.com/wp-content/uploads/2020/02/Oakmont-sm-copy-300x206.jpg',    'badge' => 'Custom Model',       'name' => 'The Oakmont',        'featured' => false ],
+                ];
+                foreach ( $static_homes as $home ) : ?>
+                    <article class="portfolio-card <?php echo $home['featured'] ? 'card-featured' : ''; ?>">
+                        <img src="<?php echo esc_url( $home['img'] ); ?>" alt="<?php echo esc_attr( $home['name'] ); ?>" loading="lazy" />
+                        <div class="portfolio-card-overlay">
+                            <span class="card-badge"><?php echo esc_html( $home['badge'] ); ?></span>
+                            <div class="card-title"><?php echo esc_html( $home['name'] ); ?></div>
+                        </div>
+                    </article>
+                <?php endforeach;
+            endif;
+            ?>
+        </div>
+    </div>
+</section>
 
-/**
- * Render star rating
- */
-function denzal_stars( $count = 5 ) {
-    return str_repeat( '★', intval( $count ) ) . str_repeat( '☆', 5 - intval( $count ) );
-}
+<!-- =============================================
+     PROCESS
+     ============================================= -->
+<section class="section" id="process">
+    <div class="container text-center">
+        <p class="section-label">How It Works</p>
+        <h2 class="section-headline">From Dream to <em>Done</em> — Our Simple 4-Step Process</h2>
 
-/**
- * Get homes query
- */
-function denzal_get_homes( $args = [] ) {
-    $defaults = [
-        'post_type'      => 'dz_home',
-        'posts_per_page' => -1,
-        'orderby'        => 'menu_order',
-        'order'          => 'ASC',
-    ];
-    return new WP_Query( array_merge( $defaults, $args ) );
-}
+        <div class="process-grid">
+            <div class="process-step">
+                <div class="step-number">01</div>
+                <h3>Free Consultation</h3>
+                <p>Sit down with Chris and Ryan. Share your vision, budget, and timeline. No pressure, no obligations.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">02</div>
+                <h3>Design &amp; Quote</h3>
+                <p>Choose a model or go fully custom. We'll provide a detailed fixed-price quote — what we quote is what you pay.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">03</div>
+                <h3>Build</h3>
+                <p>We break ground and keep you updated every step of the way. You'll never have to chase us down for information.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">04</div>
+                <h3>Keys in Hand</h3>
+                <p>Walk through your finished home, on time and on budget. Then enjoy it — you've earned it.</p>
+            </div>
+        </div>
 
-/**
- * Get testimonials query
- */
-function denzal_get_testimonials( $limit = -1 ) {
-    return new WP_Query( [
-        'post_type'      => 'dz_testimonial',
-        'posts_per_page' => $limit,
-        'orderby'        => 'menu_order date',
-        'order'          => 'ASC',
-    ] );
-}
+        <a href="<?php echo esc_url( home_url( '/our-process/' ) ); ?>" class="btn btn-outline-dark" style="margin-top:48px;">See Our Full Process →</a>
+    </div>
+</section>
 
-/* =============================================
-   CONTACT FORM HANDLER (AJAX)
-   ============================================= */
-function denzal_handle_contact() {
-    check_ajax_referer( 'denzal_nonce', 'nonce' );
+<!-- =============================================
+     TESTIMONIALS
+     ============================================= -->
+<section class="section section--dark" id="testimonials">
+    <div class="container">
+        <div class="text-center" style="margin-bottom:48px;">
+            <p class="section-label">What Our Clients Say</p>
+            <h2 class="section-headline" style="color:#fff;">Real Families. <em>Real Homes.</em></h2>
+        </div>
+        <div class="testimonials-grid">
+            <?php
+            $testimonials = new WP_Query( [
+                'post_type'      => 'dz_testimonial',
+                'posts_per_page' => 3,
+                'post_status'    => 'publish',
+            ] );
+            if ( $testimonials->have_posts() ) :
+                while ( $testimonials->have_posts() ) :
+                    $testimonials->the_post();
+                    $author = get_post_meta( get_the_ID(), '_dz_author', true ) ?: get_the_title();
+                    $role   = get_post_meta( get_the_ID(), '_dz_role', true );
+                    $stars  = intval( get_post_meta( get_the_ID(), '_dz_stars', true ) ) ?: 5;
+                    ?>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars"><?php echo str_repeat( '★', $stars ); ?></div>
+                        <p class="testimonial-text"><?php echo wp_kses_post( get_the_content() ); ?></p>
+                        <cite class="testimonial-author">— <?php echo esc_html( $author ); ?><?php if ( $role ) echo ', ' . esc_html( $role ); ?></cite>
+                    </div>
+                    <?php
+                endwhile;
+                wp_reset_postdata();
+            else :
+                $static_testimonials = [
+                    [ 'stars' => 5, 'text' => 'DenZal built our dream home in Clarks Summit and it was seamless from start to finish. Fixed price, on time — exactly what they promised.', 'author' => 'Mike & Sarah T., Clarks Summit' ],
+                    [ 'stars' => 5, 'text' => 'Chris and Ryan were hands-on throughout the entire build. We always knew exactly where things stood. The craftsmanship is beautiful.', 'author' => 'The Johnson Family, Pittston' ],
+                    [ 'stars' => 5, 'text' => "I've worked with a lot of contractors. DenZal is different — they actually do what they say they'll do.", 'author' => 'Brian C., Construction Professional' ],
+                ];
+                foreach ( $static_testimonials as $t ) : ?>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars"><?php echo str_repeat( '★', $t['stars'] ); ?></div>
+                        <p class="testimonial-text"><?php echo esc_html( $t['text'] ); ?></p>
+                        <cite class="testimonial-author">— <?php echo esc_html( $t['author'] ); ?></cite>
+                    </div>
+                <?php endforeach;
+            endif; ?>
+        </div>
+        <div class="text-center" style="margin-top:40px;">
+            <a href="<?php echo esc_url( home_url( '/testimonials/' ) ); ?>" class="btn btn-outline">Read More Reviews →</a>
+        </div>
+    </div>
+</section>
 
-    $name     = sanitize_text_field( $_POST['name'] ?? '' );
-    $email    = sanitize_email( $_POST['email'] ?? '' );
-    $phone    = sanitize_text_field( $_POST['phone'] ?? '' );
-    $interest = sanitize_text_field( $_POST['interest'] ?? '' );
-    $message  = sanitize_textarea_field( $_POST['message'] ?? '' );
+<!-- =============================================
+     SERVICE AREA MAP
+     ============================================= -->
+<section class="section section--cream" id="service-area">
+    <div class="container">
+        <div class="map-section">
+            <div class="map-text">
+                <p class="section-label">Where We Build</p>
+                <h2 class="section-headline">Proudly Serving <em>All of NEPA</em></h2>
+                <p>DenZal Construction builds throughout Northeastern Pennsylvania, with a concentration in Lackawanna and Luzerne Counties. From Scranton to Wilkes-Barre and everywhere in between — if it's NEPA, it's home turf.</p>
+                <ul class="service-list">
+                    <li>Lackawanna County</li>
+                    <li>Luzerne County</li>
+                    <li>Wayne County</li>
+                    <li>Susquehanna County</li>
+                    <li>Monroe County</li>
+                    <li>Wyoming County</li>
+                </ul>
+                <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="btn btn-primary" style="margin-top:24px;">Start Your Project →</a>
+            </div>
+            <div class="map-embed">
+                <iframe
+                    src="REPLACE_WITH_GOOGLE_MAPS_EMBED_SRC"
+                    width="100%"
+                    height="450"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="DenZal Construction service area map">
+                </iframe>
+            </div>
+        </div>
+    </div>
+</section>
 
-    if ( empty( $name ) || empty( $email ) || ! is_email( $email ) ) {
-        wp_send_json_error( 'Please fill in all required fields.' );
-    }
+<!-- =============================================
+     CONTACT
+     ============================================= -->
+<section class="section" id="contact">
+    <div class="container">
+        <div class="contact-grid">
+            <div class="contact-text">
+                <p class="section-label">Get In Touch</p>
+                <h2 class="section-headline">Ready to Build Your <em>Dream Home?</em></h2>
+                <p>The first step is a free, no-pressure consultation with Chris and Ryan. Tell us what you're thinking — we'll tell you exactly what it takes to make it happen.</p>
+                <div class="contact-details">
+                    <div class="contact-detail">
+                        <strong>Phone</strong>
+                        <a href="tel:5708764663">(570) 876-4663</a>
+                    </div>
+                    <div class="contact-detail">
+                        <strong>Email</strong>
+                        <a href="mailto:info@denzalconstruction.com">info@denzalconstruction.com</a>
+                    </div>
+                    <div class="contact-detail">
+                        <strong>Office</strong>
+                        <span>466 N Main St, Eynon, PA 18403</span>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form-wrap">
+                <form id="contact-form" class="contact-form" novalidate>
+                    <?php wp_nonce_field( 'denzal_nonce', 'denzal_nonce_field' ); ?>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cf-name">Your Name *</label>
+                            <input type="text" id="cf-name" name="name" required autocomplete="name" />
+                        </div>
+                        <div class="form-group">
+                            <label for="cf-email">Email Address *</label>
+                            <input type="email" id="cf-email" name="email" required autocomplete="email" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cf-phone">Phone Number</label>
+                            <input type="tel" id="cf-phone" name="phone" autocomplete="tel" />
+                        </div>
+                        <div class="form-group">
+                            <label for="cf-interest">I'm interested in…</label>
+                            <select id="cf-interest" name="interest">
+                                <option value="">Select one</option>
+                                <option value="custom">Custom Home Build</option>
+                                <option value="model">Model Home</option>
+                                <option value="lot">I Have a Lot</option>
+                                <option value="other">Just Exploring</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cf-message">Tell Us About Your Project</label>
+                        <textarea id="cf-message" name="message" rows="5"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Send Message →</button>
+                    <div id="form-feedback" class="form-feedback" style="display:none;"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 
-    $to      = get_option( 'admin_email' );
-    $subject = "New Inquiry from $name — DenZal Construction";
-    $body    = "Name: $name\nEmail: $email\nPhone: $phone\nInterested In: $interest\n\nMessage:\n$message";
-    $headers = [ "Reply-To: $name <$email>", 'Content-Type: text/plain; charset=UTF-8' ];
-
-    $sent = wp_mail( $to, $subject, $body, $headers );
-
-    if ( $sent ) {
-        wp_send_json_success( 'Your message has been sent! Chris and Ryan will be in touch soon.' );
-    } else {
-        wp_send_json_error( 'There was an error sending your message. Please call us directly.' );
-    }
-}
-add_action( 'wp_ajax_denzal_contact',        'denzal_handle_contact' );
-add_action( 'wp_ajax_nopriv_denzal_contact', 'denzal_handle_contact' );
-
-/* =============================================
-   SEO & CLEANUP
-   ============================================= */
-// Clean up wp_head
-remove_action( 'wp_head', 'wlwmanifest_link' );
-remove_action( 'wp_head', 'rsd_link' );
-remove_action( 'wp_head', 'wp_generator' );
-remove_action( 'wp_head', 'wp_shortlink_wp_head' );
-
-// Customize excerpt
-add_filter( 'excerpt_more', fn() => '…' );
-add_filter( 'excerpt_length', fn() => 25 );
-
-/* =============================================
-   ADMIN CUSTOMIZATIONS
-   ============================================= */
-function denzal_admin_columns( $columns ) {
-    $new = [];
-    foreach ( $columns as $key => $val ) {
-        $new[ $key ] = $val;
-        if ( $key === 'title' ) {
-            $new['home_type']  = 'Type';
-            $new['dz_specs']   = 'Specs';
-            $new['dz_county']  = 'County';
-        }
-    }
-    return $new;
-}
-add_filter( 'manage_dz_home_posts_columns', 'denzal_admin_columns' );
-
-function denzal_admin_column_content( $column, $post_id ) {
-    if ( $column === 'dz_specs' ) {
-        $beds  = get_post_meta( $post_id, '_dz_beds',  true );
-        $baths = get_post_meta( $post_id, '_dz_baths', true );
-        $sqft  = get_post_meta( $post_id, '_dz_sqft',  true );
-        echo esc_html( "$beds bed · $baths bath · $sqft sq ft" );
-    }
-    if ( $column === 'dz_county' ) {
-        echo esc_html( get_post_meta( $post_id, '_dz_county', true ) );
-    }
-    if ( $column === 'home_type' ) {
-        $terms = get_the_terms( $post_id, 'home_availability' );
-        if ( $terms ) echo esc_html( $terms[0]->name );
-    }
-}
-add_action( 'manage_dz_home_posts_custom_column', 'denzal_admin_column_content', 10, 2 );
+<?php get_footer(); ?>

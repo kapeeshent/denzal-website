@@ -319,26 +319,109 @@ h1, h2, h3, h4, h5, h6 {
 /* =============================================
    HERO
    ============================================= */
+/* ── Core hero section (unchanged) ── */
 .hero {
-  position: relative;
-  min-height: 92vh;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  background: var(--dz-navy-dark);
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: var(--dz-navy-dark); /* fallback while slides load */
 }
 
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  background-image: url('https://denzalconstruction.com/wp-content/uploads/2019/03/321-celli-dr-1024x684.jpg');
-  background-size: cover;
-  background-position: center 30%;
-  filter: brightness(0.35);
-  transform: scale(1.05);
-  transition: transform 8s ease-out;
+/* ── Swiper container — fills the entire hero ── */
+.hero-swiper {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
 }
-.hero.loaded .hero-bg { transform: scale(1); }
+
+/* ── Each slide is a full-bleed background image ── */
+.hero-swiper-slide {
+    background-size: cover;
+    background-position: center 30%;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    /* Ken Burns slow zoom — gives life to still photos */
+    animation: heroSlideZoom 8s ease-in-out both;
+}
+
+@keyframes heroSlideZoom {
+    from { transform: scale(1.06); }
+    to   { transform: scale(1); }
+}
+
+/* ── Gradient overlay — replaces the old solid dark tint
+   Just a left-side fade so the headline stays readable
+   while the photo shows through on the right ── */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;                       /* above slides, below content */
+    background:
+        /* Strong left anchor so white text is always legible */
+        linear-gradient(
+            to right,
+            rgba(10, 20, 40, 0.78) 0%,
+            rgba(10, 20, 40, 0.50) 45%,
+            rgba(10, 20, 40, 0.10) 75%,
+            transparent            100%
+        ),
+        /* Subtle bottom vignette for the stats bar area */
+        linear-gradient(
+            to top,
+            rgba(10, 20, 40, 0.45) 0%,
+            transparent 30%
+        );
+    pointer-events: none;
+}
+
+/* ── Content sits above both swiper and overlay ── */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: var(--dz-white);
+    max-width: 760px;
+    padding: 80px 0;
+}
+
+/* ── Stats bar — keep z-index above overlay ── */
+.hero-stats {
+    position: relative;  /* flows inside .hero-content */
+    z-index: 2;
+    display: flex;
+    gap: 48px;
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.hero-stat-value {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--dz-gold);
+    display: block;
+    line-height: 1;
+}
+
+.hero-stat-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.65);
+    margin-top: 6px;
+    display: block;
+}
+
+/* ── Swiper fade transition speed ── */
+.hero-swiper .swiper-slide {
+    transition-duration: 1200ms !important; /* slow crossfade */
+}
 
 .hero-overlay {
   position: absolute;
