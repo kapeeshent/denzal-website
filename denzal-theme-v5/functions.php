@@ -2,7 +2,7 @@
 /**
  * DenZal Construction Theme Functions
  * Built by Kapeesh Enterprises
- * v2.0 — Added Swiper.js for hero background carousel
+ * v2.1 — Replaced Swiper.js hero carousel with pure CSS crossfade slideshow
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -17,6 +17,12 @@ function denzal_theme_setup() {
     add_theme_support( 'customize-selective-refresh-widgets' );
     add_theme_support( 'wp-block-styles' );
     add_theme_support( 'responsive-embeds' );
+    add_theme_support( 'custom-logo', [
+        'width'       => 180,
+        'height'      => 48,
+        'flex-width'  => true,
+        'flex-height' => true,
+    ] );
 
     add_image_size( 'denzal-hero',      1920, 900,  true );
     add_image_size( 'denzal-card',       800, 600,  true );
@@ -43,37 +49,11 @@ function denzal_enqueue_assets() {
         null
     );
 
-    // Swiper CSS (CDN)
-    wp_enqueue_style(
-        'swiper',
-        'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css',
-        [],
-        '11'
-    );
-
     // Main stylesheet
-    wp_enqueue_style( 'denzal-style', get_stylesheet_uri(), [ 'denzal-fonts', 'swiper' ], $v );
+    wp_enqueue_style( 'denzal-style', get_stylesheet_uri(), [ 'denzal-fonts' ], $v );
 
     // Main JS
     wp_enqueue_script( 'denzal-main', get_template_directory_uri() . '/assets/js/main.js', [], $v, true );
-
-    // Swiper JS (CDN)
-    wp_enqueue_script(
-        'swiper',
-        'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js',
-        [],
-        '11',
-        true
-    );
-
-    // Hero carousel initializer
-    wp_enqueue_script(
-        'denzal-hero-carousel',
-        get_template_directory_uri() . '/assets/js/hero-carousel.js',
-        [ 'swiper' ],
-        $v,
-        true
-    );
 
     // Localize for AJAX
     wp_localize_script( 'denzal-main', 'denzalAjax', [
@@ -166,19 +146,26 @@ add_action( 'add_meta_boxes', 'denzal_add_meta_boxes' );
 
 function denzal_home_details_cb( $post ) {
     wp_nonce_field( 'dz_home_meta', 'dz_home_nonce' );
-    $beds   = get_post_meta( $post->ID, '_dz_beds',   true );
-    $baths  = get_post_meta( $post->ID, '_dz_baths',  true );
-    $sqft   = get_post_meta( $post->ID, '_dz_sqft',   true );
-    $county = get_post_meta( $post->ID, '_dz_county', true );
-    $model  = get_post_meta( $post->ID, '_dz_model_name', true );
+    $beds    = get_post_meta( $post->ID, '_dz_beds',       true );
+    $baths   = get_post_meta( $post->ID, '_dz_baths',      true );
+    $sqft    = get_post_meta( $post->ID, '_dz_sqft',       true );
+    $county  = get_post_meta( $post->ID, '_dz_county',     true );
+    $model   = get_post_meta( $post->ID, '_dz_model_name', true );
+    $tagline = get_post_meta( $post->ID, '_dz_tagline',    true );
+    $price   = get_post_meta( $post->ID, '_dz_price',      true );
     ?>
-    <style>.dz-meta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}.dz-meta-grid label{display:block;font-weight:600;font-size:12px;text-transform:uppercase;margin-bottom:4px;color:#666}.dz-meta-grid input,.dz-meta-full input{width:100%;padding:8px;border:1px solid #ddd;border-radius:4px}.dz-meta-full{margin-top:16px}</style>
+    <style>.dz-meta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}.dz-meta-grid label{display:block;font-weight:600;font-size:12px;text-transform:uppercase;margin-bottom:4px;color:#666}.dz-meta-grid input,.dz-meta-full input{width:100%;padding:8px;border:1px solid #ddd;border-radius:4px;font-family:inherit;font-size:13px}.dz-meta-full{margin-top:16px}.dz-meta-full label{display:block;font-weight:600;font-size:12px;text-transform:uppercase;margin-bottom:4px;color:#666}.dz-meta-note{font-size:11px;color:#999;font-weight:400;text-transform:none}</style>
     <div class="dz-meta-grid">
         <div><label>Model Name</label><input type="text" name="dz_model_name" value="<?php echo esc_attr( $model ); ?>" placeholder="The Chatham" /></div>
         <div><label>Bedrooms</label><input type="text" name="dz_beds" value="<?php echo esc_attr( $beds ); ?>" placeholder="3–4" /></div>
         <div><label>Bathrooms</label><input type="text" name="dz_baths" value="<?php echo esc_attr( $baths ); ?>" placeholder="2.5" /></div>
         <div><label>Sq Ft (Est.)</label><input type="text" name="dz_sqft" value="<?php echo esc_attr( $sqft ); ?>" placeholder="2,200" /></div>
         <div><label>County / Area</label><input type="text" name="dz_county" value="<?php echo esc_attr( $county ); ?>" placeholder="Lackawanna County" /></div>
+        <div><label>Starting Price</label><input type="text" name="dz_price" value="<?php echo esc_attr( $price ); ?>" placeholder="From $289,000" /></div>
+    </div>
+    <div class="dz-meta-full">
+        <label>Tagline <span class="dz-meta-note">— short description shown on the card (1 sentence)</span></label>
+        <input type="text" name="dz_tagline" value="<?php echo esc_attr( $tagline ); ?>" placeholder="Elegant open-concept colonial with craftsman details and a 2-car garage." />
     </div>
     <?php
 }
@@ -200,7 +187,7 @@ function denzal_testimonial_meta_cb( $post ) {
 
 function denzal_save_meta( $post_id ) {
     if ( isset( $_POST['dz_home_nonce'] ) && wp_verify_nonce( $_POST['dz_home_nonce'], 'dz_home_meta' ) ) {
-        foreach ( [ 'dz_beds', 'dz_baths', 'dz_sqft', 'dz_county', 'dz_model_name' ] as $field ) {
+        foreach ( [ 'dz_beds', 'dz_baths', 'dz_sqft', 'dz_county', 'dz_model_name', 'dz_tagline', 'dz_price' ] as $field ) {
             if ( isset( $_POST[ $field ] ) ) update_post_meta( $post_id, '_' . $field, sanitize_text_field( $_POST[ $field ] ) );
         }
     }
@@ -270,6 +257,7 @@ function denzal_fallback_nav() {
     $pages = [
         'Home'         => home_url( '/' ),
         'Our Homes'    => home_url( '/our-homes/' ),
+        'Renovations'  => home_url( '/renovations/' ),
         'Our Process'  => home_url( '/our-process/' ),
         'Testimonials' => home_url( '/testimonials/' ),
         'About Us'     => home_url( '/about/' ),
@@ -279,3 +267,145 @@ function denzal_fallback_nav() {
         printf( '<a href="%s">%s</a>', esc_url( $url ), esc_html( $label ) );
     }
 }
+
+/* =============================================
+   CUSTOMIZER — IMAGE SETTINGS
+   ============================================= */
+function denzal_customize_register( $wp_customize ) {
+
+    // ── PANEL ──
+    $wp_customize->add_panel( 'denzal_images', [
+        'title'    => 'DenZal Images',
+        'priority' => 30,
+    ] );
+
+    // ─────────────────────────────────────
+    // SECTION: Homepage Images
+    // ─────────────────────────────────────
+    $wp_customize->add_section( 'denzal_homepage_images', [
+        'title' => 'Homepage Images',
+        'panel' => 'denzal_images',
+    ] );
+
+    $homepage_images = [
+        'dz_hero_slide_1'   => [ 'label' => 'Hero Slideshow: Slide 1',   'default' => 'https://denzalconstruction.com/wp-content/uploads/2019/03/321-celli-dr-1024x684.jpg' ],
+        'dz_hero_slide_2'   => [ 'label' => 'Hero Slideshow: Slide 2',   'default' => 'https://denzalconstruction.com/wp-content/uploads/2019/03/305-vincent-ave3-1024x684.jpg' ],
+        'dz_hero_slide_3'   => [ 'label' => 'Hero Slideshow: Slide 3',   'default' => 'https://denzalconstruction.com/wp-content/uploads/2019/03/309-riverside-dr-1024x684.jpg' ],
+        'dz_home_about_img' => [ 'label' => 'About Strip Photo',         'default' => 'https://denzalconstruction.com/wp-content/uploads/2019/03/305-vincent-ave3-1024x684.jpg' ],
+    ];
+
+    foreach ( $homepage_images as $key => $data ) {
+        $wp_customize->add_setting( $key, [ 'default' => $data['default'], 'sanitize_callback' => 'esc_url_raw' ] );
+        $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, $key, [
+            'label'   => $data['label'],
+            'section' => 'denzal_homepage_images',
+        ] ) );
+    }
+
+    // ─────────────────────────────────────
+    // SECTION: Home Model Images
+    // (shared by Homepage portfolio & Our Homes page)
+    // ─────────────────────────────────────
+    $wp_customize->add_section( 'denzal_home_model_images', [
+        'title'       => 'Home Model Images',
+        'description' => 'Fallback photos shown on the Homepage and Our Homes page. Once you add real home listings in the WordPress dashboard, their Featured Images will be used automatically.',
+        'panel'       => 'denzal_images',
+    ] );
+
+    $home_model_images = [
+        'dz_home_chatham'   => [ 'label' => 'The Chatham',   'default' => 'https://denzalconstruction.com/wp-content/uploads/2019/03/305-vincent-ave3-1024x684.jpg' ],
+        'dz_home_fairmont'  => [ 'label' => 'The Fairmont',  'default' => 'https://denzalconstruction.com/wp-content/uploads/2019/03/309-riverside-dr-1024x684.jpg' ],
+        'dz_home_ardamore'  => [ 'label' => 'The Ardamore',  'default' => 'https://denzalconstruction.com/wp-content/uploads/2020/02/Ardamore-sm-copy-300x199.jpg' ],
+        'dz_home_waterford' => [ 'label' => 'The Waterford', 'default' => 'https://denzalconstruction.com/wp-content/uploads/2020/02/Waterford-sm-copy-300x187.jpg' ],
+        'dz_home_oakmont'   => [ 'label' => 'The Oakmont',   'default' => 'https://denzalconstruction.com/wp-content/uploads/2020/02/Oakmont-sm-copy-300x206.jpg' ],
+        'dz_home_celli'     => [ 'label' => 'The Celli',     'default' => 'https://denzalconstruction.com/wp-content/uploads/2019/03/321-celli-dr-1024x684.jpg' ],
+    ];
+
+    foreach ( $home_model_images as $key => $data ) {
+        $wp_customize->add_setting( $key, [ 'default' => $data['default'], 'sanitize_callback' => 'esc_url_raw' ] );
+        $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, $key, [
+            'label'   => $data['label'],
+            'section' => 'denzal_home_model_images',
+        ] ) );
+    }
+
+    // ─────────────────────────────────────
+    // SECTION: About Page Images
+    // ─────────────────────────────────────
+    $wp_customize->add_section( 'denzal_about_images', [
+        'title' => 'About Page Images',
+        'panel' => 'denzal_images',
+    ] );
+
+    $about_images = [
+        'dz_about_hero'        => [ 'label' => 'Hero: Chris & Ryan Photo',     'default' => 'https://denzalconstruction.com/wp-content/uploads/2019/03/denzal-1024x732.jpg' ],
+        'dz_about_origin'      => [ 'label' => 'Our Story: Section Photo',     'default' => 'https://denzalconstruction.com/wp-content/uploads/2019/03/221-skyline3-1024x684.jpg' ],
+        'dz_about_team_banner' => [ 'label' => 'Team Banner Photo',            'default' => 'https://denzalconstruction.com/wp-content/uploads/2019/03/denzal-1024x732.jpg' ],
+        'dz_chris_photo'       => [ 'label' => 'Chris — Headshot / Portrait', 'default' => '' ],
+        'dz_ryan_photo'        => [ 'label' => 'Ryan — Headshot / Portrait',  'default' => '' ],
+    ];
+
+    foreach ( $about_images as $key => $data ) {
+        $wp_customize->add_setting( $key, [ 'default' => $data['default'], 'sanitize_callback' => 'esc_url_raw' ] );
+        $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, $key, [
+            'label'   => $data['label'],
+            'section' => 'denzal_about_images',
+        ] ) );
+    }
+
+    // ─────────────────────────────────────
+    // SECTION: Process Page Images
+    // ─────────────────────────────────────
+    $wp_customize->add_section( 'denzal_process_images', [
+        'title' => 'Process Page Images',
+        'panel' => 'denzal_images',
+    ] );
+
+    $process_images = [
+        'dz_process_step1' => [ 'label' => 'Step 1: Consultation Background',        'default' => '' ],
+        'dz_process_step2' => [ 'label' => 'Step 2: Site & Lot Background',          'default' => '' ],
+        'dz_process_step3' => [ 'label' => 'Step 3: Design & Selections Background', 'default' => '' ],
+        'dz_process_step4' => [ 'label' => 'Step 4: Permitting Background',          'default' => '' ],
+        'dz_process_step5' => [ 'label' => 'Step 5: Construction Phase Background',  'default' => 'https://denzalconstruction.com/wp-content/uploads/2019/03/221-skyline3-1024x684.jpg' ],
+        'dz_process_step6' => [ 'label' => 'Step 6: Final Walkthrough Background',   'default' => '' ],
+        'dz_process_step7' => [ 'label' => 'Step 7: Keys in Hand Background',        'default' => 'https://denzalconstruction.com/wp-content/uploads/2019/03/305-vincent-ave3-1024x684.jpg' ],
+    ];
+
+    foreach ( $process_images as $key => $data ) {
+        $wp_customize->add_setting( $key, [ 'default' => $data['default'], 'sanitize_callback' => 'esc_url_raw' ] );
+        $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, $key, [
+            'label'   => $data['label'],
+            'section' => 'denzal_process_images',
+        ] ) );
+    }
+    // ─────────────────────────────────────
+    // SECTION: Renovations Page Images
+    // ─────────────────────────────────────
+    $wp_customize->add_section( 'denzal_reno_images', [
+        'title'       => 'Renovations Page Images',
+        'description' => 'Photos for the four service card headers and the renovation gallery. Service card photos appear as a subtle overlay on the colored gradient. Gallery photos only show when at least one is set.',
+        'panel'       => 'denzal_images',
+    ] );
+
+    $reno_images = [
+        'dz_reno_card_kitchen'   => 'Service Card: Kitchen & Bath',
+        'dz_reno_card_additions' => 'Service Card: Additions & Expansions',
+        'dz_reno_card_exterior'  => 'Service Card: Exterior & Curb Appeal',
+        'dz_reno_card_whole'     => 'Service Card: Whole-Home Renovations',
+        'dz_reno_gallery_1'      => 'Gallery Photo 1',
+        'dz_reno_gallery_2'      => 'Gallery Photo 2',
+        'dz_reno_gallery_3'      => 'Gallery Photo 3',
+        'dz_reno_gallery_4'      => 'Gallery Photo 4',
+        'dz_reno_gallery_5'      => 'Gallery Photo 5',
+        'dz_reno_gallery_6'      => 'Gallery Photo 6',
+    ];
+
+    foreach ( $reno_images as $key => $label ) {
+        $wp_customize->add_setting( $key, [ 'default' => '', 'sanitize_callback' => 'esc_url_raw' ] );
+        $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, $key, [
+            'label'   => $label,
+            'section' => 'denzal_reno_images',
+        ] ) );
+    }
+}
+add_action( 'customize_register', 'denzal_customize_register' );

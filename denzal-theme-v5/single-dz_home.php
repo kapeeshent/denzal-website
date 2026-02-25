@@ -14,10 +14,12 @@
 
 <section class="section">
     <div class="container">
-        <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:60px;align-items:start;">
+        <div class="home-detail-grid">
             <div>
-                <?php if ( has_post_thumbnail() ) : ?>
-                    <div style="border-radius:8px;overflow:hidden;margin-bottom:24px;">
+                <?php if ( has_post_thumbnail() ) :
+                    $full_img = get_the_post_thumbnail_url( get_the_ID(), 'full' ) ?: '';
+                ?>
+                    <div class="dz-lb-trigger" style="border-radius:8px;overflow:hidden;margin-bottom:24px;" data-full="<?php echo esc_url( $full_img ); ?>" data-caption="<?php echo esc_attr( get_the_title() ); ?>" onclick="dzOpenLightbox(this)">
                         <?php the_post_thumbnail( 'denzal-hero', [ 'style' => 'width:100%;height:460px;object-fit:cover;' ] ); ?>
                     </div>
                 <?php endif; ?>
@@ -57,5 +59,30 @@
         </div>
     </div>
 </section>
+
+<!-- Lightbox overlay -->
+<div class="dz-lightbox" id="dzLightbox" onclick="dzCloseLightbox()">
+    <button class="dz-lightbox-close" onclick="dzCloseLightbox()" aria-label="Close">&times;</button>
+    <img src="" alt="" id="dzLightboxImg" onclick="event.stopPropagation()" />
+</div>
+
+<script>
+function dzOpenLightbox(el) {
+    var src = el.dataset.full;
+    var alt = el.dataset.caption || '';
+    if ( ! src ) return;
+    document.getElementById('dzLightboxImg').src = src;
+    document.getElementById('dzLightboxImg').alt = alt;
+    document.getElementById('dzLightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+function dzCloseLightbox() {
+    document.getElementById('dzLightbox').classList.remove('open');
+    document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') dzCloseLightbox();
+});
+</script>
 
 <?php get_footer();

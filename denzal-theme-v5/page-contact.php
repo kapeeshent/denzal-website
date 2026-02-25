@@ -27,7 +27,7 @@ get_header();
                     </div>
                     <div class="contact-detail">
                         <strong>Email</strong>
-                        <a href="mailto:info@denzalconstruction.com">info@denzalconstruction.com</a>
+                        <a href="mailto:denzalconstruction@gmail.com">denzalconstruction@gmail.com</a>
                     </div>
                     <div class="contact-detail">
                         <strong>Office</strong>
@@ -92,7 +92,7 @@ get_header();
             <!-- Replace the src below with your actual Google Maps embed URL -->
             <!-- Go to maps.google.com → search "466 N Main St, Eynon PA 18403" → Share → Embed a map → copy the src URL -->
             <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3004.3!2d-75.5!3d41.4!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDI0JzAwLjAiTiA3NcKwMzAnMDAuMCJX!5e0!3m2!1sen!2sus!4v1234567890"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2979.256!2d-75.57478570000001!3d41.4969352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c4d061b1c85c33%3A0x3bf3a412929adc5b!2sDenzal%20Construction!5e0!3m2!1sen!2sus!4v1740000000000!5m2!1sen!2sus"
                 width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
                 title="DenZal Construction office location">
             </iframe>

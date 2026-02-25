@@ -78,7 +78,10 @@ get_header();
     background: var(--dz-gold); color: var(--dz-navy);
     display: flex; align-items: center; justify-content: center;
     font-family: var(--font-display); font-size: 1rem; font-weight: 900;
+    overflow: hidden; flex-shrink: 0;
 }
+.ab-name-tag-icon--photo { background: none; border: 2px solid var(--dz-gold); }
+.ab-name-tag-icon img { width: 100%; height: 100%; object-fit: cover; object-position: center top; border-radius: 50%; }
 .ab-name-tag-name {
     font-size: .88rem; font-weight: 700; letter-spacing: .06em; color: #fff; display: block;
 }
@@ -194,6 +197,8 @@ get_header();
 }
 .ab-bio-photo-wrap--blue { background: rgba(255,255,255,.12); color: var(--dz-gold); border: 3px solid var(--dz-gold); }
 .ab-bio-photo-wrap--gold { background: rgba(255,255,255,.08); color: var(--dz-gold); border: 3px solid var(--dz-gold); }
+.ab-bio-photo-wrap--img { background: none; overflow: hidden; }
+.ab-bio-photo-wrap--img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; border-radius: 50%; display: block; }
 .ab-bio-name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: #fff; }
 .ab-bio-title {
     font-size: .65rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
@@ -376,7 +381,7 @@ get_header();
 <!-- HERO — split photo / text -->
 <div class="ab-hero">
     <div class="ab-hero-photo">
-        <img src="https://denzalconstruction.com/wp-content/uploads/2019/03/denzal-1024x732.jpg"
+        <img src="<?php echo esc_url( get_theme_mod( 'dz_about_hero', 'https://denzalconstruction.com/wp-content/uploads/2019/03/denzal-1024x732.jpg' ) ); ?>"
              alt="Chris and Ryan — DenZal Construction" loading="lazy">
         <div class="ab-hero-overlay"></div>
         <div class="ab-hero-caption">
@@ -390,16 +395,28 @@ get_header();
             <h1>Two NEPA Guys.<br>One <em>Simple Promise.</em></h1>
             <p>DenZal Construction was built on a handshake and a belief that people in Northeastern Pennsylvania deserve a builder they can actually trust — someone who shows up, keeps their word, and cares about the finished product as much as you do.</p>
             <p>That's not marketing copy. That's Chris and Ryan. It's how they've operated since day one, and it's why so many of their clients become repeat customers and lifelong friends.</p>
+            <?php
+            $dz_chris_photo = get_theme_mod( 'dz_chris_photo', '' );
+            $dz_ryan_photo  = get_theme_mod( 'dz_ryan_photo',  '' );
+            ?>
             <div class="ab-name-tags">
                 <div class="ab-name-tag">
-                    <div class="ab-name-tag-icon">C</div>
+                    <div class="ab-name-tag-icon <?php echo $dz_chris_photo ? 'ab-name-tag-icon--photo' : ''; ?>">
+                        <?php if ( $dz_chris_photo ) : ?>
+                            <img src="<?php echo esc_url( $dz_chris_photo ); ?>" alt="Chris — DenZal Construction" />
+                        <?php else : ?>C<?php endif; ?>
+                    </div>
                     <div>
                         <span class="ab-name-tag-name">Chris</span>
                         <span class="ab-name-tag-role">Co-Founder · DenZal Construction</span>
                     </div>
                 </div>
                 <div class="ab-name-tag">
-                    <div class="ab-name-tag-icon">R</div>
+                    <div class="ab-name-tag-icon <?php echo $dz_ryan_photo ? 'ab-name-tag-icon--photo' : ''; ?>">
+                        <?php if ( $dz_ryan_photo ) : ?>
+                            <img src="<?php echo esc_url( $dz_ryan_photo ); ?>" alt="Ryan — DenZal Construction" />
+                        <?php else : ?>R<?php endif; ?>
+                    </div>
                     <div>
                         <span class="ab-name-tag-name">Ryan</span>
                         <span class="ab-name-tag-role">Co-Founder · DenZal Construction</span>
@@ -436,7 +453,7 @@ get_header();
         <p>That approach — personal, accountable, rooted in the community — has built them a track record that speaks for itself: hundreds of homes across Lackawanna and Luzerne counties, and a client list full of people who'd refer them to their own family.</p>
     </div>
     <div class="ab-origin-visual">
-        <img class="ab-origin-img" src="https://denzalconstruction.com/wp-content/uploads/2019/03/221-skyline3-1024x684.jpg" alt="A DenZal custom home in NEPA" loading="lazy">
+        <img class="ab-origin-img" src="<?php echo esc_url( get_theme_mod( 'dz_about_origin', 'https://denzalconstruction.com/wp-content/uploads/2019/03/221-skyline3-1024x684.jpg' ) ); ?>" alt="A DenZal custom home in NEPA" loading="lazy">
         <div class="ab-origin-badge">
             <span class="ab-origin-badge-num">A+</span>
             <span class="ab-origin-badge-label">Reputation in<br>the Community</span>
@@ -457,7 +474,11 @@ get_header();
             <div class="ab-bio-band ab-bio-band--blue"></div>
             <div class="ab-bio-inner">
                 <div class="ab-bio-photo-col ab-bio-photo-col--blue">
-                    <div class="ab-bio-photo-wrap ab-bio-photo-wrap--blue">C</div>
+                    <div class="ab-bio-photo-wrap ab-bio-photo-wrap--blue <?php echo $dz_chris_photo ? 'ab-bio-photo-wrap--img' : ''; ?>">
+                        <?php if ( $dz_chris_photo ) : ?>
+                            <img src="<?php echo esc_url( $dz_chris_photo ); ?>" alt="Chris — DenZal Construction" />
+                        <?php else : ?>C<?php endif; ?>
+                    </div>
                     <div class="ab-bio-name">Chris</div>
                     <div class="ab-bio-title">Co-Founder</div>
                     <a href="tel:5708764663" class="ab-bio-contact ab-bio-contact--blue">📞 Call Chris</a>
@@ -480,7 +501,11 @@ get_header();
             <div class="ab-bio-band ab-bio-band--gold"></div>
             <div class="ab-bio-inner">
                 <div class="ab-bio-photo-col ab-bio-photo-col--gold">
-                    <div class="ab-bio-photo-wrap ab-bio-photo-wrap--gold">R</div>
+                    <div class="ab-bio-photo-wrap ab-bio-photo-wrap--gold <?php echo $dz_ryan_photo ? 'ab-bio-photo-wrap--img' : ''; ?>">
+                        <?php if ( $dz_ryan_photo ) : ?>
+                            <img src="<?php echo esc_url( $dz_ryan_photo ); ?>" alt="Ryan — DenZal Construction" />
+                        <?php else : ?>R<?php endif; ?>
+                    </div>
                     <div class="ab-bio-name">Ryan</div>
                     <div class="ab-bio-title">Co-Founder</div>
                     <a href="tel:5708764663" class="ab-bio-contact ab-bio-contact--gold">📞 Call Ryan</a>
@@ -499,12 +524,14 @@ get_header();
         </div>
 
     </div>
-    <p class="ab-photo-note">📸 Individual headshots of Chris &amp; Ryan to be added when available</p>
+    <?php if ( ! $dz_chris_photo || ! $dz_ryan_photo ) : ?>
+        <p class="ab-photo-note">📸 Add headshots via Appearance → Customize → About Page Images</p>
+    <?php endif; ?>
 </section>
 
 <!-- TEAM PHOTO BANNER -->
 <div class="ab-team-banner">
-    <img src="https://denzalconstruction.com/wp-content/uploads/2019/03/denzal-1024x732.jpg" alt="Chris and Ryan — DenZal Construction Co." loading="lazy">
+    <img src="<?php echo esc_url( get_theme_mod( 'dz_about_team_banner', 'https://denzalconstruction.com/wp-content/uploads/2019/03/denzal-1024x732.jpg' ) ); ?>" alt="Chris and Ryan — DenZal Construction Co." loading="lazy">
     <div class="ab-team-banner-overlay">
         <div class="ab-team-banner-text">
             <h2>Two Founders.<br><em>One Phone Number.</em><br>Always Available.</h2>

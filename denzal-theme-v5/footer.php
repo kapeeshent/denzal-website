@@ -15,8 +15,19 @@
         <div class="footer-grid">
             <div class="footer-brand">
                 <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-                    <img src="https://denzalconstruction.com/wp-content/uploads/2019/03/DenZal_Logo-2-MED-1024x593.png"
-                         alt="<?php bloginfo( 'name' ); ?>" width="160" height="44" />
+                    <?php
+                    if ( has_custom_logo() ) {
+                        $logo_id = get_theme_mod( 'custom_logo' );
+                        echo wp_get_attachment_image( $logo_id, 'full', false, [
+                            'alt'    => esc_attr( get_bloginfo( 'name' ) ),
+                            'width'  => '160',
+                            'height' => '44',
+                        ] );
+                    } else {
+                        $logo_src = 'https://denzalconstruction.com/wp-content/uploads/2019/03/DenZal_Logo-2-MED-1024x593.png';
+                        echo '<img src="' . esc_url( $logo_src ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" width="160" height="44" />';
+                    }
+                    ?>
                 </a>
                 <p class="footer-tagline">NEPA's premier custom home builder. Fine building, quality craftsmanship, and exceptional value — since the very first home we built.</p>
                 <div class="footer-social">
@@ -34,6 +45,7 @@
                 <ul>
                     <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
                     <li><a href="<?php echo esc_url( home_url( '/our-homes/' ) ); ?>">Our Homes</a></li>
+                    <li><a href="<?php echo esc_url( home_url( '/renovations/' ) ); ?>">Renovations</a></li>
                     <li><a href="<?php echo esc_url( home_url( '/our-process/' ) ); ?>">Our Process</a></li>
                     <li><a href="<?php echo esc_url( home_url( '/testimonials/' ) ); ?>">Testimonials</a></li>
                     <li><a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">About Us</a></li>
@@ -42,14 +54,13 @@
             </div>
 
             <div class="footer-col">
-                <h5>Our Homes</h5>
+                <h5>Renovations</h5>
                 <ul>
-                    <li><a href="<?php echo esc_url( home_url( '/our-homes/' ) ); ?>">All Homes</a></li>
-                    <li><a href="<?php echo esc_url( home_url( '/our-homes/?type=ranch' ) ); ?>">Ranch Models</a></li>
-                    <li><a href="<?php echo esc_url( home_url( '/our-homes/?type=colonial' ) ); ?>">Colonial Models</a></li>
-                    <li><a href="<?php echo esc_url( home_url( '/our-homes/?type=cape-cod' ) ); ?>">Cape Cod Models</a></li>
-                    <li><a href="<?php echo esc_url( home_url( '/our-homes/?type=two-story' ) ); ?>">Two-Story Models</a></li>
-                    <li><a href="<?php echo esc_url( home_url( '/our-homes/?avail=quick' ) ); ?>">Quick Delivery</a></li>
+                    <li><a href="<?php echo esc_url( home_url( '/renovations/' ) ); ?>">All Services</a></li>
+                    <li><a href="<?php echo esc_url( home_url( '/renovations/#kitchen-bath' ) ); ?>">Kitchen &amp; Bath</a></li>
+                    <li><a href="<?php echo esc_url( home_url( '/renovations/#additions' ) ); ?>">Additions &amp; Expansions</a></li>
+                    <li><a href="<?php echo esc_url( home_url( '/renovations/#exterior' ) ); ?>">Exterior &amp; Curb Appeal</a></li>
+                    <li><a href="<?php echo esc_url( home_url( '/renovations/#whole-home' ) ); ?>">Whole-Home Renovations</a></li>
                 </ul>
             </div>
 
@@ -57,7 +68,7 @@
                 <h5>Contact Us</h5>
                 <ul>
                     <li><a href="tel:5708764663">(570) 876-4663</a></li>
-                    <li><a href="mailto:info@denzalconstruction.com">info@denzalconstruction.com</a></li>
+                    <li><a href="mailto:denzalconstruction@gmail.com">denzalconstruction@gmail.com</a></li>
                     <li><span style="color:rgba(255,255,255,.45);font-size:.88rem;">466 N Main St<br>Eynon, PA 18403</span></li>
                 </ul>
                 <div style="margin-top:16px;">

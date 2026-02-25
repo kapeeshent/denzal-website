@@ -392,6 +392,9 @@ get_header();
 <!-- STEP 1 — CONSULTATION -->
 <div class="proc-step proc-step--1" id="step1">
     <div class="proc-visual">
+        <?php $dz_s1 = get_theme_mod( 'dz_process_step1', '' ); if ( $dz_s1 ) : ?>
+        <div class="proc-visual-bg" style="background-image:url('<?php echo esc_url( $dz_s1 ); ?>');"></div>
+        <?php endif; ?>
         <div class="proc-visual-num">1</div>
         <div class="proc-visual-inner">
             <span class="proc-phase-icon">🤝</span>
@@ -426,6 +429,9 @@ get_header();
 <!-- STEP 2 — SITE & LOT -->
 <div class="proc-step proc-step--2" id="step2">
     <div class="proc-visual">
+        <?php $dz_s2 = get_theme_mod( 'dz_process_step2', '' ); if ( $dz_s2 ) : ?>
+        <div class="proc-visual-bg" style="background-image:url('<?php echo esc_url( $dz_s2 ); ?>');"></div>
+        <?php endif; ?>
         <div class="proc-visual-num">2</div>
         <div class="proc-visual-inner">
             <span class="proc-phase-icon">📍</span>
@@ -460,6 +466,9 @@ get_header();
 <!-- STEP 3 — DESIGN & SELECTIONS -->
 <div class="proc-step proc-step--3" id="step3">
     <div class="proc-visual">
+        <?php $dz_s3 = get_theme_mod( 'dz_process_step3', '' ); if ( $dz_s3 ) : ?>
+        <div class="proc-visual-bg" style="background-image:url('<?php echo esc_url( $dz_s3 ); ?>');"></div>
+        <?php endif; ?>
         <div class="proc-visual-num">3</div>
         <div class="proc-visual-inner">
             <span class="proc-phase-icon">📐</span>
@@ -494,6 +503,9 @@ get_header();
 <!-- STEP 4 — PERMITTING -->
 <div class="proc-step proc-step--4" id="step4">
     <div class="proc-visual">
+        <?php $dz_s4 = get_theme_mod( 'dz_process_step4', '' ); if ( $dz_s4 ) : ?>
+        <div class="proc-visual-bg" style="background-image:url('<?php echo esc_url( $dz_s4 ); ?>');"></div>
+        <?php endif; ?>
         <div class="proc-visual-num">4</div>
         <div class="proc-visual-inner">
             <span class="proc-phase-icon">📄</span>
@@ -528,7 +540,7 @@ get_header();
 <!-- STEP 5 — CONSTRUCTION -->
 <div class="proc-step proc-step--5" id="step5">
     <div class="proc-visual">
-        <div class="proc-visual-bg" style="background-image:url('https://denzalconstruction.com/wp-content/uploads/2019/03/221-skyline3-1024x684.jpg');"></div>
+        <div class="proc-visual-bg" style="background-image:url('<?php echo esc_url( get_theme_mod( 'dz_process_step5', 'https://denzalconstruction.com/wp-content/uploads/2019/03/221-skyline3-1024x684.jpg' ) ); ?>');"></div>
         <div class="proc-visual-num">5</div>
         <div class="proc-visual-inner">
             <span class="proc-phase-icon">🏗️</span>
@@ -564,6 +576,9 @@ get_header();
 <!-- STEP 6 — FINAL WALKTHROUGH -->
 <div class="proc-step proc-step--6" id="step6">
     <div class="proc-visual">
+        <?php $dz_s6 = get_theme_mod( 'dz_process_step6', '' ); if ( $dz_s6 ) : ?>
+        <div class="proc-visual-bg" style="background-image:url('<?php echo esc_url( $dz_s6 ); ?>');"></div>
+        <?php endif; ?>
         <div class="proc-visual-num">6</div>
         <div class="proc-visual-inner">
             <span class="proc-phase-icon">🔍</span>
@@ -599,7 +614,7 @@ get_header();
 <!-- STEP 7 — KEYS IN HAND -->
 <div class="proc-step proc-step--7" id="step7">
     <div class="proc-visual">
-        <div class="proc-visual-bg" style="background-image:url('https://denzalconstruction.com/wp-content/uploads/2019/03/305-vincent-ave3-1024x684.jpg');"></div>
+        <div class="proc-visual-bg" style="background-image:url('<?php echo esc_url( get_theme_mod( 'dz_process_step7', 'https://denzalconstruction.com/wp-content/uploads/2019/03/305-vincent-ave3-1024x684.jpg' ) ); ?>');"></div>
         <div class="proc-visual-num">7</div>
         <div class="proc-visual-inner">
             <span class="proc-phase-icon">🔑</span>
